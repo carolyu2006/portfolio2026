@@ -328,6 +328,8 @@ button:hover {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    cursor: pointer;
+    transform-origin: center center;
 }
 
 .header-container {

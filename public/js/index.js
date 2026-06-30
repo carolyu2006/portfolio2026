@@ -1,28 +1,39 @@
 // Parallax scrolling for leaves
-const leaves = document.querySelectorAll('.leaf');
+const leaves = document.querySelectorAll('.leaf:not(.incoming-leaf)');
 
 // Rotation angles for each leaf (matching CSS)
 const rotations = [110, 180, 160, -134, 165, 305];
+const speeds = [0.2, 0.2, 0.3, 0.3, 0.4, 0.5];
 
-// Initialize transforms with initial scroll position
+const updateLeafTransform = (leaf, index) => {
+    const rotation = rotations[index] ?? 0;
+    const speed = speeds[index] ?? 0.2;
+    const scrolled = window.pageYOffset;
+    const yPos = +(scrolled * speed);
+    const hoverSpin = Number(leaf.dataset.hoverSpin || 0);
+    const rotate = (scrolled * 0.2) + rotation + hoverSpin;
+    leaf.style.transform = `translateY(${yPos}px) rotate(${rotate}deg)`;
+};
+
 leaves.forEach((leaf, index) => {
-    const rotation = rotations[index];
-    leaf.style.transform = `translateY(0px) rotate(${rotation}deg)`;
+    leaf.style.transition = 'transform 700ms cubic-bezier(0.34, 1.56, 0.64, 1)';
+    leaf.dataset.hoverSpin = '0';
+
+    leaf.addEventListener('mouseenter', () => {
+        leaf.dataset.hoverSpin = '360';
+        updateLeafTransform(leaf, index);
+    });
+
+    leaf.addEventListener('mouseleave', () => {
+        leaf.dataset.hoverSpin = '0';
+        updateLeafTransform(leaf, index);
+    });
+
+    updateLeafTransform(leaf, index);
 });
 
 window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    
-    leaves.forEach((leaf, index) => {
-        const speeds = [.2,.2,.3,.3,.4,.5];
-        // const speeds = [.2,.3,.5,.8,.9,.99];
-        const speed = speeds[index];
-        const rotation = rotations[index];
-        
-        const yPos = +(scrolled * speed);
-        const rotate = (scrolled * .2)+rotation;
-        leaf.style.transform = `translateY(${yPos}px) rotate(${rotate}deg)`;
-    });
+    leaves.forEach((leaf, index) => updateLeafTransform(leaf, index));
 });
 
 // Sidebar animation - hide in hero section, show everywhere else

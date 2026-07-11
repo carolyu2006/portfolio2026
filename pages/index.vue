@@ -194,6 +194,7 @@
         <img class="incoming-scroll-cue-arrow" src="/assets/icons/scroll-arrow.png" alt="">
       </div>
     </section>
+    
     <section id="section2" class="section2" :class="{ 'is-active': isSection2Active }"
       aria-label="Smart UI/UX for Real-World Problems">
       <div class="section2-projects">
@@ -204,30 +205,32 @@
               <h2>Smart UI/UX for Real-World Problems</h2>
               <p>Interfaces that turn practical product problems into clear, delightful user experiences.</p>
             </div>
+            <div class="section2-flower-field section2-flower-field--back" aria-hidden="true">
+              <div class="section2-flower section2-flower--bottom-right">
+                <img class="section2-flower__head" src="/assets/images/section2/flower-leaf.png" alt="">
+                <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
+                  <path d="M40 1000 C41 740 42 480 38 260 C37 150 36 70 35 8" />
+                </svg>
+              </div>
+            </div>
             <div class="section2-flower-field" aria-hidden="true">
               <div class="section2-flower section2-flower--top-left">
-                <svg class="section2-flower__stem" viewBox="0 0 120 720">
-                  <path d="M62 718 C60 540 56 360 70 200 C74 130 82 70 96 12" />
+                <img class="section2-flower__head" src="/assets/images/section2/flower-corner-b.png" alt="">
+                <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
+                  <path d="M40 1000 C42 720 66 300 40 0" />
                 </svg>
-                <img class="section2-flower__head" src="/assets/images/section2/flower-corner-a.png" alt="">
               </div>
               <div class="section2-flower section2-flower--top-right">
-                <svg class="section2-flower__stem" viewBox="0 0 120 700">
-                  <path d="M58 698 C62 520 66 340 55 190 C52 120 44 68 30 12" />
+                <img class="section2-flower__head" src="/assets/images/section2/flower-corner-a.png" alt="">
+                <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
+                  <path d="M40 1000 C38 720 14 300 40 0" />
                 </svg>
-                <img class="section2-flower__head" src="/assets/images/section2/flower-corner-b.png" alt="">
               </div>
               <div class="section2-flower section2-flower--bottom-left">
-                <svg class="section2-flower__stem" viewBox="0 0 160 740">
-                  <path d="M82 738 C76 560 70 380 92 210 C102 140 118 76 138 12" />
-                </svg>
                 <img class="section2-flower__head" src="/assets/images/section2/flower-crown.png" alt="">
-              </div>
-              <div class="section2-flower section2-flower--bottom-right">
-                <svg class="section2-flower__stem" viewBox="0 0 210 720">
-                  <path d="M96 718 C108 540 112 360 96 200 C88 130 72 72 48 12" />
+                <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
+                  <path d="M40 1000 C39 740 38 480 42 260 C43 150 44 70 45 8" />
                 </svg>
-                <img class="section2-flower__head" src="/assets/images/section2/flower-leaf.png" alt="">
               </div>
             </div>
             <div class="section2-group-cards">
@@ -274,10 +277,36 @@
 
           <div class="section2-group-gap" aria-hidden="true"></div>
 
-          <div class="section2-group">
+          <div class="section2-group section2-group--gamification">
             <div class="section2-heading">
               <h2>Beyond Static Interfaces</h2>
               <p>Playful, immersive experiences that push interfaces beyond traditional screens.</p>
+            </div>
+            <div class="section2-flower-field section2-flower-field--gamification" aria-hidden="true">
+              <div class="section2-flower section2-flower--top-left">
+                <img class="section2-flower__head" src="/assets/images/section2/flower-corner-b.png" alt="">
+                <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
+                  <path d="M40 1000 C38 700 20 260 40 0" />
+                </svg>
+              </div>
+              <div class="section2-flower section2-flower--top-right">
+                <img class="section2-flower__head" src="/assets/images/section2/flower-leaf.png" alt="">
+                <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
+                  <path d="M40 1000 C39 740 39 480 40 260 C40 150 40 70 40 8" />
+                </svg>
+              </div>
+              <div class="section2-flower section2-flower--bottom-left">
+                <img class="section2-flower__head" src="/assets/images/section2/flower-crown.png" alt="">
+                <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
+                  <path d="M40 1000 C50 740 58 480 30 260 C24 150 34 70 40 8" />
+                </svg>
+              </div>
+              <div class="section2-flower section2-flower--bottom-right">
+                <img class="section2-flower__head" src="/assets/images/section2/flower-corner-a.png" alt="">
+                <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
+                  <path d="M40 1000 C42 700 60 260 40 0" />
+                </svg>
+              </div>
             </div>
             <div class="section2-group-cards">
               <a class="projects-item" data-category="web-apps" href="/projects/paletteu">
@@ -319,44 +348,7 @@
                   poster="/assets/images/covers/mbti.webp" autoplay muted loop playsinline preload="metadata">
                 </video>
               </a>
-
-              <a class="projects-item" data-category="web-apps" href="/projects/orangobranding"
-                rel="noopener noreferrer">
-                <div class="projects-item-content">
-                  <div class="project-meta">
-                    <div class="project-meta-tags">
-                      <span class="project-meta-tag">Branding</span>
-                    </div>
-                  </div>
-                  <div>
-                    <h4>2026</h4>
-                    <h2 class="project-item-title">ORANGO</h2>
-                    <h3>Designer</h3>
-                    <p>Branding design to establish a visual identity for Orango -- a startup focused on web-based social games.</p>
-                  </div>
-                </div>
-                <img class="projects-item-image" src="/assets/images/covers/orango_branding.webp" alt="ORANGO project cover">
-              </a>
-
-              <a class="projects-item" data-category="web-apps" href="/projects/everstream">
-                <div class="projects-item-content">
-                  <div class="project-meta">
-                    <div class="project-meta-tags">
-                      <span class="project-meta-tag">Game</span>
-                    </div>
-                  </div>
-                  <div>
-                    <h4>2025</h4>
-                    <h2 class="project-item-title">Everstream</h2>
-                    <h3>Game Designer & Developer</h3>
-                    <p>A 2D game depicting the journey of the four seasons along a stream.</p>
-                    <p>Original Music & Art by me</p>
-                  </div>
-                </div>
-                <video class="projects-item-image" src="/assets/images/covers/everstream.mov"
-                  poster="/assets/images/covers/everstream.webp" autoplay muted loop playsinline preload="metadata">
-                </video>
-              </a>
+              
             </div>
           </div>
         </div>

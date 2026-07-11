@@ -97,6 +97,32 @@
 
                 </section>
 
+                <section class="more-about-section" id="outside-design">
+                    <div class="interests-page-wrapper">
+                        <div class="interests-panel">
+                            <h1>Outside Design</h1>
+                            <div class="interests-container">
+                                <div class="interest-item-scroll">
+                                    <img src="/assets/images/about/interest/1.webp" alt="Music">
+                                    <img src="/assets/images/about/interest/2.webp" alt="Guitar">
+                                    <img src="/assets/images/about/interest/3.webp" alt="Painting">
+                                    <img src="/assets/images/about/interest/leaf.webp" alt="leaf">
+                                    <img src="/assets/images/about/interest/flower.webp" alt="flower">
+                                    <img src="/assets/images/about/interest/4.webp" alt="Photography">
+                                    <img src="/assets/images/about/interest/5.webp" alt="3D printing">
+                                    <img src="/assets/images/about/interest/6.webp" alt="Robotics">
+                                    <img src="/assets/images/about/interest/leaf.webp" alt="leaf">
+                                    <img src="/assets/images/about/interest/7.webp" alt="Arduino">
+                                    <img src="/assets/images/about/interest/8.webp" alt="WordPress">
+                                    <img src="/assets/images/about/interest/9.webp" alt="Github">
+                                    <img src="/assets/images/about/interest/10.webp" alt="Music">
+                                    <img src="/assets/images/about/interest/flower.webp" alt="flower">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <section class="work-experience-section work-experience-section--light" id="experience">
                     <h1>Experience</h1>
                     <div class="work-experience-grid">
@@ -224,32 +250,6 @@
                                 <div class="community-images">
                                     <img src="/assets/images/about/community/techatnyu-1.webp" alt="Tech@NYU">
                                 </div> -->
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="more-about-section" id="outside-design">
-                    <div class="interests-page-wrapper">
-                        <div class="interests-panel">
-                            <h1>Outside Design</h1>
-                            <div class="interests-container">
-                                <div class="interest-item-scroll">
-                                    <img src="/assets/images/about/interest/1.webp" alt="Music">
-                                    <img src="/assets/images/about/interest/2.webp" alt="Guitar">
-                                    <img src="/assets/images/about/interest/3.webp" alt="Painting">
-                                    <img src="/assets/images/about/interest/leaf.webp" alt="leaf">
-                                    <img src="/assets/images/about/interest/flower.webp" alt="flower">
-                                    <img src="/assets/images/about/interest/4.webp" alt="Photography">
-                                    <img src="/assets/images/about/interest/5.webp" alt="3D printing">
-                                    <img src="/assets/images/about/interest/6.webp" alt="Robotics">
-                                    <img src="/assets/images/about/interest/leaf.webp" alt="leaf">
-                                    <img src="/assets/images/about/interest/7.webp" alt="Arduino">
-                                    <img src="/assets/images/about/interest/8.webp" alt="WordPress">
-                                    <img src="/assets/images/about/interest/9.webp" alt="Github">
-                                    <img src="/assets/images/about/interest/10.webp" alt="Music">
-                                    <img src="/assets/images/about/interest/flower.webp" alt="flower">
-                                </div>
                             </div>
                         </div>
                     </div>

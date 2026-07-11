@@ -1089,6 +1089,7 @@ body,
     width: 100%;
     max-width: none;
     margin: 0;
+    height: calc(100vh - 130px);
     overflow: hidden;
 }
 
@@ -1099,7 +1100,7 @@ body,
     align-items: flex-start;
     width: max-content;
     gap: 0;
-    padding-top: 0;
+    padding-top: 8vh;
     padding-right: 20vw;
     will-change: transform;
 }
@@ -1110,9 +1111,9 @@ body,
 }
 
 .section2-group-gap {
-    flex: 0 0 160px;
-    width: 160px;
-    min-width: 160px;
+    flex: 0 0 450px;
+    width: 450px;
+    min-width: 450px;
     align-self: stretch;
 }
 
@@ -1123,6 +1124,8 @@ body,
 }
 
 .section2-group-cards {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -1130,13 +1133,16 @@ body,
     padding-top: 106px;
 }
 
-.section2-group .section2-heading {
+/* .section2-group .section2-heading {
     width: max-content;
     max-width: 640px;
-}
+} */
 
 .section2-group .section2-flower-field {
-    top: 106px;
+    top: 0;
+    bottom: auto;
+    height: calc(100vh - 130px - 8vh);
+    overflow: visible;
 }
 
 .section2-projects .projects-item {
@@ -1167,22 +1173,38 @@ body,
     inset: 0;
     z-index: 3;
     pointer-events: none;
+    overflow: visible;
+}
+
+.section2-flower-field--back {
+    z-index: 1;
+}
+
+.section2-flower-field--gamification {
+    z-index: auto;
 }
 
 .section2-flower {
     position: absolute;
+    left: var(--flower-left);
+    bottom: 0;
+    top: auto;
     width: var(--flower-width);
     height: var(--flower-height);
     opacity: 1;
     transform: rotate(var(--flower-tilt));
-    transform-origin: var(--flower-origin);
+    transform-origin: 50% 100%;
+    overflow: visible;
 }
 
 .section2-flower__stem {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+    left: 50%;
+    bottom: 0;
+    z-index: 0;
+    width: 80px;
+    height: calc(100% + var(--flower-stem-extend, 0px));
+    transform: translateX(-50%);
     overflow: visible;
 }
 
@@ -1192,82 +1214,115 @@ body,
     stroke-width: 9px;
     stroke-linecap: round;
     stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
 }
 
 .section2-flower__head {
     position: absolute;
+    top: -20px;
+    left: 50%;
+    z-index: 1;
     width: var(--flower-head-width);
     height: auto;
-    transform: rotate(var(--flower-head-rotation));
-    transform-origin: center;
+    transform: translateX(-50%) rotate(var(--flower-head-rotation));
+    transform-origin: center bottom;
 }
 
 .section2-flower--top-left {
-    --flower-width: 72px;
-    --flower-height: 720px;
-    --flower-head-width: 50px;
-    --flower-tilt: -4deg;
-    --flower-head-rotation: 8deg;
-    --flower-origin: 50% 100%;
-    left: -64px;
-    top: 236px;
-    bottom: auto;
-}
-
-.section2-flower--top-left .section2-flower__head {
-    top: -8px;
-    right: -14px;
+    --flower-width: 50px;
+    --flower-height: 300px;
+    --flower-head-width: 52px;
+    --flower-head-offset: 36px;
+    --flower-stem-extend: 12px;
+    --flower-tilt: -3deg;
+    --flower-head-rotation: -12deg;
+    --flower-left: -82px;
 }
 
 .section2-flower--top-right {
-    --flower-width: 72px;
-    --flower-height: 700px;
-    --flower-head-width: 53px;
-    --flower-tilt: 3deg;
-    --flower-head-rotation: -10deg;
-    --flower-origin: 50% 100%;
-    left: -22px;
-    top: 242px;
-    bottom: auto;
-}
-
-.section2-flower--top-right .section2-flower__head {
-    top: -6px;
-    left: -14px;
+    --flower-width: 64px;
+    --flower-height: 430px;
+    --flower-head-width: 50px;
+    --flower-head-offset: 44px;
+    --flower-stem-extend: 10px;
+    --flower-tilt: 2deg;
+    --flower-head-rotation: 12deg;
+    --flower-left: -58px;
 }
 
 .section2-flower--bottom-left {
-    --flower-width: 82px;
-    --flower-height: 740px;
-    --flower-head-width: 83px;
-    --flower-tilt: 2deg;
-    --flower-head-rotation: -6deg;
-    --flower-origin: 50% 100%;
-    left: 1040px;
-    top: 224px;
-    bottom: auto;
-}
-
-.section2-flower--bottom-left .section2-flower__head {
-    top: -10px;
-    right: -22px;
+    --flower-width: 96px;
+    --flower-height: 300px;
+    --flower-head-width: 98px;
+    --flower-head-offset: 72px;
+    --flower-tilt: 1deg;
+    --flower-head-rotation: -4deg;
+    --flower-left: auto;
+    left: auto;
+    right: -60px;
 }
 
 .section2-flower--bottom-right {
-    --flower-width: 118px;
-    --flower-height: 720px;
-    --flower-head-width: 134px;
+    --flower-width: 160px;
+    --flower-height: 420px;
+    --flower-head-width: 150px;
+    --flower-head-offset: 48px;
     --flower-tilt: -2deg;
-    --flower-head-rotation: 5deg;
-    --flower-origin: 50% 100%;
-    left: 1515px;
-    top: 226px;
-    bottom: auto;
+    --flower-head-rotation: 3deg;
+    --flower-left: auto;
+    left: auto;
+    right: -140px;
 }
 
-.section2-flower--bottom-right .section2-flower__head {
-    top: -10px;
-    left: -22px;
+/* Gamification group: left bud + lily pad, right pink bud + tall crown */
+.section2-group--gamification .section2-flower--top-left {
+    --flower-width: 52px;
+    --flower-height: 400px;
+    --flower-head-width: 58px;
+    --flower-head-offset: 36px;
+    --flower-tilt: -2deg;
+    --flower-head-rotation: 18deg;
+    --flower-left: -70px;
+    z-index: 1;
+}
+
+.section2-group--gamification .section2-flower--top-right {
+    --flower-width: 160px;
+    --flower-height: 260px;
+    --flower-head-width: 190px;
+    --flower-head-offset: 48px;
+    --flower-tilt: 0deg;
+    --flower-head-rotation: 0;
+    --flower-left: -70px;
+    left: var(--flower-left);
+    right: auto;
+    z-index: 3;
+}
+
+.section2-group--gamification .section2-flower--bottom-left {
+    --flower-width: 110px;
+    --flower-height: 680px;
+    --flower-head-width: 100px;
+    --flower-head-offset: 72px;
+    --flower-tilt: 2deg;
+    --flower-head-rotation: 10deg;
+    --flower-left: auto;
+    left: auto;
+    right: -10px;
+    z-index: 1;
+}
+
+.section2-group--gamification .section2-flower--bottom-right {
+    --flower-width: 56px;
+    --flower-height: 380px;
+    --flower-head-width: 50px;
+    --flower-head-offset: 40px;
+    --flower-tilt: 1deg;
+    --flower-head-rotation: 14deg;
+    --flower-left: auto;
+    left: auto;
+    right: -60px;
+    z-index: 3;
 }
 
 .hero {
@@ -1415,7 +1470,7 @@ body,
 }
 
 .section1.is-active .incoming-projects {
-    animation: incoming-projects-enter 700ms cubic-bezier(0.16, 1, 0.3, 1) 2200ms forwards;
+    animation: incoming-projects-enter 700ms cubic-bezier(0.16, 1, 0.3, 1) 2050ms forwards;
     pointer-events: auto;
 }
 
@@ -1550,7 +1605,7 @@ body,
 .project-annotation--semantic span {
     display: block;
     opacity: 0;
-    transform: translate(-24px, 10px);
+    transform: translate(-16px, 10px);
 }
 
 .project-annotation__semantic-arrow {
@@ -1588,19 +1643,19 @@ body,
 }
 
 .section1.is-active .project-annotation--training .project-annotation__mark .project-annotation__training-line--top {
-    animation: project-annotation-draw 260ms ease-in-out 3550ms forwards;
+    animation: project-annotation-draw 220ms ease-in-out 3180ms forwards;
 }
 
 .section1.is-active .project-annotation--training .project-annotation__side-label--top {
-    animation: project-annotation-label-enter 160ms ease-out 3980ms forwards;
+    animation: project-annotation-label-enter 140ms ease-out 3420ms forwards;
 }
 
 .section1.is-active .project-annotation--training .project-annotation__mark .project-annotation__training-line--bottom {
-    animation: project-annotation-draw 260ms ease-in-out 4200ms forwards;
+    animation: project-annotation-draw 220ms ease-in-out 3560ms forwards;
 }
 
 .section1.is-active .project-annotation--training .project-annotation__side-label--bottom {
-    animation: project-annotation-label-enter 160ms ease-out 4630ms forwards;
+    animation: project-annotation-label-enter 140ms ease-out 3800ms forwards;
 }
 
 .incoming-projects.show-bottom-annotations .project-annotation--bottom {
@@ -1709,7 +1764,7 @@ body,
 }
 
 .section1.is-settled .project-annotation--semantic span {
-    transform: translate(-24px, 10px);
+    transform: translate(-16px, 10px);
 }
 
 .section1.is-settled .incoming-scroll-cue {
@@ -2036,6 +2091,7 @@ body,
     .section2-projects {
         width: 100%;
         max-width: none;
+        height: calc(100vh - 96px);
     }
 
     .section2-projects .projects-container {
@@ -2060,7 +2116,8 @@ body,
     }
 
     .section2-group .section2-flower-field {
-        top: 92px;
+        top: 0;
+        height: calc(100vh - 96px - 4vh);
     }
 
     .section2-projects .projects-item {
@@ -2074,39 +2131,77 @@ body,
     }
 
     .section2-flower--top-left {
-        --flower-width: 54px;
-        --flower-height: 520px;
-        --flower-head-width: 35px;
-        left: -28px;
-        top: 188px;
-        bottom: auto;
+        --flower-width: 42px;
+        --flower-height: 230px;
+        --flower-head-width: 30px;
+        --flower-head-offset: 26px;
+        --flower-left: -24px;
     }
 
     .section2-flower--top-right {
-        --flower-width: 54px;
-        --flower-height: 510px;
-        --flower-head-width: 37px;
-        left: 10px;
-        top: 192px;
-        bottom: auto;
+        --flower-width: 48px;
+        --flower-height: 300px;
+        --flower-head-width: 38px;
+        --flower-head-offset: 32px;
+        --flower-left: 12px;
     }
 
     .section2-flower--bottom-left {
-        --flower-width: 68px;
-        --flower-height: 530px;
-        --flower-head-width: 58px;
-        left: calc(200vw - 60px);
-        top: 180px;
-        bottom: auto;
+        --flower-width: 72px;
+        --flower-height: 200px;
+        --flower-head-width: 62px;
+        --flower-head-offset: 52px;
+        --flower-left: auto;
+        left: auto;
+        right: 10px;
     }
 
     .section2-flower--bottom-right {
-        --flower-width: 90px;
-        --flower-height: 520px;
-        --flower-head-width: 88px;
-        left: calc(300vw - 80px);
-        top: 182px;
-        bottom: auto;
+        --flower-width: 140px;
+        --flower-height: 340px;
+        --flower-head-width: 140px;
+        --flower-head-offset: 36px;
+        --flower-left: auto;
+        left: auto;
+        right: -56px;
+    }
+
+    .section2-group--gamification .section2-flower--top-left {
+        --flower-width: 40px;
+        --flower-height: 370px;
+        --flower-head-width: 34px;
+        --flower-head-offset: 28px;
+        --flower-left: -18px;
+    }
+
+    .section2-group--gamification .section2-flower--top-right {
+        --flower-width: 110px;
+        --flower-height: 180px;
+        --flower-head-width: 100px;
+        --flower-head-offset: 36px;
+        --flower-left: 10px;
+        left: -10px;
+        right: auto;
+    }
+
+    .section2-group--gamification .section2-flower--bottom-left {
+        --flower-width: 80px;
+        --flower-height: 400px;
+        --flower-head-width: 72px;
+        --flower-head-offset: 56px;
+        --flower-left: auto;
+        left: auto;
+        right: -15px;
+    }
+
+    .section2-group--gamification .section2-flower--bottom-right {
+        --flower-width: 44px;
+        --flower-height: 430px;
+        --flower-head-width: 36px;
+        --flower-head-offset: 30px;
+        --flower-left: auto;
+        left: auto;
+        right: 0px;
     }
 
     .incoming-dead-title,
@@ -2228,7 +2323,6 @@ body,
         width: 28px;
         margin-top: 10px;
     }
-
 }
 
 @keyframes question-pop-mobile {

@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateActiveSection();
 
     const h1 = document.querySelector('.content h1');
-    const footer = document.querySelector('.next-project-section') || document.querySelector('footer');
+    const footer = document.querySelector('footer');
     const footerMargin = 24;
 
     // Get the h1's top position relative to the document (stable after layout)
@@ -416,12 +416,12 @@ document.addEventListener('DOMContentLoaded', () => {
             nav.style.top = '50%';
             nav.style.transform = 'translateY(-50%)';
 
-            // Align nav bottom with footer bottom as it scrolls up
+            // Move the navigation above the footer as soon as it enters view.
             if (footer) {
-                const footerBottom = footer.getBoundingClientRect().bottom;
+                const footerTop = footer.getBoundingClientRect().top;
                 const centeredNavBottom = viewportHeight / 2 + navHeight / 2;
-                if (footerBottom < centeredNavBottom) {
-                    nav.style.top = (footerBottom - navHeight) + 'px';
+                if (footerTop < centeredNavBottom + footerMargin) {
+                    nav.style.top = (footerTop - navHeight - footerMargin) + 'px';
                     nav.style.transform = 'none';
                 }
             }

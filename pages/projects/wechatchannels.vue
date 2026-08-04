@@ -7,7 +7,7 @@
         <div class="content">
             <div class="project-header-container">
                 <div class="project-header">
-                    <h4 class="tag" style="background-color: #FFE4C2;">2026</h4>
+                    <h4 class="tag wechat-accent">2026</h4>
 
                     <h1>WeChat Channels × AI</h1>
                     <h3>An interview-stage design task for the Tencent WeChat Channels team — rethinking video
@@ -42,7 +42,7 @@
             </div>
 
             <div class="problem-statement-container">
-                <div class="problem-statement" style="background-color: #FFE4C2;">
+                <div class="problem-statement wechat-accent">
                     <h3>How can AI reshape the entire creation flow of WeChat Channels, rather than only optimizing
                         single-point tools?</h3>
                 </div>
@@ -50,7 +50,7 @@
 
             <section>
                 <h2>FIGMA PROTOTYPE</h2>
-                <iframe style="border: 1px solid rgba(0, 0, 0, 0.1); width: 100%; height: 75vh; margin-top: 12px;"
+                <iframe class="figma-prototype"
                     src="https://embed.figma.com/proto/fvgooKpozMN5v0OeOpOQcc/%E5%BE%AE%E4%BF%A1%E8%A7%86%E9%A2%91%E5%8F%B7?node-id=34-64&viewport=-524%2C382%2C0.12&scaling=scale-down&content-scaling=fixed&starting-point-node-id=34%3A64&page-id=34%3A63&embed-host=share"
                     loading="lazy" allowfullscreen></iframe>
             </section>
@@ -76,23 +76,22 @@
 
             <section>
                 <h2>REFLECTION</h2>
+                <h3>Three principles shaped how I introduced AI into a familiar creation flow.</h3>
                 <div class="reflection-grid">
-                    <div class="reflection-card">
-                        <h3>AI is Copilot, Not Autopilot</h3>
-                        <p>Design must hold that the human is the creative subject. AI should focus on sparking
-                            inspiration and reducing repetitive labor — not replacing human emotional expression.</p>
+                    <div class="reflection-card wechat-accent">
+                        <h3>01 · Protect creative ownership</h3>
+                        <p>The creator remains the author. AI should provide inspiration and remove repetitive work,
+                            while people retain control over the idea, emotional tone, and final decision.</p>
                     </div>
-                    <div class="reflection-card">
-                        <h3>Restrained Technical Intervention</h3>
-                        <p>Embedding AI into Channels' stable user path must follow a "seamless-integration" principle —
-                            avoid feature pile-up that weighs down interaction, and preserve WeChat's characteristic
-                            simplicity and restraint.</p>
+                    <div class="reflection-card wechat-accent">
+                        <h3>02 · Fit the existing habit</h3>
+                        <p>AI belongs inside the familiar Channels flow, not beside it as another complicated tool.
+                            Every intervention should make creating easier while preserving WeChat's restraint.</p>
                     </div>
-                    <div class="reflection-card">
-                        <h3>Continuously Evolving Semantic Understanding</h3>
-                        <p>The current solution relies on powerful multimodal large models. Future iterations should pay
-                            closer attention to AI's aesthetic precision in vertical domains (e.g., specific intangible
-                            cultural heritage and life skills).</p>
+                    <div class="reflection-card wechat-accent">
+                        <h3>03 · Improve taste in context</h3>
+                        <p>Strong multimodal models are a starting point. Future iterations should learn the visual
+                            language of specific creator communities, from everyday skills to cultural-heritage content.</p>
                     </div>
                 </div>
             </section>

@@ -12,8 +12,7 @@
                     <h3 style="color: #ff6952;" font-weight="bold">1st Place & Best UI/UX at HOF Hack 2025</h3>
                     <p style="margin-top: 10px;">A smart Google Chrome extension built to organize your digital
                         workspace. By intelligently remember, organize, and suggest tabs for you, it transforms browser
-                        chaos into a structured environment—perfect for power users who need instant access to
-                        task-specific workflows.</p>
+                        chaos into a structured environment.</p>
                 </div>
                 <div class="button-container">
                     <button class="button" onclick="window.location.href='https://www.intertabs.com/'"

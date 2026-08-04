@@ -286,7 +286,7 @@
                                 <p>Blender, Fusion 360</p>
                             </div>
                         </div>
-
+                        
                         <div class="skill-category">
                             <h2 class="skill-label">Other</h2>
                             <div class="skill-list">

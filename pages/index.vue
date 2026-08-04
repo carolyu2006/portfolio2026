@@ -1,7 +1,7 @@
 <template>
   <AppHeader />
   <div class="main-content">
-    <div id="hero" class="hero hero-section">
+    <div id="hero" class="hero hero-section" :class="{ 'is-transition-active': isHeroTransitionActive }">
       <div class="hero-title-container">
         <h1 class="hero-title">YU</h1>
         <img class="hero-title-icon" src="/assets/icons/yu.svg" alt="yu">
@@ -47,8 +47,12 @@
       </div>
     </div>
 
-    <section id="section1" class="section1"
-      :class="{ 'is-active': isSection1Active, 'is-settled': isSection1Settled }">
+    <section id="section1" class="section1" :class="{
+      'is-active': isSection1Active,
+      'is-settled': isSection1Settled,
+      'is-transition-active': isHeroTransitionActive,
+      'is-returning-from-section2': isReturningFromSection2
+    }">
       <div class="section1-inner">
       <div class="incoming-leaves" aria-hidden="true">
         <div class="leaf leaf-1 incoming-leaf incoming-leaf-1"></div>
@@ -75,45 +79,43 @@
       </div>
       <div class="incoming-projects" :class="{ 'show-bottom-annotations': showBottomAnnotations }">
         <div class="projects-container">
-          <a class="projects-item" data-category="web-apps" href="/projects/intertabs">
+          <a class="projects-item" data-category="web-apps" href="/projects/ai-brand-kit">
             <div class="projects-item-content">
               <div class="project-meta">
                 <div class="project-meta-tags">
-                  <span class="project-meta-tag">HOF Hack 2025 1st Place & Best UI/UX</span>
-                  <span class="project-meta-tag">Case Study</span>
-                  <span class="project-meta-tag">Shipped Product</span>
-                </div>
-              </div>
-              <div>
-                <h4>2025</h4>
-                <h2 class="project-item-title">interTabs</h2>
-                <h3>Product designer & Frontend Developer</h3>
-                <p>An AI-powered Chrome Extension that manage tabs.</p>
-              </div>
-            </div>
-            <img class="projects-item-image" src="/assets/images/covers/placeholder.png" alt="interTabs project cover">
-          </a>
-
-          <a class="projects-item" data-category="web-apps" href="/projects/wechatchannels">
-            <div class="projects-item-content">
-              <div class="project-meta">
-                <div class="project-meta-tags">
-                  <span class="project-meta-tag">AI Product</span>
-                  <span class="project-meta-tag">Case Study</span>
-                  <span class="project-meta-tag">Tencent Design Challenge</span>
+                  <span class="project-meta-tag">Image & HTML H5 generating</span>
+                  <span class="project-meta-tag">AI Agent Product</span>
                 </div>
               </div>
               <div>
                 <h4>2026</h4>
-                <h2 class="project-item-title">WeChat Channels × AI</h2>
-                <h3>Product Designer</h3>
-                <p>A Tencent Design Challenge that led to a Successful Offer.</p>
+                <h2 class="project-item-title">AI Brand Kit</h2>
+                <h3>AI Product Design Intern @ TikTok</h3>
+                <p>Training AI for Brand Content Automation by creating skill and lora.</p>
               </div>
             </div>
-            <img src="/assets/images/covers/placeholder.png" alt="WeChat Channels project cover">
+            <img class="projects-item-image" src="/assets/images/covers/ai-brand-kit.png" alt="AI Brand Kit project cover">
           </a>
 
-          <a class="projects-item" data-category="web-apps">
+          <a class="projects-item" data-category="web-apps" href="/projects/aigc-video-automation">
+            <div class="projects-item-content">
+              <div class="project-meta">
+                <div class="project-meta-tags">
+                  <span class="project-meta-tag">AIGC Video Generation</span>
+                  <span class="project-meta-tag">Creative Automation</span>
+                </div>
+              </div>
+              <div>
+                <h4>2026</h4>
+                <h2 class="project-item-title">AIGC Video Automation</h2>
+                <h3>AI Product Design intern @ TikTok</h3>
+                <p>Turning product information and cultural trends into scalable, platform-native e-commerce video ads.</p>
+              </div>
+            </div>
+            <img src="/assets/images/covers/aigc-video-automation.png" alt="WeChat Channels project cover">
+          </a>
+
+          <a class="projects-item" data-category="web-apps" href="https://cosmasense.tech/" target="_blank" rel="noopener noreferrer">
             <div class="projects-item-content">
               <div class="project-meta">
                 <div class="project-meta-tags">
@@ -362,6 +364,9 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+const isHeroTransitionActive = ref(false);
+let removeMobileHeroTransitionListener = null;
+
 // section1 content entrance (leaves + statement) fires via this class
 const isSection1Active = ref(false);
 const isSection1Settled = ref(false);
@@ -370,6 +375,8 @@ const showScrollCue = ref(false);
 const showBottomAnnotations = ref(false);
 // section2 plays its own entrance once it reaches the viewport threshold
 const isSection2Active = ref(false);
+// distinct reverse transition when scrolling back from section2 to section1 bottom
+const isReturningFromSection2 = ref(false);
 
 let scrollTimeline = null;
 let pageScrollTrigger = null;
@@ -379,12 +386,30 @@ let section2HorizontalWheelHandler = null;
 let section2TransitionUnlockTimer = null;
 
 onMounted(() => {
+  if (window.matchMedia('(max-width: 720px)').matches) {
+    const updateHeroTransition = () => {
+      const firstSection = document.querySelector('#section1');
+      if (!firstSection) return;
+      isHeroTransitionActive.value = firstSection.getBoundingClientRect().top <= window.innerHeight * 0.72;
+    };
+
+    window.addEventListener('scroll', updateHeroTransition, { passive: true });
+    window.addEventListener('resize', updateHeroTransition);
+    updateHeroTransition();
+    removeMobileHeroTransitionListener = () => {
+      window.removeEventListener('scroll', updateHeroTransition);
+      window.removeEventListener('resize', updateHeroTransition);
+    };
+    return;
+  }
+
   gsap.registerPlugin(ScrollTrigger);
 
   const hero = document.querySelector('#hero');
   const section1 = document.querySelector('#section1');
   const section1Inner = document.querySelector('.section1-inner');
   const incomingLeaves = document.querySelector('.incoming-leaves');
+  const incomingProjects = document.querySelector('.incoming-projects');
   const section2 = document.querySelector('#section2');
   const projects = document.querySelector('.incoming-projects .projects-container');
   const section2Projects = document.querySelector('.section2-projects');
@@ -423,11 +448,11 @@ onMounted(() => {
 
   // Starting positions for the pinned hero/section1 moment.
   gsap.set(hero, { xPercent: 0 });
-  gsap.set(section1, { xPercent: 0, autoAlpha: 1 });
+  gsap.set(section1, { xPercent: 0, yPercent: 0, autoAlpha: 1 });
   gsap.set(section1Inner, { y: 0 });
   gsap.set(incomingLeaves, { y: 0 });
   gsap.set(section2ProjectsTrack, { x: 0 });
-  gsap.set(section2, { xPercent: 100, autoAlpha: 0 });
+  gsap.set(section2, { xPercent: 100, yPercent: 0, autoAlpha: 0 });
 
   // Four rest states the pinned scroll snaps between (as timeline progress):
   //  HERO   (0)     -> hero fully in view
@@ -541,25 +566,53 @@ onMounted(() => {
     section2TransitionUnlockTimer = null;
   };
 
+  // Hard-reset section shells so return (vertical) and enter (horizontal) never share leftover transforms.
+  const setSectionShell = (el, { xPercent, yPercent, autoAlpha, zIndex }) => {
+    gsap.set(el, { clearProps: 'transform,opacity,visibility,zIndex' });
+    gsap.set(el, {
+      xPercent,
+      yPercent,
+      autoAlpha,
+      ...(zIndex == null ? {} : { zIndex })
+    });
+  };
+
   const startSection2EnterTransition = (self) => {
     isAnimatingSection2Transition = true;
-    isSection1Settled.value = false;
+    // Keep settled so entrance CSS animations do not restart mid-exit.
+    isSection1Settled.value = true;
+    isSection1Active.value = true;
+    isReturningFromSection2.value = false;
+    isSection2Active.value = false;
     section2TransitionLockProgress = pSection2Start;
     clearSection2TransitionUnlockTimer();
-    setScrollToProgress(self, pSection2Start);
-    setTimelineProgress(pSection2Start);
-    hasScrollCueBeenDismissed = true;
     progressTween?.kill();
+    progressTween = null;
+    hasScrollCueBeenDismissed = true;
+    hideScrollCue();
 
-    animateTimelineToProgress(
-      pSection2Ready,
-      SECTION2_TRANSITION_ANIM_DURATION,
-      () => {
+    setScrollToProgress(self, pSection2Start);
+    // Park timeline in the cue-hold range (same visual reveal as section2 trigger,
+    // but before the empty handoff placeholder / horizontal scroll segment).
+    setTimelineProgress(pRevealDone);
+    preserveSection1Reveal();
+    gsap.set(incomingLeaves, { y: getIncomingLeafParallax() });
+    gsap.set(section2ProjectsTrack, { x: 0 });
+
+    setSectionShell(section1, { xPercent: 0, yPercent: 0, autoAlpha: 1 });
+    setSectionShell(section2, { xPercent: 100, yPercent: 0, autoAlpha: 0 });
+
+    progressTween = gsap.timeline({
+      onComplete: () => {
+        setSectionShell(section1, { xPercent: -100, yPercent: 0, autoAlpha: 0.2 });
+        setSectionShell(section2, { xPercent: 0, yPercent: 0, autoAlpha: 1 });
         section2TransitionLockProgress = pSection2Ready;
         setScrollToProgress(self, pSection2Ready);
         setTimelineProgress(pSection2Ready);
+        gsap.set(section2ProjectsTrack, { x: 0 });
         isSection2Active.value = true;
         isSection1Active.value = false;
+        isSection1Settled.value = false;
         hideScrollCue();
 
         section2TransitionUnlockTimer = window.setTimeout(() => {
@@ -567,33 +620,105 @@ onMounted(() => {
           isAnimatingSection2Transition = false;
           section2TransitionUnlockTimer = null;
         }, SECTION2_POST_TRANSITION_SCROLL_LOCK);
-      },
-      (progress) => {
-        if (progress >= pRevealDone) {
-          preserveSection1Reveal();
-        }
-        isSection2Active.value = progress >= pSection2EnterStart;
+        progressTween = null;
       }
-    );
+    })
+      .to(section1, {
+        xPercent: -100,
+        yPercent: 0,
+        autoAlpha: 0.2,
+        duration: SECTION_EXIT_DURATION,
+        ease: 'power2.inOut'
+      }, 0)
+      .to(section2, {
+        xPercent: 0,
+        yPercent: 0,
+        autoAlpha: 1,
+        duration: SECTION_ENTER_DURATION,
+        ease: 'power2.inOut'
+      }, 0);
   };
 
   const returnToSection1Bottom = (self) => {
-    hasEnteredSection2 = false;
-    isAnimatingSection2Transition = false;
+    isAnimatingSection2Transition = true;
+    section2TransitionLockProgress = pSection2Ready;
     clearSection2TransitionUnlockTimer();
     progressTween?.kill();
     progressTween = null;
 
-    setScrollToProgress(self, pSection2Start);
-    setTimelineProgress(pSection2Start);
-    preserveSection1Reveal();
-    hasBottomAnnotationsAppeared = true;
-    showBottomAnnotations.value = true;
+    setScrollToProgress(self, pSection2Ready);
     hasScrollCueBeenDismissed = true;
     hideScrollCue();
+    isReturningFromSection2.value = true;
     isSection1Active.value = true;
-    isSection1Settled.value = true;
-    isSection2Active.value = false;
+    // Settled off while returning so drop-in CSS isn't overridden by settled transforms.
+    isSection1Settled.value = false;
+    isSection2Active.value = true;
+    showBottomAnnotations.value = false;
+
+    // Land at reveal-done: above the section2 trigger, full reveal (no mid-reveal
+    // jump when scrolling forward into section2 again).
+    const pReturnLand = pRevealDone;
+    const revealY = -getReveal();
+    const leafY = getIncomingLeafParallax();
+    const dropDistance = window.innerHeight;
+
+    setSectionShell(section1, { xPercent: 0, yPercent: 0, autoAlpha: 1, zIndex: 11 });
+    setSectionShell(section2, { xPercent: 0, yPercent: 0, autoAlpha: 1, zIndex: 12 });
+    gsap.set(section1Inner, { y: revealY });
+    gsap.set(section2ProjectsTrack, { x: 0 });
+    gsap.set(incomingProjects, {
+      y: -dropDistance,
+      autoAlpha: 1,
+      x: 0,
+      xPercent: 0
+    });
+    gsap.set(incomingLeaves, { y: leafY - dropDistance, autoAlpha: 1 });
+
+    const returnExitDuration = 0.22;
+    const returnEnterDelay = 0.2;
+    const returnEnterDuration = 0.4;
+
+    progressTween = gsap.timeline({
+      onComplete: () => {
+        hasEnteredSection2 = false;
+        isAnimatingSection2Transition = false;
+        clearSection2TransitionUnlockTimer();
+
+        gsap.set(incomingProjects, { y: 0, clearProps: 'transform,opacity,x,xPercent,y,yPercent' });
+        setScrollToProgress(self, pReturnLand);
+        setTimelineProgress(pReturnLand);
+        setSectionShell(section1, { xPercent: 0, yPercent: 0, autoAlpha: 1 });
+        setSectionShell(section2, { xPercent: 100, yPercent: 0, autoAlpha: 0 });
+        gsap.set(section1Inner, { y: revealY });
+        gsap.set(incomingLeaves, { y: leafY });
+        gsap.set(section2ProjectsTrack, { x: 0 });
+
+        hasBottomAnnotationsAppeared = true;
+        showBottomAnnotations.value = true;
+        isReturningFromSection2.value = false;
+        isSection1Active.value = true;
+        isSection1Settled.value = true;
+        isSection2Active.value = false;
+        progressTween = null;
+      }
+    })
+      .to(section2, {
+        yPercent: 100,
+        autoAlpha: 0,
+        duration: returnExitDuration,
+        ease: 'power3.in'
+      }, 0)
+      .to(incomingProjects, {
+        y: 0,
+        duration: returnEnterDuration,
+        ease: 'power2.out'
+      }, returnEnterDelay)
+      .to(incomingLeaves, {
+        y: leafY,
+        duration: returnEnterDuration,
+        ease: 'power2.out'
+      }, returnEnterDelay);
   };
 
   scrollTimeline = gsap.timeline({ paused: true });
@@ -604,8 +729,10 @@ onMounted(() => {
     .to(incomingLeaves, { y: () => getIncomingLeafParallax(), ease: 'none', duration: REVEAL }, '<')
     .to(section1Inner, { y: () => -getReveal(), ease: 'none', duration: CUE_HOLD })
     .to(incomingLeaves, { y: () => getIncomingLeafParallax(), ease: 'none', duration: CUE_HOLD }, '<')
-    .to(section1, { xPercent: -100, autoAlpha: 0.2, ease: 'power2.inOut', duration: SECTION_EXIT_DURATION })
-    .to(section2, { xPercent: 0, autoAlpha: 1, ease: 'power2.inOut', duration: SECTION_ENTER_DURATION }, '<')
+    // Placeholder durations keep progress math (pSection2Start / pSection2Ready)
+    // in sync. The visible handoff is played by startSection2EnterTransition.
+    .to({}, { duration: SECTION_EXIT_DURATION })
+    .to({}, { duration: 0 }, '<')
     .to(section2ProjectsTrack, { x: () => -getSection2HorizontalScroll(), ease: 'none', duration: SECTION2_HORIZONTAL_SCROLL });
 
   // Scroll chooses the next state, while exits play as fixed-duration animations:
@@ -646,7 +773,6 @@ onMounted(() => {
 
       if (isAnimatingSection2Transition) {
         setScrollToProgress(self, section2TransitionLockProgress);
-        isSection2Active.value = scrollTimeline.progress() >= pSection2EnterStart;
         return;
       }
 
@@ -817,6 +943,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+  removeMobileHeroTransitionListener?.();
   clearTimeout(heroExitUnlockTimer);
   clearTimeout(section2TransitionUnlockTimer);
   progressTween?.kill();

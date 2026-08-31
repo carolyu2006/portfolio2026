@@ -47,6 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Custom Cursor
 document.addEventListener('DOMContentLoaded', () => {
+    // Touch devices hide the cursor in CSS; building it there would leave a
+    // per-frame rAF loop writing styles for nothing, which costs scroll smoothness.
+    if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+
     // Create cursor element
     const cursor = document.createElement('div');
     cursor.className = 'custom-cursor';

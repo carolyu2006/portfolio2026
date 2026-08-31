@@ -1,5 +1,5 @@
 <template>
-<header class="main-header">
+<header class="main-header" :class="{ 'main-header--hero-dark': hero === 'dark' }">
     <div class="header-container">
         <div class="header-left">
             <a href="/" class="header-link">
@@ -101,6 +101,15 @@
 
 <script setup>
 import { onBeforeUnmount, onMounted } from 'vue';
+
+// hero="dark" for pages whose top section is dark: the nav starts white and
+// fades to the normal dark text as the white background scrolls in.
+defineProps({
+  hero: {
+    type: String,
+    default: 'light',
+  },
+});
 
 let cleanup = () => {};
 

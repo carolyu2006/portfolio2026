@@ -1,5 +1,5 @@
 <template>
-  <AppHeader />
+  <AppHeader hero="dark" />
   <img class="hero-image" src="/assets/images/projects/ai-brand-kit/cover.png" alt="AI Brand Kit cover">
 
   <div class="content">

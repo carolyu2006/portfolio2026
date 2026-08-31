@@ -5,10 +5,14 @@ const leaves = document.querySelectorAll('.leaf:not(.incoming-leaf)');
 const rotations = [110, 180, 160, -134, 165, 305];
 const speeds = [0.2, 0.2, 0.3, 0.3, 0.4, 0.5];
 
+// On phones the hero is a short block in normal flow, so the scroll parallax just
+// makes the leaves lag behind the page on a 700ms spring. Place them once instead.
+const isPhoneLayout = window.matchMedia('(max-width: 720px)').matches;
+
 const updateLeafTransform = (leaf, index) => {
     const rotation = rotations[index] ?? 0;
     const speed = speeds[index] ?? 0.2;
-    const scrolled = window.pageYOffset;
+    const scrolled = isPhoneLayout ? 0 : window.pageYOffset;
     const yPos = +(scrolled * speed);
     const hoverSpin = Number(leaf.dataset.hoverSpin || 0);
     const rotate = (scrolled * 0.2) + rotation + hoverSpin;
@@ -16,7 +20,9 @@ const updateLeafTransform = (leaf, index) => {
 };
 
 leaves.forEach((leaf, index) => {
-    leaf.style.transition = 'transform 700ms cubic-bezier(0.34, 1.56, 0.64, 1)';
+    if (!isPhoneLayout) {
+        leaf.style.transition = 'transform 700ms cubic-bezier(0.34, 1.56, 0.64, 1)';
+    }
     leaf.dataset.hoverSpin = '0';
 
     leaf.addEventListener('mouseenter', () => {
@@ -32,9 +38,18 @@ leaves.forEach((leaf, index) => {
     updateLeafTransform(leaf, index);
 });
 
-window.addEventListener('scroll', () => {
-    leaves.forEach((leaf, index) => updateLeafTransform(leaf, index));
-});
+if (!isPhoneLayout) {
+    // Coalesce into one write per frame — the raw scroll event fires far more
+    // often than the page paints.
+    let leafFrame = 0;
+    window.addEventListener('scroll', () => {
+        if (leafFrame) return;
+        leafFrame = requestAnimationFrame(() => {
+            leafFrame = 0;
+            leaves.forEach((leaf, index) => updateLeafTransform(leaf, index));
+        });
+    }, { passive: true });
+}
 
 // Sidebar animation - hide in hero section, show everywhere else
 const heroSection = document.querySelector('#hero');

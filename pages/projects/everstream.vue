@@ -1,5 +1,5 @@
 <template>
-<AppHeader />
+<AppHeader hero="dark" />
         <img class="hero-image" src="/assets/images/projects/everstream/cover.webp" alt="Everstream">
 
         <div class="content">

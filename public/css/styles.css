@@ -112,7 +112,11 @@
 
 html {
     background-color: var(--color-background);
+    /* `hidden` turns <html> into a scroll container, which makes iOS momentum
+       scrolling and sticky positioning misbehave. `clip` clips the same overflow
+       without that side effect; the `hidden` above is the fallback. */
     overflow-x: hidden;
+    overflow-x: clip;
 }
 
 body {
@@ -122,7 +126,9 @@ body {
     /* margin-top: 190px; */
     background-color: var(--color-background);
     color: var(--color-foreground);
-    overflow-x: hidden;
+    /* clip, not hidden: hidden turns body into a scroll container and breaks
+       position: sticky inside the page. */
+    overflow-x: clip;
     max-width: 100%;
 }
 
@@ -225,6 +231,59 @@ header h1 {
     opacity: var(--header-bg-opacity);
     z-index: -1;
     pointer-events: none;
+}
+
+/* Dark-hero variant: nav starts white over the dark top section, then fades to
+   the normal dark text in step with the white background fading in. */
+.main-header--hero-dark {
+    --header-foreground: color-mix(in srgb,
+        var(--color-foreground) calc(var(--header-bg-opacity) * 100%),
+        var(--color-white));
+}
+
+.main-header--hero-dark .header-title,
+.main-header--hero-dark .menu-button h1,
+.main-header--hero-dark .header-middle a {
+    color: var(--header-foreground);
+}
+
+.main-header--hero-dark .header-middle a:hover,
+.main-header--hero-dark .header-middle a.active {
+    border-bottom-color: var(--header-foreground);
+}
+
+.main-header--hero-dark .menu-button:hover h1 {
+    color: var(--header-foreground);
+}
+
+@media (min-width: 769px) {
+    /* Cross-fade the white logo/menu icon into the dark ones. */
+    .main-header--hero-dark .header-left .header-link {
+        position: relative;
+    }
+
+    .main-header--hero-dark .logo.light,
+    .main-header--hero-dark .menu-button-icon.light {
+        opacity: var(--header-bg-opacity);
+    }
+
+    .main-header--hero-dark .logo.dark,
+    .main-header--hero-dark .menu-button-icon.dark {
+        display: block;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: calc(1 - var(--header-bg-opacity));
+        pointer-events: none;
+    }
+
+    .main-header--hero-dark .logo.dark {
+        left: 0;
+    }
+
+    .main-header--hero-dark .menu-button-icon.dark {
+        right: 0;
+    }
 }
 
 a {

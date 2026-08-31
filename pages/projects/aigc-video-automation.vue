@@ -1,5 +1,5 @@
 <template>
-  <AppHeader />
+  <AppHeader hero="dark" />
   <img class="hero-image" src="/assets/images/projects/aigc-video-automation/cover.png" alt="AIGC e-commerce advertisement video examples">
 
   <div class="content">
@@ -20,7 +20,6 @@
 
     <section class="aigc-overview">
       <h2>OVERVIEW</h2>
-      
 
       <div class="aigc-overview-layout">
         <div>
@@ -117,117 +116,110 @@
           </div>
         </article>
       </div>
-<!-- 
-      <p class="goal-section-label">Difficulties in AIGC Video Automation</p>
-      <ul class="goal-difficulty-list">
-        <li>
-          <span class="goal-difficulty-title">Inconsistent character and flow</span>
-          <span class="goal-difficulty-text">Characters, scenes, and continuity drifted across clips.</span>
-        </li>
-        <li>
-          <span class="goal-difficulty-title">Music swapped between clips</span>
-          <span class="goal-difficulty-text">Background audio jumped when separately generated clips were stitched together.</span>
-        </li>
-        <li>
-          <span class="goal-difficulty-title">Plots felt complicated and flat</span>
-          <span class="goal-difficulty-text">Stories were overcomplicated yet still not interesting enough to watch through.</span>
-        </li>
-      </ul> -->
     </section>
 
     <section id="features">
-      <div class="solution-layout">
-        <div class="solution-copy">
-          <h2>SOLUTION</h2>
-          <h3>A creative automation workflow that turns one product brief into several ad-video directions.</h3>
+      <h2>SOLUTION</h2>
+      <div class="solution-mindmap-layout">
+        <div class="solution-mindmap">
+          <h3 class="solution-mindmap-intro">A creative automation workflow that turns one product brief into several ad-video directions.</h3>
+          <img
+            ref="mindmapImage"
+            class="solution-mindmap-image"
+            src="/assets/images/projects/aigc-video-automation/workflow-diagram.png"
+            alt="Creative generation workflow: product extraction, plot and script generation, character and scene assets, video clips, and final output."
+            loading="lazy"
+            decoding="async"
+          >
         </div>
-        <video
-          class="solution-demo-video"
-          data-autoplay-demo
-          data-src="/assets/images/projects/aigc-video-automation/solution-demo.mp4"
-          muted
-          loop
-          playsinline
-          preload="none"
-          aria-label="AIGC e-commerce advertisement video demo. Select to expand."
-        ></video>
-      </div>
-      <div class="solution-mindmap" role="img" aria-label="Creative-generation mindmap: plot generation, script generation, scene and character image generation, then video generation.">
-        <div class="solution-mindmap-heading">
-          <span>CREATIVE GENERATION MINDMAP</span>
-          <p>From an idea to a completed ad video</p>
-        </div>
-        <ol class="solution-mindmap-flow">
-          <li class="solution-mindmap-stage">
-            <span class="solution-mindmap-number">01</span>
-            <h4>Plot Generation</h4>
-            <div class="solution-mindmap-media-placeholder">Add supporting image</div>
-          </li>
-          <li class="solution-mindmap-stage">
-            <span class="solution-mindmap-number">02</span>
-            <h4>Script Generation</h4>
-            <div class="solution-mindmap-media-placeholder">Add supporting image</div>
-          </li>
-          <li class="solution-mindmap-stage solution-mindmap-stage--visuals">
-            <span class="solution-mindmap-number">03</span>
-            <h4>Visual Generation</h4>
-            <ul>
-              <li>Scene Images</li>
-              <li>Character Images</li>
-            </ul>
-            <div class="solution-mindmap-media-placeholder">Add supporting images</div>
-          </li>
-          <li class="solution-mindmap-stage">
-            <span class="solution-mindmap-number">04</span>
-            <h4>Video Generation</h4>
-            <div class="solution-mindmap-media-placeholder">Add supporting image</div>
-          </li>
-        </ol>
+        <aside ref="mindmapAside" class="solution-mindmap-aside" aria-label="Video demos">
+          <div class="solution-mindmap-videos">
+            <div
+              class="solution-video-stage"
+              @mouseenter="solutionControlsVisible = true"
+              @mouseleave="solutionControlsVisible = solutionControlsPinned"
+            >
+              <video
+                ref="solutionMainVideo"
+                class="solution-mindmap-video solution-mindmap-video--main"
+                data-autoplay-demo
+                data-no-expand
+                :src="activeSolutionVideo.src"
+                :poster="activeSolutionVideo.poster"
+                :aria-label="`${activeSolutionVideo.label} video demo`"
+                :controls="solutionControlsVisible"
+                muted
+                loop
+                playsinline
+                preload="none"
+              ></video>
+              <button type="button" class="solution-video-nav solution-video-nav--prev" aria-label="Previous video" @click="stepSolutionVideo(-1)">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button type="button" class="solution-video-nav solution-video-nav--next" aria-label="Next video" @click="stepSolutionVideo(1)">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="solution-mindmap-video-row" role="group" aria-label="Choose a video demo">
+              <button
+                v-for="(video, index) in solutionVideos"
+                :key="video.src"
+                type="button"
+                class="solution-video-thumb"
+                :class="{ 'is-active': index === activeSolutionIndex }"
+                :aria-pressed="index === activeSolutionIndex"
+                :aria-label="`Play ${video.label}`"
+                @click="selectSolutionVideo(index)"
+              >
+                <img :src="video.poster" :alt="video.label" decoding="async">
+              </button>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
 
     <section>
       <h2>IMPACT</h2>
-      <h3>The 投放数据复盘 delivery review found that several generated materials performed better than the agency-made and other production-path baselines.</h3>
-      <div class="overview-card-container">
-        <div class="overview-card" style="background-color:#FFF5E8;"><div class="overview-card-title"><h4>2 CIDs</h4><h3>Agency benchmark exceeded</h3></div><p>On Douyin, a single material generated 400+ new additions and about 7k in spend — exceeding the agency-video baseline.</p></div>
-        <div class="overview-card" style="background-color:#FFF5E8;"><div class="overview-card-title"><h4>3 CIDs</h4><h3>Clear production-path advantage</h3></div><p>A single material generated 100+ new additions and 1k+ in spend, performing clearly better than the other production paths in the review.</p></div>
-        <div class="overview-card" style="background-color:#FFF5E8;"><div class="overview-card-title"><h4>NOW</h4><h3>Moving into automation</h3></div><p>TikTok is putting the workflow into automation to create similar videos at scale.</p></div>
-        <div class="overview-card" style="background-color:#FFF5E8;"><div class="overview-card-title"><h4>NEXT</h4><h3>Expanding the system</h3></div><p>A new system is being developed to capture hot topics and high-performing videos, turn them into human-made templates, and unlock more automated video types.</p></div>
-      </div>
-    </section>
-
-    <section>
-      <h2>DETAIL</h2>
-      <h3>Each step turns a clear input into a tangible output that can be reviewed before the next step begins.</h3>
-      <div class="features-container-wrapper">
-        <div class="features-container"><div class="feature-item"><img src="/assets/images/projects/aigc-video-automation/workflow-overview.png" alt="Workflow source diagram from the project brief" loading="lazy" decoding="async"></div><div class="feature-description"><h3>01 · Build the product brief</h3><p>The workflow starts by translating raw commerce data into an instruction the creative system can use.</p><ul class="feature-reasoning-list"><li class="feature-reasoning"><span class="feature-reasoning-label">Input</span></li><li class="feature-reasoning">Product link, title, product images, price, selling points, and target audience</li><li class="feature-reasoning"><span class="feature-reasoning-label">Output</span></li><li class="feature-reasoning">A structured product brief: key message, visual references, product assets, and the selected creative route</li></ul></div></div>
-        <div class="features-container"><div class="feature-item"><img src="/assets/images/projects/aigc-video-automation/drama-demo-cover.jpg" alt="Short-drama concept generation example" loading="lazy" decoding="async"></div><div class="feature-description"><h3>02 · Generate the idea and script</h3><p>The product brief is paired with a proven trend or video structure — such as a drama twist or rapid remix — to create a story people will recognize in the feed.</p><ul class="feature-reasoning-list"><li class="feature-reasoning"><span class="feature-reasoning-label">Input</span></li><li class="feature-reasoning">Structured product brief, selected format, trend reference, and conversion goal</li><li class="feature-reasoning"><span class="feature-reasoning-label">Output</span></li><li class="feature-reasoning">A hook, plot beats, product-insertion moment, script, and shot-level content direction</li></ul></div></div>
-        <div class="features-container"><div class="feature-item"><img src="/assets/images/projects/aigc-video-automation/ai-story-cover.jpg" alt="AI-created character and scene visual example" loading="lazy" decoding="async"></div><div class="feature-description"><h3>03 · Create the visual world</h3><p>The script becomes a coherent set of characters, scenes, and product placements that the video model can use as visual anchors.</p><ul class="feature-reasoning-list"><li class="feature-reasoning"><span class="feature-reasoning-label">Input</span></li><li class="feature-reasoning">Script, character descriptions, scene descriptions, product image, and unified visual direction</li><li class="feature-reasoning"><span class="feature-reasoning-label">Output</span></li><li class="feature-reasoning">Character reference images, scene images, and product-placement visuals ready for generation</li></ul></div></div>
-        <div class="features-container"><div class="feature-item"><img src="/assets/images/projects/aigc-video-automation/fast-remix-source-cover.jpg" alt="Generated video segment example" loading="lazy" decoding="async"></div><div class="feature-description"><h3>04 · Generate video segments</h3><p>Instead of asking for one long, unreliable generation, the system produces the story as controllable video clips that can be checked independently.</p><ul class="feature-reasoning-list"><li class="feature-reasoning"><span class="feature-reasoning-label">Input</span></li><li class="feature-reasoning">Script beats, product visual, character and scene references, and individual video prompts</li><li class="feature-reasoning"><span class="feature-reasoning-label">Output</span></li><li class="feature-reasoning">Short vertical video segments that match the approved story and visual direction</li></ul></div></div>
-        <div class="features-container"><div class="feature-item"><img src="/assets/images/projects/aigc-video-automation/fast-remix-poster.jpg" alt="Finished vertical advertisement video output" loading="lazy" decoding="async"></div><div class="feature-description"><h3>05 · Assemble, review, and publish</h3><p>The final stage turns the generated clips into a delivery-ready ad and creates a feedback loop for the next round of automation.</p><ul class="feature-reasoning-list"><li class="feature-reasoning"><span class="feature-reasoning-label">Input</span></li><li class="feature-reasoning">Approved video segments, captions, voiceover, fixed elements, end card, and campaign requirements</li><li class="feature-reasoning"><span class="feature-reasoning-label">Output</span></li><li class="feature-reasoning">A final 9:16 advertisement video, ready for AI and human review, platform delivery, and performance analysis</li></ul></div></div>
+      <h3>Strong delivery results led to automation at scale — and a next system to keep templates current.</h3>
+      <div class="impact-flow">
+        <div class="impact-flow-step overview-card" style="background-color:#FFF5E8;">
+          <div class="overview-card-title"><h4>01</h4><h3>Strong delivery results</h3></div>
+          <p>Generated materials outperformed agency-made and other production-path baselines. On average, a single creative drove:</p>
+          <div class="impact-stat-row">
+            <div class="impact-stat">
+              <span class="impact-stat-value">400<span class="impact-stat-affix">+</span></span>
+              <span class="impact-stat-label">new additions</span>
+            </div>
+            <div class="impact-stat">
+              <span class="impact-stat-value"><span class="impact-stat-affix">~</span>7k</span>
+              <span class="impact-stat-label">in spend on TikTok</span>
+            </div>
+          </div>
+        </div>
+        <div class="impact-flow-step overview-card" style="background-color:#FFF5E8;">
+          <div class="overview-card-title"><h4>02</h4><h3>Automating the workflow</h3></div>
+          <p>TikTok is putting the workflow into automation to create similar videos at scale.</p>
+        </div>
+        <div class="impact-flow-step overview-card" style="background-color:#FFF5E8;">
+          <div class="overview-card-title"><h4>03</h4><h3>Expanding the system</h3></div>
+          <p>TikTok is developing a new system to capture hot topics and high-performing videos, turn them into video workflow templates.</p>
+        </div>
       </div>
     </section>
 
     <section>
       <h2>PROCESS & REFLECTION</h2>
-      <h3>Turning an exploration into a reusable creative system.</h3>
-      <div class="analysis-items-grid" style="margin-top:24px;">
-        <div class="analysis-item" style="border-left:4px solid #FFBA70;padding-left:20px;"><h3>Explore formats before automating them</h3><p>I tested short-drama insertion, rapid remix, AI short drama, animation, and IP-led routes to understand where each structure could create attention for a product.</p></div>
-        <div class="analysis-item" style="border-left:4px solid #FFBA70;padding-left:20px;"><h3>Make the creative choices reviewable</h3><p>Staging the process creates useful checkpoints: the hook, script, visual assets, edit, and delivery strategy can each be assessed and improved.</p></div>
-        <div class="analysis-item" style="border-left:4px solid #FFBA70;padding-left:20px;"><h3>Let performance shape the next template</h3><p>The most valuable output is not one video; it is a system that can learn from strong results and create the next automated template faster.</p></div>
-        <div class="analysis-item" style="border-left:4px solid #FFBA70;padding-left:20px;"><h3>Share the system, not only the result</h3><p>Sharing the exploration helped make the workflow actionable for the team and supported its transition into a broader automation effort.</p></div>
-      </div>
-    </section>
-
-    <section>
-      <h2>VIDEO DEMOS</h2>
-      <h3>A selection of the completed vertical video outputs from the exploration.</h3>
-      <div class="two-column-container">
-        <video class="project-wide-image" data-autoplay-demo data-src="/assets/images/projects/aigc-video-automation/fast-remix-demo.mp4" poster="/assets/images/projects/aigc-video-automation/fast-remix-poster.jpg" muted loop playsinline preload="none" aria-label="Fast remix video demo"></video>
-        <video class="project-wide-image" data-autoplay-demo data-src="/assets/images/projects/aigc-video-automation/ai-story-demo.mp4" poster="/assets/images/projects/aigc-video-automation/ai-story-demo-poster.jpg" muted loop playsinline preload="none" aria-label="AI story video demo"></video>
-        <video class="project-wide-image" data-autoplay-demo data-src="/assets/images/projects/aigc-video-automation/douyin-select-demo.mp4" poster="/assets/images/projects/aigc-video-automation/douyin-select-demo-poster.jpg" muted loop playsinline preload="none" aria-label="Douyin Select video demo"></video>
-        <video class="project-wide-image" data-autoplay-demo data-src="/assets/images/projects/aigc-video-automation/remix-demo-2.mp4" poster="/assets/images/projects/aigc-video-automation/remix-demo-2-poster.jpg" muted loop playsinline preload="none" aria-label="Additional remix video demo"></video>
+      <h3>Through this intenrship experience, I got hands-on experiences with different Video and Image AIGC models and building AI workflow. </h3>
+      <div class="reflection-grid">
+        <div class="reflection-item">
+          <h3>Explore formats before automating them</h3>
+          <p>I tested short-drama insertion, rapid remix, AI short drama, animation, and IP-led routes to understand where each structure could create attention for a product.</p>
+        </div>
+        <div class="reflection-item">
+          <h3>Let performance shape the next template</h3>
+          <p>The most valuable output is not one video; it is a system that can learn from strong results and create the next automated template faster.</p>
+        </div>
       </div>
     </section>
   </div>
@@ -235,7 +227,40 @@
 </template>
 
 <script setup>
-import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+
+const mediaBase = '/assets/images/projects/aigc-video-automation'
+
+const solutionVideos = [
+  { label: 'AI short drama 01', src: `${mediaBase}/ai-drama-01.mp4`, poster: `${mediaBase}/ai-drama-01-poster.jpg` },
+  { label: '3D animation 01', src: `${mediaBase}/animation-01.mp4`, poster: `${mediaBase}/animation-01-poster.jpg` },
+  { label: '3D animation 02', src: `${mediaBase}/animation-02.mp4`, poster: `${mediaBase}/animation-02-poster.jpg` },
+  { label: 'AI short drama 02', src: `${mediaBase}/ai-drama-02.mp4`, poster: `${mediaBase}/ai-drama-02-poster.jpg` }
+]
+
+const activeSolutionIndex = ref(0)
+const activeSolutionVideo = computed(() => solutionVideos[activeSolutionIndex.value])
+const solutionMainVideo = ref(null)
+const solutionVideoInView = ref(false)
+// Controls ride on hover, except on touch devices where there is no hover to ride on.
+const solutionControlsVisible = ref(false)
+const solutionControlsPinned = ref(false)
+
+const selectSolutionVideo = async (index) => {
+  if (index === activeSolutionIndex.value) return
+  activeSolutionIndex.value = index
+  await nextTick()
+
+  const video = solutionMainVideo.value
+  if (!video) return
+  video.load()
+  if (solutionVideoInView.value) video.play().catch(() => {})
+}
+
+const stepSolutionVideo = (offset) => {
+  const count = solutionVideos.length
+  selectSolutionVideo((activeSolutionIndex.value + offset + count) % count)
+}
 
 const showDemoVideo = ref(false)
 const demoVideo = ref(null)
@@ -243,11 +268,32 @@ const demoVideoContainer = ref(null)
 const showOverviewVideo = ref(false)
 const overviewPreviewVideo = ref(null)
 const overviewVideoContainer = ref(null)
+const mindmapImage = ref(null)
+const mindmapAside = ref(null)
 let demoVideoObserver
 let galleryVideoObserver
 let overviewVideoObserver
+let mindmapResizeObserver
+
+const syncMindmapAsideHeight = () => {
+  const aside = mindmapAside.value
+  const image = mindmapImage.value
+  if (!aside || !image) return
+
+  if (window.matchMedia('(max-width: 900px)').matches) {
+    aside.style.minHeight = ''
+    return
+  }
+
+  aside.style.minHeight = `${image.getBoundingClientRect().height}px`
+}
 
 onMounted(() => {
+  if (window.matchMedia('(hover: none)').matches) {
+    solutionControlsPinned.value = true
+    solutionControlsVisible.value = true
+  }
+
   demoVideoObserver = new IntersectionObserver(async ([entry]) => {
     if (entry.isIntersecting) {
       showDemoVideo.value = true
@@ -275,8 +321,10 @@ onMounted(() => {
   galleryVideoObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       const video = entry.target
+      if (video === solutionMainVideo.value) solutionVideoInView.value = entry.isIntersecting
+
       if (entry.isIntersecting) {
-        if (!video.src) {
+        if (!video.src && video.dataset.src) {
           video.src = video.dataset.src
           video.load()
         }
@@ -288,12 +336,24 @@ onMounted(() => {
   }, { threshold: 0.2 })
 
   document.querySelectorAll('video[data-autoplay-demo]').forEach((video) => galleryVideoObserver.observe(video))
+
+  syncMindmapAsideHeight()
+  mindmapImage.value?.addEventListener('load', syncMindmapAsideHeight)
+  window.addEventListener('resize', syncMindmapAsideHeight)
+
+  if (mindmapImage.value?.complete) syncMindmapAsideHeight()
+
+  mindmapResizeObserver = new ResizeObserver(syncMindmapAsideHeight)
+  if (mindmapImage.value) mindmapResizeObserver.observe(mindmapImage.value)
 })
 
 onBeforeUnmount(() => {
   demoVideoObserver?.disconnect()
   overviewVideoObserver?.disconnect()
   galleryVideoObserver?.disconnect()
+  mindmapResizeObserver?.disconnect()
+  mindmapImage.value?.removeEventListener('load', syncMindmapAsideHeight)
+  window.removeEventListener('resize', syncMindmapAsideHeight)
 })
 
 useHead({

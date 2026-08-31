@@ -1,5 +1,5 @@
 <template>
-<AppHeader />
+<AppHeader hero="dark" />
         <img class="hero-image" src="/assets/images/projects/orango-branding/cover.webp" alt="Orango Branding">
 
         <div class="content">

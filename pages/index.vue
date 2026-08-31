@@ -1,7 +1,7 @@
 <template>
   <AppHeader />
-  <div class="main-content">
-    <div id="hero" class="hero hero-section" :class="{ 'is-transition-active': isHeroTransitionActive }">
+  <div class="main-content" :class="{ 'is-reveal-armed': isPhoneRevealArmed }">
+    <div id="hero" class="hero hero-section">
       <div class="hero-title-container">
         <h1 class="hero-title">YU</h1>
         <img class="hero-title-icon" src="/assets/icons/yu.svg" alt="yu">
@@ -50,8 +50,9 @@
     <section id="section1" class="section1" :class="{
       'is-active': isSection1Active,
       'is-settled': isSection1Settled,
-      'is-transition-active': isHeroTransitionActive,
-      'is-returning-from-section2': isReturningFromSection2
+      'is-returning-from-section2': isReturningFromSection2,
+      'is-statement-armed': isPhoneRevealArmed,
+      'is-statement-in': isStatementIn
     }">
       <div class="section1-inner">
       <div class="incoming-leaves" aria-hidden="true">
@@ -128,7 +129,7 @@
               <div>
                 <h4>2026</h4>
                 <h2 class="project-item-title">Cosma Sense</h2>
-                <h3>Product Designer</h3>
+                <h3>Product Designer & Frontend Dev</h3>
                 <p>A local-first, AI-powered search engine that indexes your files and lets you find information
                   semantically.</p>
               </div>
@@ -364,7 +365,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const isHeroTransitionActive = ref(false);
 let removeMobileHeroTransitionListener = null;
 
 // section1 content entrance (leaves + statement) fires via this class
@@ -373,6 +373,9 @@ const isSection1Settled = ref(false);
 // scroll cue appears once section1 is settled, inviting the user to keep scrolling
 const showScrollCue = ref(false);
 const showBottomAnnotations = ref(false);
+// phone only: content below the hero holds until it is scrolled to, then plays
+const isPhoneRevealArmed = ref(false);
+const isStatementIn = ref(false);
 // section2 plays its own entrance once it reaches the viewport threshold
 const isSection2Active = ref(false);
 // distinct reverse transition when scrolling back from section2 to section1 bottom
@@ -387,18 +390,121 @@ let section2TransitionUnlockTimer = null;
 
 onMounted(() => {
   if (window.matchMedia('(max-width: 720px)').matches) {
+    const hero = document.querySelector('#hero');
+    const firstSection = document.querySelector('#section1');
+    if (!hero || !firstSection) return;
+
+    // The hero fades out as it scrolls away rather than snapping to 0 at a fixed
+    // threshold — a hard toggle left a blank hole where the hero still sat in flow.
+    const HERO_FADE_LIFT = 72;
+    let frame = 0;
+    let lastFade = -1;
+
     const updateHeroTransition = () => {
-      const firstSection = document.querySelector('#section1');
-      if (!firstSection) return;
-      isHeroTransitionActive.value = firstSection.getBoundingClientRect().top <= window.innerHeight * 0.72;
+      frame = 0;
+      const viewportHeight = window.innerHeight;
+      const heroBottom = hero.getBoundingClientRect().bottom;
+      // The fade only starts once the hero's bottom edge is on its way out (past
+      // 45% of the viewport) and finishes exactly as it clears the top, so the
+      // hero is never dimmed while it is still the main thing on screen, and
+      // never invisible while it still occupies space.
+      const fadeStart = viewportHeight * 0.45;
+      const linear = Math.min(1, Math.max(0, heroBottom / fadeStart));
+      const visibility = linear * linear * (3 - 2 * linear);
+
+      if (Math.abs(visibility - lastFade) > 0.005 || visibility === 0 || visibility === 1) {
+        lastFade = visibility;
+        hero.style.setProperty('--hero-scroll-opacity', visibility.toFixed(3));
+        hero.style.setProperty('--hero-scroll-lift', `${((1 - visibility) * -HERO_FADE_LIFT).toFixed(1)}px`);
+      }
     };
 
-    window.addEventListener('scroll', updateHeroTransition, { passive: true });
-    window.addEventListener('resize', updateHeroTransition);
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(updateHeroTransition);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
     updateHeroTransition();
+
+    // The statement sits below the fold now, so it plays when scrolled to — once.
+    // The bottom rootMargin plus the ratio check hold it back until the statement
+    // is about two thirds up the screen, rather than the instant it peeks in.
+    // (An observer always reports the crossing of 0 too, hence the explicit
+    // ratio test rather than a bare isIntersecting.)
+    const STATEMENT_REVEAL_RATIO = 0.4;
+    const statement = document.querySelector('.incoming-statement');
+    let statementObserver = null;
+    if (statement && 'IntersectionObserver' in window) {
+      isPhoneRevealArmed.value = true;
+      statementObserver = new IntersectionObserver((entries) => {
+        const reached = entries.some(
+          (entry) => entry.isIntersecting && entry.intersectionRatio >= STATEMENT_REVEAL_RATIO
+        );
+        if (!reached) return;
+        isStatementIn.value = true;
+        statementObserver.disconnect();
+        statementObserver = null;
+      }, { rootMargin: '0px 0px -25% 0px', threshold: STATEMENT_REVEAL_RATIO });
+      statementObserver.observe(statement);
+    }
+
+    // Everything under the statement rises in on arrival, in the same spirit.
+    // The negative bottom rootMargin is what makes it fire as the item comes up
+    // past roughly seven eighths of the screen, rather than at the very edge.
+    const revealTargets = Array.from(document.querySelectorAll(
+      '.incoming-projects .projects-item, .section2-heading, .section2-projects .projects-item'
+    ));
+    let revealObserver = null;
+    if (revealTargets.length && 'IntersectionObserver' in window) {
+      isPhoneRevealArmed.value = true;
+      revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-in');
+          revealObserver.unobserve(entry.target);
+        });
+      }, { rootMargin: '0px 0px -12% 0px' });
+
+      const revealLine = window.innerHeight * 0.88;
+      revealTargets.forEach((target) => {
+        // Already on screen (a reload part-way down the page): show it as-is
+        // rather than fading in something the reader is already looking at.
+        if (target.getBoundingClientRect().top >= revealLine) {
+          target.classList.add('phone-reveal');
+          revealObserver.observe(target);
+        }
+      });
+    }
+
+    // Four looping cover videos decoding at once is a real source of scroll
+    // stutter on a phone. Let them autoplay as usual, but park the ones that are
+    // far off screen. Layered on top of native autoplay on purpose: if the
+    // observer never fires, playback behaves exactly as it did before.
+    const videos = Array.from(document.querySelectorAll('.main-content video'));
+    let videoObserver = null;
+    if (videos.length && 'IntersectionObserver' in window) {
+      videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            if (video.paused) video.play?.().catch(() => {});
+          } else if (!video.paused) {
+            video.pause();
+          }
+        });
+      }, { rootMargin: '300px 0px' });
+      videos.forEach((video) => videoObserver.observe(video));
+    }
+
     removeMobileHeroTransitionListener = () => {
-      window.removeEventListener('scroll', updateHeroTransition);
-      window.removeEventListener('resize', updateHeroTransition);
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      videoObserver?.disconnect();
+      statementObserver?.disconnect();
+      revealObserver?.disconnect();
     };
     return;
   }

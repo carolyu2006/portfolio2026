@@ -7,7 +7,7 @@
       <div class="project-header">
         <h4 class="tag" style="background-color:#FFBA70;">2026</h4>
         <h1>AIGC Video Automation</h1>
-        <h3>Exploring how AIGC can turn product and trend signals into better-performing e-commerce advertisement videos. Creating a reusable workflow for generating trend-led video ads.</h3>
+        <h3>Creating a reusable workflow for generating trend-led video ads.</h3>
       </div>
     </div>
 
@@ -21,35 +21,24 @@
     <section class="aigc-overview">
       <h2>OVERVIEW</h2>
 
-      <div class="aigc-overview-layout">
-        <div>
-          <h3>At my internship at TikTok, my team collaborated with the TikTok User Growth team to explore how AIGC can turn product and trend signals into better-performing e-commerce advertisement videos.</h3>
-          <div class="aigc-overview-points">
-            <div class="aigc-overview-point">
-              <span class="aigc-overview-num">01</span>
-              <div class="aigc-overview-copy">
-                <h4>AI Workflow Building</h4>
-                <p>Exploring how to create a workflow that generates high-quality videos with minimal human intervention.</p>
-              </div>
-            </div>
-            <div class="aigc-overview-point">
-              <span class="aigc-overview-num">02</span>
-              <div class="aigc-overview-copy">
-                <h4>Prompt Engineering</h4>
-                <p>Editing prompts for plot, script, character, and scene descriptions to support a reusable AIGC workflow with strong results.</p>
-              </div>
-            </div>
-            <div class="aigc-overview-point">
-              <span class="aigc-overview-num">03</span>
-              <div class="aigc-overview-copy">
-                <h4>Video Strategy</h4>
-                <p>Exploring different video formats and styles, then evaluating how effectively they can be produced through the AIGC workflow.</p>
-              </div>
-            </div>
+      <h3 class="overview-intro">At my internship at TikTok, my team collaborated with the TikTok User Growth team to explore how AIGC can turn product and trend signals into better-performing e-commerce advertisement videos.</h3>
+      <div class="overview-container">
+        <div class="overview-card-container">
+          <div class="overview-card" style="background-color:#FFF5E8;">
+            <div class="overview-card-title"><h4>01</h4><h3>AI Workflow Building</h3></div>
+            <p>Exploring how to create a workflow that generates high-quality videos with NO human intervention.</p>
+          </div>
+          <div class="overview-card" style="background-color:#FFF5E8;">
+            <div class="overview-card-title"><h4>02</h4><h3>Prompt Engineering</h3></div>
+            <p>Editing prompts for plot, script, character, and scene descriptions to support a reusable AIGC workflow with strong results.</p>
+          </div>
+          <div class="overview-card" style="background-color:#FFF5E8;">
+            <div class="overview-card-title"><h4>03</h4><h3>Video Strategy</h3></div>
+            <p>Exploring different video formats and styles, then evaluating how effectively they can be produced through the AIGC workflow.</p>
           </div>
         </div>
 
-        <div ref="overviewVideoContainer" class="aigc-overview-media">
+        <div ref="overviewVideoContainer" class="overview-image-container">
           <template v-if="showOverviewVideo">
             <video ref="overviewPreviewVideo" class="overview-video-preview" muted loop playsinline preload="metadata" poster="/assets/images/projects/aigc-video-automation/overview-demo-poster.jpg" aria-label="AIGC video automation overview demo">
               <source src="/assets/images/projects/aigc-video-automation/overview-demo.mp4" type="video/mp4">
@@ -69,54 +58,11 @@
       </div>
     </section>
 
-    <section class="goal-metric-section">
-      <h2 style="margin-bottom: 20px;">GOAL & SUCCESS METRIC</h2>
-      
-      <div class="problem-statement-container">
-        <div class="problem-statement" style="background-color:#FFBA70;">
-          <h3><b style="margin-right:10px;">Goal:</b> Create advertisement videos that deliver strong performance results, and build a workflow that can later support automatic generation at scale.</h3>
-        </div>
+    <div class="problem-statement-container">
+      <div class="problem-statement" style="background-color:#FFBA70;">
+        <h3><b style="margin-right:10px;">Goal:</b> Create advertisement videos that deliver strong performance results, and build a workflow that can later support automatic generation at scale.</h3>
       </div>
-      
-      <p class="goal-section-label">Success metrics</p>
-      <div class="goal-metric-row">
-        <article class="goal-metric-card">
-          <div class="goal-metric-graphic" aria-hidden="true">
-            <svg viewBox="0 0 120 88" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="8" y="12" width="104" height="64" rx="10" fill="#FFF5E8" stroke="#2C2C2C" stroke-width="2"/>
-              <circle cx="36" cy="40" r="10" fill="#FFBA70" stroke="#2C2C2C" stroke-width="2"/>
-              <path d="M23 64c2.2-7.5 7-11.5 13-11.5S47 56.5 49 64" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="60" cy="40" r="10" fill="#FFD9A8" stroke="#2C2C2C" stroke-width="2"/>
-              <path d="M47 64c2.2-7.5 7-11.5 13-11.5S71 56.5 73 64" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="92" cy="34" r="14" fill="#FFBA70" stroke="#2C2C2C" stroke-width="2"/>
-              <path d="M92 26v16M84 34h16" stroke="#2C2C2C" stroke-width="2.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="goal-metric-copy">
-            <span class="goal-metric-kicker">Success metric 01</span>
-            <h4>New additions per creative</h4>
-            <p>How many new users a single video material can drive.</p>
-          </div>
-        </article>
-
-        <article class="goal-metric-card">
-          <div class="goal-metric-graphic" aria-hidden="true">
-            <svg viewBox="0 0 120 88" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="8" y="12" width="104" height="64" rx="10" fill="#FFF5E8" stroke="#2C2C2C" stroke-width="2"/>
-              <rect x="28" y="48" width="14" height="18" rx="3" fill="#FFE8C8" stroke="#2C2C2C" stroke-width="2"/>
-              <rect x="50" y="36" width="14" height="30" rx="3" fill="#FFD9A8" stroke="#2C2C2C" stroke-width="2"/>
-              <rect x="72" y="24" width="14" height="42" rx="3" fill="#FFBA70" stroke="#2C2C2C" stroke-width="2"/>
-              <path d="M24 66h72" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="goal-metric-copy">
-            <span class="goal-metric-kicker">Success metric 02</span>
-            <h4>Spend per creative</h4>
-            <p>How strongly a material performs in ad delivery, measured by spend per creative.</p>
-          </div>
-        </article>
-      </div>
-    </section>
+    </div>
 
     <section id="features">
       <h2>SOLUTION</h2>
@@ -181,6 +127,46 @@
 
     <section>
       <h2>IMPACT</h2>
+<!-- 
+      <p class="goal-section-label">Success metrics</p>
+      <div class="goal-metric-row">
+        <article class="goal-metric-card">
+          <div class="goal-metric-graphic" aria-hidden="true">
+            <svg viewBox="0 0 120 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="12" width="104" height="64" rx="10" fill="#FFF5E8" stroke="#2C2C2C" stroke-width="2"/>
+              <circle cx="36" cy="40" r="10" fill="#FFBA70" stroke="#2C2C2C" stroke-width="2"/>
+              <path d="M23 64c2.2-7.5 7-11.5 13-11.5S47 56.5 49 64" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="60" cy="40" r="10" fill="#FFD9A8" stroke="#2C2C2C" stroke-width="2"/>
+              <path d="M47 64c2.2-7.5 7-11.5 13-11.5S71 56.5 73 64" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="92" cy="34" r="14" fill="#FFBA70" stroke="#2C2C2C" stroke-width="2"/>
+              <path d="M92 26v16M84 34h16" stroke="#2C2C2C" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="goal-metric-copy">
+            <span class="goal-metric-kicker">Success metric 01</span>
+            <h4>New additions per creative</h4>
+            <p>How many new users a single video material can drive.</p>
+          </div>
+        </article>
+
+        <article class="goal-metric-card">
+          <div class="goal-metric-graphic" aria-hidden="true">
+            <svg viewBox="0 0 120 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="12" width="104" height="64" rx="10" fill="#FFF5E8" stroke="#2C2C2C" stroke-width="2"/>
+              <rect x="28" y="48" width="14" height="18" rx="3" fill="#FFE8C8" stroke="#2C2C2C" stroke-width="2"/>
+              <rect x="50" y="36" width="14" height="30" rx="3" fill="#FFD9A8" stroke="#2C2C2C" stroke-width="2"/>
+              <rect x="72" y="24" width="14" height="42" rx="3" fill="#FFBA70" stroke="#2C2C2C" stroke-width="2"/>
+              <path d="M24 66h72" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="goal-metric-copy">
+            <span class="goal-metric-kicker">Success metric 02</span>
+            <h4>Spend per creative</h4>
+            <p>How strongly a material performs in ad delivery, measured by spend per creative.</p>
+          </div>
+        </article>
+      </div>
+       -->
       <h3>Strong delivery results led to automation at scale — and a next system to keep templates current.</h3>
       <div class="impact-flow">
         <div class="impact-flow-step overview-card" style="background-color:#FFF5E8;">
@@ -209,8 +195,8 @@
     </section>
 
     <section>
-      <h2>PROCESS & REFLECTION</h2>
-      <h3>Through this intenrship experience, I got hands-on experiences with different Video and Image AIGC models and building AI workflow. </h3>
+      <h2>REFLECTION</h2>
+      <h3>Through this intenrship experience, I got hands-on experiences with different Video and Image AIGC models and building AI workflow. With this understanding, I hope to explore more about how can AI workflow be used to create more efficient and effective in our life.</h3>
       <div class="reflection-grid">
         <div class="reflection-item">
           <h3>Explore formats before automating them</h3>

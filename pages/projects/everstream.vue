@@ -47,7 +47,7 @@
                     <div>
                         <h2>OVERVIEW</h2>
 
-                        <h3>Final Project for NYU Game Center's Game Development Course.</h3>
+                        <h3 class="overview-intro">Final Project for NYU Game Center's Game Development Course.</h3>
                         <!-- <div class="overview-container"> -->
                         <div class="overview-accomplishments">
                             <p>Several of my accomplishments included:</p>

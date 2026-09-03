@@ -178,7 +178,7 @@
             <path class="project-annotation__semantic-line" pathLength="1" d="M62 5 C48 7 37 12 30 18 C22 26 18 39 28 58" />
             <path class="project-annotation__semantic-arrow" pathLength="1" d="M12 50 L28 58 L34 43" />
           </svg>
-          <span>AI Semantic<br>Search</span>
+          <span>AI Native<br>APP</span>
         </div>
         <div class="project-annotation project-annotation--bottom project-annotation--integration" aria-hidden="true">
           <span>AI Integration</span>
@@ -357,8 +357,107 @@
         </div>
       </div>
     </section>
+
+    <section id="section3" class="section3" :class="{ 'is-active': isSection3Active }"
+      aria-label="About Carol and playground">
+      <div class="section3-inner">
+        <aside class="section3-profile">
+          <div class="section3-profile-card">
+            <img class="section3-profile-image" src="/assets/images/about/profile.webp" alt="Carol Yu">
+            <h1>Carol Yu</h1>
+            <h3>Product Designer + Creative Technologist</h3>
+            <a href="mailto:CAROL.YU@NYU.EDU" class="section3-profile-email">
+              <h1>CAROL.YU@NYU.EDU</h1>
+            </a>
+            <div class="section3-profile-socials">
+              <a href="https://www.linkedin.com/in/carolyuhf/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="currentColor" />
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/carolyuhf/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="currentColor" />
+                </svg>
+              </a>
+              <a href="https://github.com/carolyu2006" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" fill="currentColor" />
+                </svg>
+              </a>
+              <a href="https://www.xiaohongshu.com/user/profile/5d1cd7fa00000000120188e0?xsec_token=YBCBoIDQv8J87E1oyjqCuMg_Nt6OsVnhy_21ROXc6LLaA=&amp;xsec_source=app_share&amp;xhsshare=CopyLink&amp;shareRedId=N0ozQ0c8Sko2NzUyOTgwNjc1OTg8PUs5&amp;apptime=1768556034&amp;share_id=e22ed04444514283841f8ea95a601532" target="_blank" rel="noopener noreferrer" aria-label="RedNote">
+                <img src="/assets/icons/rednote.webp" alt="">
+              </a>
+            </div>
+            <a class="section3-more section3-more--about" href="/about">MORE</a>
+          </div>
+        </aside>
+
+        <div class="section3-play">
+          <a class="section3-more section3-more--play" href="/play">MORE</a>
+          <div class="section3-play-columns">
+            <div
+              v-for="column in playColumns"
+              :key="column.direction"
+              class="section3-play-column"
+              :class="`section3-play-column--${column.direction}`"
+            >
+              <div class="section3-play-track">
+                <!-- The track holds the same group twice and travels exactly one
+                     group's height, so the loop has no seam. -->
+                <div
+                  v-for="copy in 2"
+                  :key="copy"
+                  class="section3-play-group"
+                  :aria-hidden="copy === 2 ? 'true' : null"
+                >
+                  <a
+                    v-for="item in column.items"
+                    :key="`${copy}-${item.src}`"
+                    class="section3-play-item-wrapper"
+                    :class="{ 'section3-play-item-info-wrapper': item.info }"
+                    :href="item.href || null"
+                    :target="item.external ? '_blank' : null"
+                    :rel="item.external ? 'noopener noreferrer' : null"
+                    :tabindex="copy === 2 ? -1 : null"
+                  >
+                    <div v-if="item.info" class="section3-play-item-info">
+                      <h4>{{ item.info.year }}</h4>
+                      <h2>{{ item.info.title }}</h2>
+                      <h3>{{ item.info.role }}</h3>
+                    </div>
+                    <video
+                      v-if="item.type === 'video'"
+                      class="section3-play-item"
+                      :src="item.src"
+                      :poster="item.poster || null"
+                      autoplay
+                      muted
+                      loop
+                      playsinline
+                      preload="metadata"
+                    ></video>
+                    <img v-else class="section3-play-item" :src="item.src" :alt="item.alt || ''">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div ref="section3Footer" class="section3-footer-stage">
+      <AppFooter />
+    </div>
   </div>
-  <!-- <AppFooter /> -->
+  <button
+    type="button"
+    class="index-back-to-beginning"
+    :class="{ 'is-visible': showBackToBeginning }"
+    @click="handleBackToBeginning"
+  >
+    Back to beginning
+  </button>
 </template>
 
 <script setup>
@@ -378,6 +477,77 @@ const isPhoneRevealArmed = ref(false);
 const isStatementIn = ref(false);
 // section2 plays its own entrance once it reaches the viewport threshold
 const isSection2Active = ref(false);
+// section3 (profile + playground) slides up from below once section2 is done
+const isSection3Active = ref(false);
+const showBackToBeginning = ref(false);
+
+// The playground is two marquee columns drifting in opposite directions, each
+// rendered twice so the loop is seamless. Order is the reading order of the
+// first copy.
+const playColumns = [
+  {
+    direction: 'up',
+    items: [
+      {
+        type: 'video',
+        src: '/assets/images/covers/everstream.mov',
+        poster: '/assets/images/covers/everstream.webp',
+        href: '/projects/everstream',
+        info: { year: '2025', title: 'Everstream', role: 'Game Designer & Developer' }
+      },
+      {
+        type: 'video',
+        src: '/assets/images/play/pixelme.mov',
+        href: 'https://pixel-me-taupe.vercel.app/',
+        external: true
+      },
+      { type: 'image', src: '/assets/images/play/springshowposter.webp', alt: 'ITP Spring Show 2026' },
+      { type: 'video', src: '/assets/images/play/mr-coffeechat.mov' },
+      { type: 'image', src: '/assets/images/play/super-maricat.webp', alt: 'Super Maricat' },
+      {
+        type: 'video',
+        src: '/assets/images/play/clock.mov',
+        href: 'https://animal-clock-git-main-carol-projects.vercel.app/',
+        external: true
+      },
+      { type: 'image', src: '/assets/images/play/modelMe.webp', alt: 'Model Me' }
+    ]
+  },
+  {
+    direction: 'down',
+    items: [
+      {
+        type: 'image',
+        src: '/assets/images/covers/dreamail.webp',
+        alt: 'Dreammail',
+        href: 'https://devpost.com/software/dreamail',
+        external: true,
+        info: { year: '2026', title: 'DREAMMAIL', role: 'Designer & Developer' }
+      },
+      {
+        type: 'video',
+        src: '/assets/images/play/PetUrFriends.mov',
+        href: 'https://chromewebstore.google.com/detail/pet-ur-friend/onddalpajmjpenfeoppfpcincflmbghb',
+        external: true
+      },
+      { type: 'video', src: '/assets/images/play/cook-animation.mov' },
+      { type: 'image', src: '/assets/images/play/orango.webp', alt: 'Orango' },
+      {
+        type: 'video',
+        src: '/assets/images/play/TheInvisibleLoop.mp4',
+        href: 'https://youtu.be/AuA6fwoRjjc',
+        external: true
+      },
+      {
+        type: 'video',
+        src: '/assets/images/play/maricat.mp4',
+        href: 'https://youtu.be/O5TcwrCu_Dw',
+        external: true
+      },
+      { type: 'image', src: '/assets/images/play/space-shooter.webp', alt: 'Space Shooter' }
+    ]
+  }
+];
 // distinct reverse transition when scrolling back from section2 to section1 bottom
 const isReturningFromSection2 = ref(false);
 
@@ -387,6 +557,16 @@ let heroExitUnlockTimer = null;
 let progressTween = null;
 let section2HorizontalWheelHandler = null;
 let section2TransitionUnlockTimer = null;
+let section3TransitionUnlockTimer = null;
+let footerTransitionUnlockTimer = null;
+// Set by the desktop timeline. Nothing calls it while the "back to beginning"
+// button is out of the markup; kept so bringing the button back is one line.
+let backToBeginningHandler = null;
+let section3FooterObserver = null;
+
+const handleBackToBeginning = () => {
+  backToBeginningHandler?.();
+};
 
 onMounted(() => {
   if (window.matchMedia('(max-width: 720px)').matches) {
@@ -515,16 +695,36 @@ onMounted(() => {
   const section1 = document.querySelector('#section1');
   const section1Inner = document.querySelector('.section1-inner');
   const incomingLeaves = document.querySelector('.incoming-leaves');
-  const incomingProjects = document.querySelector('.incoming-projects');
   const section2 = document.querySelector('#section2');
   const projects = document.querySelector('.incoming-projects .projects-container');
   const section2Projects = document.querySelector('.section2-projects');
   const section2ProjectsTrack = document.querySelector('.section2-projects .projects-container');
+  const section3 = document.querySelector('#section3');
+  const section3Footer = document.querySelector('.section3-footer-stage');
+  // Pieces the section2 -> section3 handoff stages in behind the panel move.
+  const section3Profile = document.querySelector('.section3-profile');
+  const section3PlayColumns = Array.from(document.querySelectorAll('.section3-play-column'));
+  const section3StagedPieces = [section3Profile, ...section3PlayColumns].filter(Boolean);
+  // The marquee renders every clip twice, so section3 alone holds 16 looping
+  // videos. They stay parked until the scene is actually on screen — it is
+  // hidden behind section1/section2 for most of the page.
+  const section3Videos = section3 ? Array.from(section3.querySelectorAll('video')) : [];
+  section3Videos.forEach((video) => video.pause());
+  watch(isSection3Active, (active) => {
+    section3Videos.forEach((video) => {
+      if (active) video.play?.().catch(() => {});
+      else video.pause();
+    });
+  });
   const section1BottomSpace = 300;
   const SECTION1_INTRO_LOCK_DURATION = 1400;
   const EXIT_ANIMATION_DURATION = 0.75;
   const SECTION_EXIT_DURATION = 0.8;
   const SECTION_ENTER_DURATION = 0.8;
+  // Both panels of a handoff share one ease so they travel locked together, like
+  // one strip of film. `out` rather than `inOut`: the move starts the instant the
+  // scroll triggers it instead of idling through an ease-in the reader reads as lag.
+  const SECTION_TRANSITION_EASE = 'power2.out';
   const SECTION2_TRANSITION_ANIM_DURATION = Math.max(SECTION_EXIT_DURATION, SECTION_ENTER_DURATION);
   const SECTION2_POST_TRANSITION_SCROLL_LOCK = 100;
   const SCROLL_TRIGGER_THRESHOLD = 0.01;
@@ -548,8 +748,12 @@ onMounted(() => {
     return Math.max(0, section2ProjectsTrack.scrollWidth - section2Projects.clientWidth);
   };
 
+  // The footer band and section3 travel the same distance, so section3's bottom
+  // edge and the band's top edge stay welded together for the whole tail.
+  const getFooterBandHeight = () => section3Footer?.offsetHeight || 0;
+
   const getPinnedScrollDistance = () => {
-    return Math.round((window.innerHeight * 3) + (getSection2HorizontalScroll() * SECTION2_SCROLL_SLOWDOWN));
+    return Math.round((window.innerHeight * 5) + (getSection2HorizontalScroll() * SECTION2_SCROLL_SLOWDOWN));
   };
 
   // Starting positions for the pinned hero/section1 moment.
@@ -559,35 +763,68 @@ onMounted(() => {
   gsap.set(incomingLeaves, { y: 0 });
   gsap.set(section2ProjectsTrack, { x: 0 });
   gsap.set(section2, { xPercent: 100, yPercent: 0, autoAlpha: 0 });
+  gsap.set(section3, { xPercent: 0, yPercent: 100, autoAlpha: 0 });
+  if (section3Footer) {
+    gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
+  }
 
   // Four rest states the pinned scroll snaps between (as timeline progress):
   //  HERO   (0)     -> hero fully in view
   //  REVEAL         -> hero has left, section1 is in
   //  CUE            -> section1 projects are revealed, cue appears
   //  SECTION2       -> section1 exits left, section2 enters
-  //  END    (1)     -> section2 project row finishes horizontal scroll
+  //  SCROLL_DONE    -> section2 project row finishes horizontal scroll
+  //  SECTION3       -> section2 exits upward, section3 slides up from below
+  //  END    (1)     -> tail room so the pin never releases behind section3
   // Durations below drive these fractions; keep the snap array in sync.
   const HERO_OUT = EXIT_ANIMATION_DURATION;
   const REVEAL = 1.6;    // section1 project reveal
   const CUE_HOLD = 0.6;  // cue threshold before release
   const SECTION2_HORIZONTAL_SCROLL = 6;
   const PARALLEL_EXIT_ENTER = SECTION2_TRANSITION_ANIM_DURATION;
-  const total = HERO_OUT + REVEAL + CUE_HOLD + PARALLEL_EXIT_ENTER + SECTION2_HORIZONTAL_SCROLL;
+  // Breathing room after the horizontal row ends, so scrolling back out of
+  // section3 does not land straight back on the section3 trigger.
+  const SECTION3_LEAD = 0.6;
+  const SECTION3_TRANSITION = SECTION2_TRANSITION_ANIM_DURATION;
+  // The footer is a snap like every other boundary, not a scrubbed drag: a
+  // little travel to arm it, a placeholder for the animation the trigger plays,
+  // and clamped room past it so the pin never releases behind the footer.
+  const FOOTER_LEAD = 0.6;
+  const FOOTER_TRANSITION = SECTION2_TRANSITION_ANIM_DURATION;
+  const FOOTER_TAIL = 0.8;
+  const SECTION3_TAIL = FOOTER_LEAD + FOOTER_TRANSITION + FOOTER_TAIL;
+  const SECTION2_STAGES = HERO_OUT + REVEAL + CUE_HOLD + PARALLEL_EXIT_ENTER + SECTION2_HORIZONTAL_SCROLL;
+  const total = SECTION2_STAGES + SECTION3_LEAD + SECTION3_TRANSITION + SECTION3_TAIL;
   const pHeroOut = HERO_OUT / total;
   const pRevealDone = (HERO_OUT + REVEAL) / total;
   const pSection2Start = (HERO_OUT + REVEAL + CUE_HOLD) / total;
   const pSection2EnterStart = pSection2Start;
   const pSection2Ready = (HERO_OUT + REVEAL + CUE_HOLD + PARALLEL_EXIT_ENTER) / total;
+  const pSection2ScrollDone = SECTION2_STAGES / total;
+  const pSection3Start = (SECTION2_STAGES + SECTION3_LEAD) / total;
+  const pSection3Ready = (SECTION2_STAGES + SECTION3_LEAD + SECTION3_TRANSITION) / total;
+  const pFooterStart = pSection3Ready + (FOOTER_LEAD / total);
+  const pFooterReady = pFooterStart + (FOOTER_TRANSITION / total);
+  // Coming back out of the footer lands inside the arming gap rather than exactly
+  // on the section3 rest point, so the same gesture cannot carry straight on into
+  // the handoff back to section2.
+  const pFooterReturnLand = pSection3Ready + ((FOOTER_LEAD / total) * 0.35);
   const pBottomAnnotations = pHeroOut + ((pRevealDone - pHeroOut) * 0.55);
   const pScrollCueShow = pRevealDone;
   const pScrollCueHide = pHeroOut + ((pRevealDone - pHeroOut) * 0.88);
   let hasEnteredSection1Start = false;
   let hasEnteredSection2 = false;
+  let hasEnteredSection3 = false;
+  let hasEnteredFooter = false;
   let hasBottomAnnotationsAppeared = false;
   let isLockingHeroExit = false;
   let isAnimatingHeroReturn = false;
   let isAnimatingSection2Transition = false;
   let section2TransitionLockProgress = 0;
+  let isAnimatingSection3Transition = false;
+  let section3TransitionLockProgress = 0;
+  let isAnimatingFooterTransition = false;
+  let footerTransitionLockProgress = 0;
   const preserveSection1Reveal = () => {
     gsap.set(section1Inner, { y: -getReveal() });
     gsap.set(incomingLeaves, { y: getIncomingLeafParallax() });
@@ -595,6 +832,11 @@ onMounted(() => {
 
   const setScrollToProgress = (self, progress) => {
     const scrollPosition = self.start + (self.end - self.start) * progress;
+    // The transition locks hold position by calling this on every scroll event.
+    // Writing a scroll offset that is already correct still costs a synchronous
+    // scroll on each wheel tick, which is enough to stutter the tween running
+    // alongside it — so only correct an actual drift.
+    if (Math.abs(self.scroll() - scrollPosition) < 0.5) return;
     self.scroll(scrollPosition);
   };
 
@@ -672,6 +914,23 @@ onMounted(() => {
     section2TransitionUnlockTimer = null;
   };
 
+  const clearSection3TransitionUnlockTimer = () => {
+    clearTimeout(section3TransitionUnlockTimer);
+    section3TransitionUnlockTimer = null;
+  };
+
+  const clearFooterTransitionUnlockTimer = () => {
+    clearTimeout(footerTransitionUnlockTimer);
+    footerTransitionUnlockTimer = null;
+  };
+
+  const setSection3VideosPlaying = (playing) => {
+    section3Videos.forEach((video) => {
+      if (playing) video.play?.().catch(() => {});
+      else video.pause();
+    });
+  };
+
   // Hard-reset section shells so return (vertical) and enter (horizontal) never share leftover transforms.
   const setSectionShell = (el, { xPercent, yPercent, autoAlpha, zIndex }) => {
     gsap.set(el, { clearProps: 'transform,opacity,visibility,zIndex' });
@@ -734,14 +993,14 @@ onMounted(() => {
         yPercent: 0,
         autoAlpha: 0.2,
         duration: SECTION_EXIT_DURATION,
-        ease: 'power2.inOut'
+        ease: SECTION_TRANSITION_EASE
       }, 0)
       .to(section2, {
         xPercent: 0,
         yPercent: 0,
         autoAlpha: 1,
         duration: SECTION_ENTER_DURATION,
-        ease: 'power2.inOut'
+        ease: SECTION_TRANSITION_EASE
       }, 0);
   };
 
@@ -767,23 +1026,26 @@ onMounted(() => {
     const pReturnLand = pRevealDone;
     const revealY = -getReveal();
     const leafY = getIncomingLeafParallax();
-    const dropDistance = window.innerHeight;
+
+    // Both panels travel down by exactly one screen: section2 drops out of the
+    // bottom while section1 arrives from the top, at the same speed, so it reads
+    // as one surface sliding rather than two separate events.
+    //
+    // Driven in pixels, not yPercent: the global `section { margin: 10vh 0 }`
+    // leaves section1's box a screen minus 180px tall, while section2 sets its
+    // own `height: 100vh` — so a percentage would move the two different
+    // distances and they would drift apart mid-slide.
+    const pushDistance = window.innerHeight;
 
     setSectionShell(section1, { xPercent: 0, yPercent: 0, autoAlpha: 1, zIndex: 11 });
     setSectionShell(section2, { xPercent: 0, yPercent: 0, autoAlpha: 1, zIndex: 12 });
+    gsap.set(section1, { y: -pushDistance });
     gsap.set(section1Inner, { y: revealY });
+    gsap.set(incomingLeaves, { y: leafY });
     gsap.set(section2ProjectsTrack, { x: 0 });
-    gsap.set(incomingProjects, {
-      y: -dropDistance,
-      autoAlpha: 1,
-      x: 0,
-      xPercent: 0
-    });
-    gsap.set(incomingLeaves, { y: leafY - dropDistance, autoAlpha: 1 });
 
-    const returnExitDuration = 0.22;
-    const returnEnterDelay = 0.2;
-    const returnEnterDuration = 0.4;
+    // Same duration as the forward handoff, so the two directions feel matched.
+    const returnDuration = SECTION_EXIT_DURATION;
 
     progressTween = gsap.timeline({
       onComplete: () => {
@@ -791,7 +1053,6 @@ onMounted(() => {
         isAnimatingSection2Transition = false;
         clearSection2TransitionUnlockTimer();
 
-        gsap.set(incomingProjects, { y: 0, clearProps: 'transform,opacity,x,xPercent,y,yPercent' });
         setScrollToProgress(self, pReturnLand);
         setTimelineProgress(pReturnLand);
         setSectionShell(section1, { xPercent: 0, yPercent: 0, autoAlpha: 1 });
@@ -810,21 +1071,319 @@ onMounted(() => {
       }
     })
       .to(section2, {
+        y: pushDistance,
+        duration: returnDuration,
+        ease: SECTION_TRANSITION_EASE
+      }, 0)
+      .to(section1, {
+        y: 0,
+        duration: returnDuration,
+        ease: SECTION_TRANSITION_EASE
+      }, 0);
+  };
+
+  // section2 rides up and out while section3 slides in from below it.
+  const startSection3EnterTransition = (self) => {
+    isAnimatingSection3Transition = true;
+    section3TransitionLockProgress = pSection3Start;
+    clearSection3TransitionUnlockTimer();
+    progressTween?.kill();
+    progressTween = null;
+    hasScrollCueBeenDismissed = true;
+    hideScrollCue();
+
+    setScrollToProgress(self, pSection3Start);
+    setTimelineProgress(pSection3Start);
+    gsap.set(section2ProjectsTrack, { x: -getSection2HorizontalScroll() });
+
+    isSection2Active.value = true;
+    isSection3Active.value = true;
+    hasEnteredFooter = false;
+    showBackToBeginning.value = false;
+    if (section3Footer) gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
+    setSectionShell(section2, { xPercent: 0, yPercent: 0, autoAlpha: 1, zIndex: 8 });
+    setSectionShell(section3, { xPercent: 0, yPercent: 100, autoAlpha: 1, zIndex: 13 });
+
+    // Both panels are a viewport tall, so yPercent keeps their edges welded for
+    // the whole slide — that carries the move. The character comes from what
+    // happens inside: section2's project row runs on ahead of its own panel,
+    // and section3's three columns arrive a beat apart with a little overshoot,
+    // so the scene assembles instead of just arriving. Section2's row leaves
+    // sideways-scrolled and section3's columns drop in vertically, which trades
+    // one reading axis for the other.
+    progressTween = gsap.timeline({
+      onComplete: () => {
+        setSectionShell(section2, { xPercent: 0, yPercent: -100, autoAlpha: 0, zIndex: 8 });
+        setSectionShell(section3, { xPercent: 0, yPercent: 0, autoAlpha: 1, zIndex: 13 });
+        gsap.set(section2Projects, { clearProps: 'transform' });
+        gsap.set(section3StagedPieces, { clearProps: 'transform,opacity,visibility' });
+        section3TransitionLockProgress = pSection3Ready;
+        setScrollToProgress(self, pSection3Ready);
+        setTimelineProgress(pSection3Ready);
+        isSection2Active.value = false;
+
+        section3TransitionUnlockTimer = window.setTimeout(() => {
+          hasEnteredSection3 = true;
+          isAnimatingSection3Transition = false;
+          section3TransitionUnlockTimer = null;
+        }, SECTION2_POST_TRANSITION_SCROLL_LOCK);
+        progressTween = null;
+      }
+    })
+      .to(section2, {
+        yPercent: -100,
+        autoAlpha: 0,
+        duration: SECTION_EXIT_DURATION,
+        ease: SECTION_TRANSITION_EASE
+      }, 0)
+      .to(section3, {
+        yPercent: 0,
+        autoAlpha: 1,
+        duration: SECTION_ENTER_DURATION,
+        ease: SECTION_TRANSITION_EASE
+      }, 0)
+      // The row lifts a little faster than the panel carrying it — cheap
+      // parallax that reads as section2 receding rather than sliding flat.
+      .fromTo(section2Projects, { y: 0 }, {
+        y: -80,
+        duration: SECTION_EXIT_DURATION,
+        ease: 'power2.in'
+      }, 0)
+      .fromTo(section3Profile, { y: 110, autoAlpha: 0 }, {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.58,
+        ease: 'back.out(1.5)'
+      }, 0.22)
+      .fromTo(section3PlayColumns, { y: 170 }, {
+        y: 0,
+        duration: 0.62,
+        ease: 'back.out(1.3)',
+        stagger: 0.08
+      }, 0.28);
+  };
+
+  const returnToSection2FromSection3 = (self) => {
+    isAnimatingSection3Transition = true;
+    section3TransitionLockProgress = pSection3Ready;
+    clearSection3TransitionUnlockTimer();
+    progressTween?.kill();
+    progressTween = null;
+
+    setScrollToProgress(self, pSection3Ready);
+    setTimelineProgress(pSection3Ready);
+
+    hasEnteredFooter = false;
+    showBackToBeginning.value = false;
+    if (section3Footer) gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
+
+    isSection2Active.value = true;
+    setSectionShell(section1, { xPercent: -100, yPercent: 0, autoAlpha: 0.2 });
+    setSectionShell(section2, { xPercent: 0, yPercent: -100, autoAlpha: 1, zIndex: 8 });
+    setSectionShell(section3, { xPercent: 0, yPercent: 0, autoAlpha: 1, zIndex: 13 });
+    gsap.set(section2ProjectsTrack, { x: -getSection2HorizontalScroll() });
+
+    progressTween = gsap.timeline({
+      onComplete: () => {
+        hasEnteredSection3 = false;
+        isSection3Active.value = false;
+        isAnimatingSection3Transition = false;
+        clearSection3TransitionUnlockTimer();
+
+        setSectionShell(section2, { xPercent: 0, yPercent: 0, autoAlpha: 1, zIndex: 8 });
+        setSectionShell(section3, { xPercent: 0, yPercent: 100, autoAlpha: 0, zIndex: 13 });
+        if (section3Footer) gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
+        hasEnteredFooter = false;
+        showBackToBeginning.value = false;
+        // Land at the end of the horizontal row, one SECTION3_LEAD short of the
+        // section3 trigger, so section3 is not re-entered on the same gesture.
+        section3TransitionLockProgress = pSection2ScrollDone;
+        setScrollToProgress(self, pSection2ScrollDone);
+        setTimelineProgress(pSection2ScrollDone);
+        gsap.set(section2ProjectsTrack, { x: -getSection2HorizontalScroll() });
+        gsap.set(section2Projects, { clearProps: 'transform' });
+        gsap.set(section3StagedPieces, { clearProps: 'transform,opacity,visibility' });
+        progressTween = null;
+      }
+    })
+      .to(section3, {
         yPercent: 100,
         autoAlpha: 0,
-        duration: returnExitDuration,
-        ease: 'power3.in'
+        duration: SECTION_EXIT_DURATION,
+        ease: SECTION_TRANSITION_EASE
       }, 0)
-      .to(incomingProjects, {
+      .to(section2, {
+        yPercent: 0,
+        autoAlpha: 1,
+        duration: SECTION_ENTER_DURATION,
+        ease: SECTION_TRANSITION_EASE
+      }, 0)
+      // Going back, the same pieces lag instead of overshooting: the columns
+      // sink a little as their panel drops and the row settles back into place,
+      // so the reverse reads as the same mechanism unwinding.
+      .fromTo(section3PlayColumns, { y: 0 }, {
+        y: 90,
+        duration: SECTION_EXIT_DURATION * 0.7,
+        ease: 'power2.in',
+        stagger: 0.05
+      }, 0)
+      .fromTo(section3Profile, { y: 0 }, {
+        y: 60,
+        duration: SECTION_EXIT_DURATION * 0.7,
+        ease: 'power2.in'
+      }, 0.05)
+      .fromTo(section2Projects, { y: -80 }, {
         y: 0,
-        duration: returnEnterDuration,
+        duration: SECTION_ENTER_DURATION,
         ease: 'power2.out'
-      }, returnEnterDelay)
-      .to(incomingLeaves, {
-        y: leafY,
-        duration: returnEnterDuration,
-        ease: 'power2.out'
-      }, returnEnterDelay);
+      }, 0);
+  };
+
+  // The footer band rises from the bottom and pushes section3 up by exactly its
+  // own height, so the two edges stay welded. Triggered and locked like every
+  // other boundary rather than scrubbed, so a small scroll plays the whole move.
+  const startFooterEnterTransition = (self) => {
+    isAnimatingFooterTransition = true;
+    footerTransitionLockProgress = pFooterStart;
+    clearFooterTransitionUnlockTimer();
+    progressTween?.kill();
+    progressTween = null;
+
+    setScrollToProgress(self, pFooterStart);
+    setTimelineProgress(pFooterStart);
+
+    const pushDistance = getFooterBandHeight();
+    gsap.set(section3, { y: 0 });
+    gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
+
+    progressTween = gsap.timeline({
+      onComplete: () => {
+        gsap.set(section3, { y: -pushDistance });
+        gsap.set(section3Footer, { xPercent: 0, yPercent: 0, y: 0 });
+        footerTransitionLockProgress = pFooterReady;
+        setScrollToProgress(self, pFooterReady);
+        setTimelineProgress(pFooterReady);
+        // The playground is off screen behind the footer now.
+        setSection3VideosPlaying(false);
+        showBackToBeginning.value = true;
+
+        footerTransitionUnlockTimer = window.setTimeout(() => {
+          hasEnteredFooter = true;
+          isAnimatingFooterTransition = false;
+          footerTransitionUnlockTimer = null;
+        }, SECTION2_POST_TRANSITION_SCROLL_LOCK);
+        progressTween = null;
+      }
+    })
+      .to(section3, {
+        y: -pushDistance,
+        duration: SECTION_EXIT_DURATION,
+        ease: SECTION_TRANSITION_EASE
+      }, 0)
+      .to(section3Footer, {
+        yPercent: 0,
+        duration: SECTION_ENTER_DURATION,
+        ease: SECTION_TRANSITION_EASE
+      }, 0);
+  };
+
+  const returnToSection3FromFooter = (self) => {
+    isAnimatingFooterTransition = true;
+    footerTransitionLockProgress = pFooterReady;
+    clearFooterTransitionUnlockTimer();
+    progressTween?.kill();
+    progressTween = null;
+
+    setScrollToProgress(self, pFooterReady);
+    setTimelineProgress(pFooterReady);
+
+    const pushDistance = getFooterBandHeight();
+    gsap.set(section3, { y: -pushDistance });
+    gsap.set(section3Footer, { xPercent: 0, yPercent: 0, y: 0 });
+    setSection3VideosPlaying(true);
+    showBackToBeginning.value = false;
+
+    progressTween = gsap.timeline({
+      onComplete: () => {
+        hasEnteredFooter = false;
+        isAnimatingFooterTransition = false;
+        clearFooterTransitionUnlockTimer();
+
+        gsap.set(section3, { y: 0 });
+        gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
+        footerTransitionLockProgress = pFooterReturnLand;
+        setScrollToProgress(self, pFooterReturnLand);
+        setTimelineProgress(pFooterReturnLand);
+        progressTween = null;
+      }
+    })
+      .to(section3, {
+        y: 0,
+        duration: SECTION_ENTER_DURATION,
+        ease: SECTION_TRANSITION_EASE
+      }, 0)
+      .to(section3Footer, {
+        yPercent: 100,
+        duration: SECTION_EXIT_DURATION,
+        ease: SECTION_TRANSITION_EASE
+      }, 0);
+  };
+
+  // "Back to beginning": section3 drops away, then every scene is hard-reset to
+  // the hero rather than replaying each transition in reverse on the way up.
+  const resetToHero = () => {
+    isAnimatingSection3Transition = false;
+    isAnimatingSection2Transition = false;
+    isAnimatingHeroReturn = false;
+    isLockingHeroExit = false;
+    hasEnteredSection1Start = false;
+    hasEnteredSection2 = false;
+    hasEnteredSection3 = false;
+    hasEnteredFooter = false;
+    hasScrollCueBeenDismissed = false;
+    hasBottomAnnotationsAppeared = false;
+    clearSection2TransitionUnlockTimer();
+    clearSection3TransitionUnlockTimer();
+    clearFooterTransitionUnlockTimer();
+    clearTimeout(heroExitUnlockTimer);
+    heroExitUnlockTimer = null;
+
+    showBottomAnnotations.value = false;
+    isSection1Active.value = false;
+    isSection1Settled.value = false;
+    isSection2Active.value = false;
+    isSection3Active.value = false;
+    showBackToBeginning.value = false;
+    isReturningFromSection2.value = false;
+    hideScrollCue();
+
+    gsap.set(hero, { xPercent: 0, yPercent: 0, autoAlpha: 1, clearProps: 'zIndex' });
+    setSectionShell(section1, { xPercent: 0, yPercent: 0, autoAlpha: 1 });
+    setSectionShell(section2, { xPercent: 100, yPercent: 0, autoAlpha: 0 });
+    setSectionShell(section3, { xPercent: 0, yPercent: 100, autoAlpha: 0 });
+    if (section3Footer) gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
+    gsap.set(section1Inner, { y: 0 });
+    gsap.set(incomingLeaves, { y: 0 });
+    gsap.set(section2ProjectsTrack, { x: 0 });
+
+    setTimelineProgress(0);
+    pageScrollTrigger?.scroll(pageScrollTrigger.start);
+    progressTween = null;
+  };
+
+  backToBeginningHandler = () => {
+    if (!pageScrollTrigger || !scrollTimeline) return;
+    progressTween?.kill();
+    isAnimatingSection3Transition = true;
+    section3TransitionLockProgress = pageScrollTrigger.progress;
+
+    progressTween = gsap.to(section3, {
+      yPercent: 100,
+      autoAlpha: 0,
+      duration: 0.5,
+      ease: 'power2.inOut',
+      onComplete: resetToHero
+    });
   };
 
   scrollTimeline = gsap.timeline({ paused: true });
@@ -839,7 +1398,16 @@ onMounted(() => {
     // in sync. The visible handoff is played by startSection2EnterTransition.
     .to({}, { duration: SECTION_EXIT_DURATION })
     .to({}, { duration: 0 }, '<')
-    .to(section2ProjectsTrack, { x: () => -getSection2HorizontalScroll(), ease: 'none', duration: SECTION2_HORIZONTAL_SCROLL });
+    .to(section2ProjectsTrack, { x: () => -getSection2HorizontalScroll(), ease: 'none', duration: SECTION2_HORIZONTAL_SCROLL })
+    // Lead-in gap, the section3 handoff (played by startSection3EnterTransition)
+    // and the clamped tail — placeholders that only keep the progress math right.
+    .to({}, { duration: SECTION3_LEAD })
+    .to({}, { duration: SECTION3_TRANSITION })
+    // Arming room, the footer handoff (played by startFooterEnterTransition) and
+    // the clamped tail — placeholders that only keep the progress math right.
+    .to({}, { duration: FOOTER_LEAD })
+    .to({}, { duration: FOOTER_TRANSITION })
+    .to({}, { duration: FOOTER_TAIL });
 
   // Scroll chooses the next state, while exits play as fixed-duration animations:
   //  1. small scroll -> hero snaps out to the left, section1 enters
@@ -879,6 +1447,16 @@ onMounted(() => {
 
       if (isAnimatingSection2Transition) {
         setScrollToProgress(self, section2TransitionLockProgress);
+        return;
+      }
+
+      if (isAnimatingSection3Transition) {
+        setScrollToProgress(self, section3TransitionLockProgress);
+        return;
+      }
+
+      if (isAnimatingFooterTransition) {
+        setScrollToProgress(self, footerTransitionLockProgress);
         return;
       }
 
@@ -941,9 +1519,19 @@ onMounted(() => {
         isLockingHeroExit = false;
         isAnimatingHeroReturn = false;
         isAnimatingSection2Transition = false;
+        isAnimatingSection3Transition = false;
+        isAnimatingFooterTransition = false;
+        hasEnteredSection3 = false;
+        hasEnteredFooter = false;
+        clearFooterTransitionUnlockTimer();
         isSection1Settled.value = false;
         clearSection2TransitionUnlockTimer();
+        clearSection3TransitionUnlockTimer();
         isSection2Active.value = false;
+        isSection3Active.value = false;
+        showBackToBeginning.value = false;
+        setSectionShell(section3, { xPercent: 0, yPercent: 100, autoAlpha: 0 });
+        if (section3Footer) gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
         hideScrollCue();
         showBottomAnnotations.value = false;
         hasBottomAnnotationsAppeared = false;
@@ -980,8 +1568,28 @@ onMounted(() => {
         return;
       }
 
-      if (self.direction < 0 && hasEnteredSection2 && !isAnimatingSection2Transition && p <= pSection2Ready + 0.002) {
+      if (self.direction < 0 && hasEnteredSection2 && !hasEnteredSection3 && !isAnimatingSection2Transition && p <= pSection2Ready + 0.002) {
         returnToSection1Bottom(self);
+        return;
+      }
+
+      if (self.direction > 0 && hasEnteredSection2 && !hasEnteredSection3 && !isAnimatingSection3Transition && p >= pSection3Start - 0.002) {
+        startSection3EnterTransition(self);
+        return;
+      }
+
+      if (self.direction < 0 && hasEnteredSection3 && !hasEnteredFooter && !isAnimatingFooterTransition && !isAnimatingSection3Transition && p <= pSection3Ready - 0.002) {
+        returnToSection2FromSection3(self);
+        return;
+      }
+
+      if (self.direction > 0 && hasEnteredSection3 && !hasEnteredFooter && !isAnimatingFooterTransition && p >= pFooterStart - 0.002) {
+        startFooterEnterTransition(self);
+        return;
+      }
+
+      if (self.direction < 0 && hasEnteredFooter && !isAnimatingFooterTransition && p <= pFooterReady - 0.002) {
+        returnToSection3FromFooter(self);
         return;
       }
 
@@ -990,6 +1598,21 @@ onMounted(() => {
       if (!hasEnteredSection2 && p > pSection2Start) {
         setScrollToProgress(self, pSection2Start);
         effectiveProgress = pSection2Start;
+      }
+
+      if (!hasEnteredSection3 && p > pSection3Start) {
+        setScrollToProgress(self, pSection3Start);
+        effectiveProgress = pSection3Start;
+      }
+
+      if (hasEnteredSection3 && !hasEnteredFooter && p > pFooterStart) {
+        setScrollToProgress(self, pFooterStart);
+        effectiveProgress = pFooterStart;
+      }
+
+      if (hasEnteredFooter && p > pFooterReady) {
+        setScrollToProgress(self, pFooterReady);
+        effectiveProgress = pFooterReady;
       }
 
       if (p < pSection2Start && self.direction < 0) {
@@ -1008,14 +1631,14 @@ onMounted(() => {
         hasBottomAnnotationsAppeared = true;
       }
       showBottomAnnotations.value = hasBottomAnnotationsAppeared && effectiveProgress >= pHeroOut;
-      isSection2Active.value = effectiveProgress >= pSection2EnterStart && hasEnteredSection2;
+      isSection2Active.value = effectiveProgress >= pSection2EnterStart && hasEnteredSection2 && !hasEnteredSection3;
     }
   });
 
   section2HorizontalWheelHandler = (event) => {
     if (!pageScrollTrigger || !scrollTimeline) return;
 
-    if (isAnimatingSection2Transition) {
+    if (isAnimatingSection2Transition || isAnimatingSection3Transition) {
       event.preventDefault();
       return;
     }
@@ -1024,7 +1647,7 @@ onMounted(() => {
     if (Math.abs(x) <= Math.abs(y) || Math.abs(x) < 1) return;
 
     const progress = pageScrollTrigger.progress;
-    const isInHorizontalRange = progress >= pSection2Ready && progress <= 1;
+    const isInHorizontalRange = progress >= pSection2Ready && progress <= pSection2ScrollDone;
     if (!isInHorizontalRange) return;
 
     const horizontalScrollScale = 0.55;
@@ -1046,12 +1669,22 @@ onMounted(() => {
   };
 
   window.addEventListener('wheel', section2HorizontalWheelHandler, { passive: false });
+
+  if (window.matchMedia('(max-width: 720px)').matches && section3Footer) {
+    const footerTarget = section3Footer.querySelector('footer') || section3Footer;
+    section3FooterObserver = new IntersectionObserver(([entry]) => {
+      showBackToBeginning.value = entry.isIntersecting;
+    }, { threshold: 0.12 });
+    section3FooterObserver.observe(footerTarget);
+  }
 });
 
 onBeforeUnmount(() => {
   removeMobileHeroTransitionListener?.();
   clearTimeout(heroExitUnlockTimer);
   clearTimeout(section2TransitionUnlockTimer);
+  clearTimeout(section3TransitionUnlockTimer);
+  clearTimeout(footerTransitionUnlockTimer);
   progressTween?.kill();
   if (section2HorizontalWheelHandler) {
     window.removeEventListener('wheel', section2HorizontalWheelHandler);
@@ -1060,6 +1693,9 @@ onBeforeUnmount(() => {
   scrollTimeline?.kill();
   progressTween = null;
   section2HorizontalWheelHandler = null;
+  backToBeginningHandler = null;
+  section3FooterObserver?.disconnect();
+  section3FooterObserver = null;
   pageScrollTrigger = null;
   scrollTimeline = null;
 });

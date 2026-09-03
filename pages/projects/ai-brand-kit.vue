@@ -20,55 +20,160 @@
 
     <section id="overview">
       <h2>OVERVIEW</h2>
-      <h3>Life Services teams need campaign visuals that feel polished, branded, and ready to use. I designed a two-skill workflow that moves an AI agent from a campaign brief to a key visual and a complete H5 page.</h3>
+      <h3 class="overview-intro">Life Services teams constantly need to create campaign visuals and H5 pages that feel polished, branded, and ready to use. I designed a two-skill workflow that moves an AI agent from a campaign brief to a key visual and a complete H5 page.</h3>
       <div class="overview-container">
         <div class="overview-card-container">
-          <div class="overview-card" style="background-color:#fff2f0;"><div class="overview-card-title"><h4>01</h4><h3>Brand Knowledge</h3></div><p>Consolidate visual rules, templates, and asset requirements into instructions the agent can follow.</p></div>
-          <div class="overview-card" style="background-color:#fff2f0;"><div class="overview-card-title"><h4>02</h4><h3>Key Visual</h3></div><p>Generate a Life Services-style header image with a clear campaign idea and consistent logo treatment.</p></div>
-          <div class="overview-card" style="background-color:#fff2f0;"><div class="overview-card-title"><h4>03</h4><h3>H5 Experience</h3></div><p>Extend the visual direction into a complete mobile campaign page with the right content modules.</p></div>
-          <div class="overview-card" style="background-color:#fff2f0;"><div class="overview-card-title"><h4>04</h4><h3>Visual QA</h3></div><p>Build checks into the workflow so the final output retains hierarchy, clarity, and brand consistency.</p></div>
+          <div class="overview-card" style="background-color:#fff2f0;"><div class="overview-card-title"><h4>01</h4><h3>Brand Knowledge</h3></div><p>Analyzing and understanding the brand visual language and brand assets.</p></div>
+          <div class="overview-card" style="background-color:#fff2f0;"><div class="overview-card-title"><h4>02</h4><h3>Visual Generation</h3></div><p>Generate high quality head images that includes the logo in a smart way, align with the campaign brie and fits the style of the brand.</p></div>
+          <div class="overview-card" style="background-color:#fff2f0;"><div class="overview-card-title"><h4>03</h4><h3>H5 Page Generation</h3></div><p>Extend the head image into a complete H5 page and create elements and content that align with the brand.</p></div>
+          <div class="overview-card" style="background-color:#fff2f0;"><div class="overview-card-title"><h4>04</h4><h3>Python Scripts</h3></div><p>Creating Python scripts in the skill to assist page generation, eg. Background removal, blending the picture to the background, inserting logo, etc.</p></div>
         </div>
         <div class="overview-image-container"><img class="overview-image" src="/assets/images/projects/ai-brand-kit/kv-02.png" alt="Generated Life Services key visual"></div>
       </div>
     </section>
 
-    <div id="problem" class="problem-statement-container"><div class="problem-statement" style="background-color:#FFB0A3;"><h3>How might we help an AI agent create Life Services H5 pages and header images that meet a high visual standard—without making every campaign a manual design task?</h3><p><b>Target users:</b><span style="margin-left:10px;">Life Services campaign and operations teams.</span></p></div></div>
-
-    <section id="problems">
-      <h2>PROBLEMS</h2>
-      <h3>The agent needed more than a good prompt. It needed a reliable way to make visual and structural decisions that respect a mature brand system.</h3>
-      <div class="analysis-block"><div class="analysis-items-grid"><div class="analysis-item analysis-item-bad"><h3>Brand Expression Was Inconsistent</h3><p>Without concrete rules, output could miss the expected logo placement, visual materials, copy hierarchy, and campaign character.</p></div><div class="analysis-item analysis-item-bad"><h3>H5 Pages Lost the Key Visual</h3><p>A strong header image did not automatically produce a coherent mobile page. Color, typography, modules, and CTAs could drift apart.</p></div><div class="analysis-item analysis-item-bad"><h3>Production Knowledge Was Scattered</h3><p>Templates, page patterns, reference images, and QA rules existed across separate documents instead of one repeatable workflow.</p></div><div class="analysis-item analysis-item-bad"><h3>Quality Was Hard to Evaluate</h3><p>“Make it better” is not an actionable instruction. The agent needed specific completion and compliance checks.</p></div></div></div>
-    </section>
+    <div id="problem" class="problem-statement-container">
+      <div class="problem-statement" style="background-color:#FFB0A3;">
+        <h3>How might we help an AI agent create Life Services H5 pages and header images that meet a high visual standard—without making every campaign a manual design task?</h3>
+      </div>
+    </div>
 
     <section id="solution">
       <h2>SOLUTION</h2>
-      <h3>I created two connected skills. The key visual skill establishes the visual direction; the H5 skill carries it through the complete campaign experience.</h3>
-      <div class="features-container-wrapper">
-        <div class="features-container"><div class="feature-item gallery-feature"><div class="kv-gallery"><img src="/assets/images/projects/ai-brand-kit/kv-01.png" alt="Header image sample"><img src="/assets/images/projects/ai-brand-kit/kv-02.png" alt="Header image sample"><img src="/assets/images/projects/ai-brand-kit/kv-03.png" alt="Header image sample"></div></div><div class="feature-description"><h3>Skill 01: Header Image Generation</h3><p>Creates a ready-to-use Life Services campaign key visual from a campaign theme.</p><ul class="feature-reasoning-list"><li class="feature-reasoning"><span class="feature-reasoning-label">Structure</span></li><li class="feature-reasoning">1. Define the theme</li><li class="feature-reasoning">2. Select a category template</li><li class="feature-reasoning">3. Generate title and prompt</li><li class="feature-reasoning">4. Create the visual and apply the final logo</li></ul></div></div>
-        <div class="features-container"><div class="feature-item gallery-feature phone-feature"><div class="phone-gallery"><img src="/assets/images/projects/ai-brand-kit/h5-01.png" alt="H5 activity page sample"><img src="/assets/images/projects/ai-brand-kit/h5-02.png" alt="H5 activity page sample"></div></div><div class="feature-description"><h3>Skill 02: H5 Page Generation</h3><p>Uses the approved key visual as a foundation for a complete, responsive H5 campaign page.</p><ul class="feature-reasoning-list"><li class="feature-reasoning"><span class="feature-reasoning-label">Structure</span></li><li class="feature-reasoning">1. Analyze the key visual</li><li class="feature-reasoning">2. Establish a brand kit</li><li class="feature-reasoning">3. Select relevant page modules</li><li class="feature-reasoning">4. Build the page and run visual QA</li></ul></div></div>
+
+      <div class="skill-list">
+        <article class="skill-block">
+          <div class="skill-info">
+            <h3 class="skill-title"><span class="skill-num">01</span>Header Image Generation</h3>
+            <p class="skill-summary">Turns a campaign theme into a ready-to-use Life Services key visual.</p>
+            <p class="skill-steps-label">SKILL.md steps</p>
+            <ol class="skill-steps">
+              <li>Define the campaign theme</li>
+              <li>Classify into one of seven categories</li>
+              <li>Draft three titles, pick one</li>
+              <li>Compose the prompt from the template</li>
+              <li>Generate against two reference images</li>
+              <li>Overlay the auto-colored logo</li>
+            </ol>
+          </div>
+          <div class="skill-visuals skill-visuals-kv">
+            <img src="/assets/images/projects/ai-brand-kit/kv-04.png" alt="Travel campaign key visual">
+            <img src="/assets/images/projects/ai-brand-kit/kv-05.png" alt="Matcha campaign key visual">
+            <img src="/assets/images/projects/ai-brand-kit/kv-06.png" alt="Tea campaign key visual">
+            <img src="/assets/images/projects/ai-brand-kit/kv-07.png" alt="Late-night food campaign key visual">
+            <img src="/assets/images/projects/ai-brand-kit/kv-08.png" alt="Summer picnic campaign key visual">
+            <img src="/assets/images/projects/ai-brand-kit/kv-09.png" alt="Beauty campaign key visual">
+          </div>
+        </article>
+        <article class="skill-block">
+          <div class="skill-info">
+            <h3 class="skill-title"><span class="skill-num">02</span>H5 Page Generation</h3>
+            <p class="skill-summary">Extends the approved key visual into a complete, responsive H5 page.</p>
+            <p class="skill-steps-label">SKILL.md steps</p>
+            <ol class="skill-steps">
+              <li>Confirm inputs and real content</li>
+              <li>Generate or receive the key visual</li>
+              <li>Analyze the key visual</li>
+              <li>Build the brand kit</li>
+              <li>Select modules, set page order</li>
+              <li>Plan title images and cutouts</li>
+              <li>Implement in HTML and CSS</li>
+              <li>Check compliance, then deliver</li>
+            </ol>
+          </div>
+          <div class="skill-visuals skill-visuals-h5">
+            <img src="/assets/images/projects/ai-brand-kit/h5-set.png" alt="Four generated H5 campaign pages: restaurant discovery, summer water play, winter pet travel, and spring blossom">
+          </div>
+        </article>
       </div>
     </section>
 
     <section id="impact">
       <h2>INTENDED IMPACT</h2>
-      <h3>The skills are designed to make high-quality campaign production more accessible and scalable.</h3>
-      <div class="impact-cards"><div><h3>Agent Platform Adoption</h3><p>Give more teams a practical reason to use the agent platform for real campaign production.</p></div><div><h3>Higher Quality Floor</h3><p>Embed Life Services visual standards directly in the workflow, rather than relying on generic generation.</p></div><div><h3>Faster Campaign Production</h3><p>Help Life Services teams move efficiently from a campaign idea to B–A level header images and H5 pages.</p></div></div>
-      <p class="impact-note">Metrics will be added when adoption and quality-evaluation data are available.</p>
+      <h3>The skills aim to change three things: who can make campaign visuals, how good they are, and how long they take.</h3>
+      <div class="impact-cards">
+        <div>
+          <h3>Wider Adoption</h3>
+          <p>Operations teams can create their own campaign visuals on the agent platform instead of queuing for design support.</p>
+        </div>
+        <div>
+          <h3>Higher Baseline</h3>
+          <p>Life Services visual standards live inside the workflow, so output starts on-brand rather than generic.</p>
+        </div>
+        <div>
+          <h3>Faster Turnaround</h3>
+          <p>A campaign brief becomes a finished header image and H5 page in a single pass.</p>
+        </div>
+      </div>
     </section>
 
     <section id="process" class="process-section">
-      <h2>PROCESS</h2><br>
-      <h3>ANALYZE THE VISUAL LANGUAGE</h3><p>I studied Life Services sample H5 pages and header images to identify recurring brand ingredients: expressive campaign typography, rich 3D objects, clear CTA hierarchy, and a cohesive extension from the header image into the mobile page.</p>
-      <div class="process-image-row"><img src="/assets/images/projects/ai-brand-kit/kv-02.png" alt="Life Services visual language sample"><img src="/assets/images/projects/ai-brand-kit/h5-01.png" alt="Life Services H5 visual language sample"></div>
-      <br><h3>TURN KNOWLEDGE INTO AGENT DECISIONS</h3><p>Rather than keeping brand knowledge as general guidance, I structured it as steps, templates, constraints, asset rules, and final quality checks. This gives the agent a path to follow from input to deliverable.</p>
-      <div class="problem-statement-container"><div class="problem-statement" style="background-color:#fff2f0;"><h3><b style="margin-right:10px;">Design decision:</b> The key visual is the single source of truth for the rest of the H5 page.</h3></div></div>
+      <h2>PROCESS</h2>
+      <ol class="process-steps">
+        <li class="process-step">
+          <h3><span class="process-step-num">01</span>LoRA vs. Skill</h3>
+          <p>I evaluated two approaches, a LoRA and a skill, on which produced higher-quality images that fit the Life Services visual style. The comparison favored the skill, which became the foundation for the rest of the workflow.</p>
+        </li>
+
+        <li class="process-step">
+          <h3><span class="process-step-num">02</span>Header Image Skill</h3>
+          <div class="process-split">
+            <div class="process-split-text">
+              <p>The initial workflow was a linear chain: campaign topic, then generated prompt, then generated image. In practice it rarely met the quality bar, and the resulting style repeated itself across campaigns.</p>
+              <p>I replaced it with a set of prompt templates organized by topic category. The skill now assigns the template that matches the campaign and composes a prompt from it, addressing both the quality ceiling and the repetition.</p>
+            </div>
+            <figure class="process-figure">
+              <img src="/assets/images/projects/ai-brand-kit/prompt-canvas.jpg" alt="Working canvas showing a logo reference and category reference images fanning out into prompt threads and their generated header images">
+            </figure>
+          </div>
+        </li>
+
+
+        <li class="process-step">
+          <h3><span class="process-step-num">03</span>Problem Solving</h3>
+          <p>Problems occurred in the process that affect the quality of the output. I iterated on reference inputs, scripts writing, prompt engineering, and adding steps to the skill to resolve each of these and brought the output to a consistent quality level.</p>
+          <!-- Element repetition: hidden for now, no supporting image yet.
+          <div class="issue-item">
+            <h3>Element repetition</h3>
+            <p>Decorative elements repeated excessively within one composition.</p>
+          </div>
+          -->
+          <div class="issue-grid">
+            <div class="issue-item">
+              <img src="/assets/images/projects/ai-brand-kit/issue-logo.jpg" alt="Problem and solution for the logo: inconsistent renders beside the reference sheet of approved heart-logo treatments">
+              <h3>Logo distortion</h3>
+              <p>The logo rendered with an incorrect shape, or appeared more than once in a single image.</p>
+            </div>
+            <div class="issue-item">
+              <img src="/assets/images/projects/ai-brand-kit/issue-title.jpg" alt="Problem and solution for title placement: an overlapping title beside the script-blended version that reserves space at the top">
+              <h3>Title collision</h3>
+              <p>The space reserved for the logo at the top of the image was not respected, so the title overlapped it.</p>
+            </div>
+            <div class="issue-item">
+              <img src="/assets/images/projects/ai-brand-kit/issue-typeface.jpg" alt="Campaign titles before and after, three samples each side">
+              <h3>Wrong typeface</h3>
+              <p>Generated text rendered in a typeface outside the brand set.</p>
+            </div>
+            <div class="issue-item">
+              <img src="/assets/images/projects/ai-brand-kit/issue-style.jpg" alt="Nine header images before and after, showing the shift away from a cartoonish render">
+              <h3>Over-stylization</h3>
+              <p>The overall render skewed more cartoonish than the brand allows.</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="process-step">
+          <h3><span class="process-step-num">04</span>H5 Page Skill</h3>
+          <p>I analyzed the sample H5 pages to determine which parts of the layout could be encoded as a skill, then defined a template for each page section. The skill is written with HTML and CSS knowledge so pages can be reproduced consistently, including a typographic treatment for section subtitles that keeps them on brand.</p>
+        </li>
+      </ol>
     </section>
 
-    <section id="reflection">
+    <!-- <section id="reflection">
       <h2>REFLECTION</h2>
       <h3>Visual quality becomes repeatable only when it is designed as a system.</h3>
       <div class="analysis-items-grid" style="margin-top:32px;"><div class="analysis-item" style="border-left:4px solid #FFB0A3;"><h3>From Taste to Rules</h3><p>“Make it look better” cannot guide an agent. References become useful when they are translated into concrete visual, content, and layout constraints.</p></div><div class="analysis-item" style="border-left:4px solid #FFB0A3;"><h3>What Comes Next</h3><p>The next step is expanding the sample library and validating the workflow with real production requests and measurable quality feedback.</p></div></div>
-    </section>
+    </section> -->
   </div>
   <AppFooter />
 </template>

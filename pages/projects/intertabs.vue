@@ -10,9 +10,6 @@
                     <h1>interTabs</h1>
                     <h3>An AI-powered Chrome Extension that manage tabs.</h3>
                     <h3 style="color: #ff6952;" font-weight="bold">1st Place & Best UI/UX at HOF Hack 2025</h3>
-                    <p style="margin-top: 10px;">A smart Google Chrome extension built to organize your digital
-                        workspace. By intelligently remember, organize, and suggest tabs for you, it transforms browser
-                        chaos into a structured environment.</p>
                 </div>
                 <div class="button-container">
                     <button class="button" onclick="window.location.href='https://www.intertabs.com/'"
@@ -48,18 +45,15 @@
             <!-- Overview -->
             <section>
                 <h2>OVERVIEW</h2>
-                <h3>Developed at the HOF Hack 2025 as a team of 4, winning the 1st Place, Best UI/UX, and Best Beginner
-                    Hack. Later published to chrome web store and launched by
+                <h3 class="overview-intro">Developed at the HOF Hack 2025 as a team of 4, winning the 1st Place, Best UI/UX, and Best Beginner Hack. <br>Later published to chrome web store and launched by
                     <a href="https://interfinity.tech/" target="_blank"
                         style="color: #ff6952; font-size: 18px; font-family: 'GajrajOne', sans-serif;">interfinity
                         Limited</a>.
                 </h3>
+                <p>Several of my accomplishments included:</p>
+
                 <div class="overview-container">
-
                     <div class="overview-card-container">
-
-
-                        <p>Several of my accomplishments included:</p>
                         <div class="overview-card" style="background-color: #fff2f0;">
                             <div class="overview-card-title">
                                 <h4>01</h4>

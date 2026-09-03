@@ -33,14 +33,17 @@ iframe {
 }
 
 .hero-image {
+    /* Full-bleed, but never cropped: the cover keeps its own proportions. */
+    display: block;
     width: 100%;
-    height: 74vh;
-    object-fit: cover;
+    height: auto;
 }
 
 
 .content {
-    width: max(60vw, 900px);
+    /* The 900px floor must still yield to the viewport, or tablet-width screens
+       get silently cropped by the body's overflow-x: clip. */
+    width: min(max(60vw, 900px), calc(100vw - 2 * var(--margin-x)));
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -128,22 +131,23 @@ iframe {
 }
 
 .key-info {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 26px 40px;
     width: 100%;
-    justify-content: space-between;
     /* background-color: var(--color-primary-light); */
     padding: 20px 0px;
     border-bottom: 2px solid var(--color-foreground);
     border-top: 2px solid var(--color-foreground);
-
+    box-sizing: border-box;
 }
 
 .key-info-item {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 24%;
+    width: auto;
+    min-width: 0;
 }
 
 .key-info-item h3 {
@@ -161,6 +165,11 @@ section h2 {
     font-size: 24px;
 }
 
+
+/* Lead sentence under the OVERVIEW heading, on every project page. */
+.overview-intro {
+    margin-bottom: 22px;
+}
 
 .overview-container {
     display: flex;
@@ -235,74 +244,14 @@ section h2 {
     font-size: 14px;
 }
 
-/* AIGC overview */
-.aigc-overview-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.7fr);
-    gap: 40px;
-    align-items: start;
-    width: 100%;
-    margin-top: 28px;
+/* AIGC overview: shared overview-container layout, with a 9:16 video where the
+   other project pages use a landscape image. */
+.aigc-overview .overview-image-container {
+    flex: 0 0 auto;
+    width: 300px;
 }
 
-.aigc-overview-points {
-    display: flex;
-    flex-direction: column;
-    border-top: 2px solid var(--color-foreground);
-    margin-top: 30px;
-}
-
-.aigc-overview-point {
-    display: grid;
-    grid-template-columns: 48px 1fr;
-    gap: 18px;
-    align-items: start;
-    padding: 22px 0;
-    border-bottom: 1px solid #e8e8e8;
-}
-
-.aigc-overview-num {
-    font-family: 'ArchivoBlack', sans-serif;
-    font-size: 18px;
-    line-height: 1.2;
-    color: #FFBA70;
-}
-
-.aigc-overview-copy {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    min-width: 0;
-}
-
-.aigc-overview-copy h4 {
-    margin: 0;
-    font-family: 'ArchivoBlack', sans-serif;
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.25;
-    color: var(--color-foreground);
-}
-
-.aigc-overview-copy p {
-    margin: 0;
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--color-gray);
-}
-
-.aigc-overview-media {
-    position: sticky;
-    top: 96px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-self: end;
-    width: min(100%, 300px);
-}
-
-.aigc-overview-media .overview-video-preview {
+.aigc-overview .overview-video-preview {
     width: 100%;
     max-height: none;
     aspect-ratio: 9 / 16;
@@ -310,16 +259,10 @@ section h2 {
     border-radius: 12px;
 }
 
-@media (max-width: 900px) {
-    .aigc-overview-layout {
-        grid-template-columns: 1fr;
-        gap: 28px;
-    }
-
-    .aigc-overview-media {
-        position: static;
-        justify-self: center;
+@media (max-width: 768px) {
+    .aigc-overview .overview-image-container {
         width: min(100%, 280px);
+        align-self: center;
     }
 }
 
@@ -524,6 +467,7 @@ html.media-lightbox-open body {
     max-width: 100%;
     max-height: calc(100vh - 48px);
     object-fit: contain;
+    transform-origin: center center;
     border-radius: 8px;
     box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
     background: #000;
@@ -535,6 +479,15 @@ html.media-lightbox-open body {
 .media-lightbox.is-open .media-lightbox-media {
     transform: translateY(0) scale(1);
     opacity: 1;
+}
+
+/* Pinch/wheel zoom is driven from JS, so the browser must not claim the touch
+   gestures on the image itself. Videos keep default touch handling for controls. */
+.media-lightbox-image {
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .media-lightbox-video {
@@ -1160,12 +1113,27 @@ html.media-lightbox-open body {
 }
 
 /* Case-study media, cards, and section navigation */
-.gallery-feature { background: #fff2f0; padding: 20px; }
-.kv-gallery { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 10px; align-items: center; width: 100%; }
-.kv-gallery img { width: 100%; border-radius: 6px; }
-.phone-feature { align-items: flex-start; max-height: 560px; overflow: hidden; }
-.phone-gallery { display: flex; gap: 12px; width: 100%; }
-.phone-gallery img { width: calc(50% - 6px); height: auto; border-radius: 6px; }
+/* AI Brand Kit — SOLUTION: each skill is text on the left, sample output on the right. */
+.skill-list { display: flex; flex-direction: column; gap: 0; width: 100%; margin-top: 28px; }
+/* Each skill (heading, summary, and steps together) sits left of its image; the
+   40/40 rule around the hairline is what separates one skill from the next. */
+.skill-block + .skill-block { margin-top: 40px; padding-top: 40px; border-top: 1px solid #ececec; }
+.skill-block { display: flex; flex-direction: row; align-items: flex-start; gap: 40px; width: 100%; }
+
+.skill-info { flex: 1; min-width: 0; }
+.skill-title { margin: 0; }
+.skill-num { color: #FFB0A3; font-variation-settings: 'wght' 700; margin-right: 10px; }
+.skill-info .skill-summary { margin: 10px 0 0; font-size: 20px; color: var(--color-foreground); line-height: 1.4; }
+.skill-info .skill-steps-label { margin: 20px 0 6px; font-size: 17px; color: var(--color-foreground); }
+.skill-steps { margin: 0; padding-left: 18px; }
+.skill-steps li { margin-top: 6px; font-size: 17px; color: var(--color-foreground); line-height: 1.6; }
+
+.skill-visuals { width: min(400px, 100%); flex-shrink: 0; display: grid; gap: 12px; align-items: start; }
+.skill-visuals img { width: 100%; height: auto; display: block; border-radius: 6px; }
+.skill-visuals-kv { grid-template-columns: repeat(3, 1fr); }
+
+.skill-visuals-h5 { grid-template-columns: 1fr; }
+
 .impact-cards { display: flex; gap: 20px; width: 100%; margin-top: 20px; }
 .impact-cards > div { flex: 1; background: #fff2f0; padding: 20px; }
 .impact-cards h3 { margin: 0; }
@@ -1235,12 +1203,55 @@ html.media-lightbox-open body {
     font-size: 20px;
     text-align: center;
 }
+/* AI Brand Kit — PROCESS: numbered steps on one rhythm, matching the SOLUTION blocks.
+   Spacing scale for this section: 14px between paragraphs, 24px around media and
+   tables, 40px between columns and between steps. */
+.process-steps { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-direction: column; gap: 40px; }
+.process-step { width: 100%; }
+.process-step + .process-step { border-top: 1px solid #ececec; padding-top: 40px; }
+.process-step h3 { margin: 0 0 14px; }
+.process-step-num { color: #FFB0A3; font-variation-settings: 'wght' 700; margin-right: 10px; }
+.process-step p { margin: 0 0 14px; font-size: 17px; color: var(--color-foreground); line-height: 1.7; }
+/* Standalone prose gets a readable measure; figures and the split still span the
+   full step width, so the block stays aligned with the other sections. */
+/* .process-step > p { max-width: 680px; } */
+.process-step p:last-child { margin-bottom: 0; }
+
+.process-split { display: flex; flex-direction: column; align-items: stretch; gap: 24px; width: 100%; }
+.process-split-text { flex: 1; min-width: 0; }
+.process-split-text p:last-child { margin-bottom: 0; }
+.process-split .process-figure { width: 100%; margin: 0; }
+
+.process-figure { margin: 24px 0 0; }
+.process-figure img { width: 100%; height: auto; display: block; border-radius: 8px; }
+
+.process-compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center; margin: 24px 0 0; }
+.process-compare figure { margin: 0; }
+.process-compare img { width: 100%; height: auto; display: block; border-radius: 8px; }
+.process-compare-vs { font-size: 20px; text-align: center; color: var(--color-foreground); }
+.process-compare figcaption,
+.process-figure figcaption { margin-top: 10px; font-size: 18px; text-align: center; color: var(--color-foreground); }
+
+/* Issues: two rows of two, words above the supporting image, no card background. */
+.issue-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px 20px; width: 100%; margin: 10px 0 24px; }
+.issue-item { display: flex; flex-direction: column; gap: 10px; }
+.issue-item h3 { margin: 0; color: var(--color-foreground); }
+.issue-item p { margin: 0; font-size: 17px; color: var(--color-foreground); line-height: 1.6; }
+.issue-item img { width: 100%; height: auto; display: block; border-radius: 8px; margin-bottom: 4px; }
+
 .process-image-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; margin-top: 20px; max-height: 550px; overflow: hidden; }
 .process-image-row img { width: 100%; height: auto; display: block; border-radius: 8px; }
 @media (max-width: 768px) {
     .impact-cards { flex-direction: column; }
     .process-image-row { grid-template-columns: 1fr; max-height: none; }
-    .phone-feature { max-height: 460px; }
+    .process-steps { gap: 32px; }
+    .process-step + .process-step { padding-top: 32px; }
+    .process-compare { grid-template-columns: 1fr; gap: 16px; }
+    .issue-grid { grid-template-columns: 1fr; gap: 28px; }
+    .skill-block { flex-direction: column; align-items: stretch; gap: 24px; }
+    .skill-block + .skill-block { margin-top: 32px; padding-top: 32px; }
+    .skill-visuals { width: 100%; gap: 8px; }
+    .skill-visuals-kv { grid-template-columns: repeat(2, 1fr); }
 }
 
 .feature-item video {
@@ -1779,15 +1790,70 @@ html.media-lightbox-open body {
 
 /* ─────────────────────────────────────────────────────────── */
 
+/* Tablet band: the overview cards sit beside the media column, which leaves them
+   ~170px of text at this width. Stack instead, and let the cards go 2-up. */
+@media (max-width: 1000px) {
+    /* Four across leaves each cell ~170px, which wraps "1 Product Manager" to
+       three lines. Two rows of two reads better from here down. */
+    .key-info {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .overview-container {
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    /* Scoped to the container: the impact cards also carry .overview-card, and
+       they live in their own grid that must keep sizing its own columns. */
+    .overview-card-container > .overview-card {
+        box-sizing: border-box;
+        width: calc(50% - 10px);
+    }
+
+    .aigc-overview .overview-image-container {
+        align-self: center;
+    }
+}
+
 @media (max-width: 768px) {
     .content {
         width: calc(100vw - 2 * var(--margin-x));
         max-width: 900px;
         gap: 60px;
+        /* The hero is an inset card here, not a full-bleed band, so it wants to
+           sit close to the title rather than across a 60px trough. */
+        margin-top: 28px;
     }
 
+    /* styles.css declares the 36px mobile h1 *above* the 54px base rule, so the
+       override never wins. Restate it here (project.css loads later). */
+    .project-header h1 {
+        font-size: 34px;
+        line-height: 1.1;
+    }
+
+    .project-header h3 {
+        font-size: 17px;
+    }
+
+    /* Match the impact cards, which are already border-box; without this the
+       overview cards render 40px wider than them on the same page. */
+    .overview-card {
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    /* On phones the hero becomes an inset card aligned to the text column, and
+       crops to 4:3 — the 2.39:1 cover is a letterbox sliver at this width. */
     .hero-image {
-        height: 50vh;
+        /* The mobile bar is opaque, so clear it instead of letting it cover
+           the top of a now much shorter hero (15px offset + 54px bar). */
+        margin: 69px auto 0;
+        width: calc(100% - 2 * var(--margin-x));
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        border-radius: 14px;
     }
 
     .figma-prototype {
@@ -1809,13 +1875,17 @@ html.media-lightbox-open body {
         gap: 20px;
     }
 
+    /* Stays 2x2; just tighter, since each cell is only ~150px here. */
     .key-info {
-        flex-direction: column;
-        gap: 20px;
+        gap: 20px 18px;
     }
 
     .key-info-item {
-        width: 100%;
+        width: auto;
+    }
+
+    .key-info-item p {
+        font-size: 15px;
     }
 
     .overview-container {
@@ -1830,8 +1900,13 @@ html.media-lightbox-open body {
         flex-direction: column;
     }
 
-    .overview-card {
-        width: calc(100% - 40px);
+    /* Was calc(100% - 40px) to fake border-box against the 20px padding; now that
+       the card is border-box, 100% gives the same full-bleed edge. The scoped
+       selector is repeated to outrank the 2-up tablet rule above. */
+    .overview-card,
+    .overview-card-container > .overview-card {
+        box-sizing: border-box;
+        width: 100%;
     }
 
     .problem-research-container {

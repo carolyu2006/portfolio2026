@@ -1033,10 +1033,14 @@ body,
     position: absolute;
     inset: 0;
     z-index: 8;
+    /* Without this the 48px right padding made the border box 1488px against
+       section1's 1440px, so `xPercent: 100` moved the two panels different
+       distances and tore a sliver of background open mid-handoff. */
+    box-sizing: border-box;
     height: 100vh;
     min-height: 100vh;
     display: block;
-    padding: 130px 48px 0 0;
+    padding: 130px 0 0 0;
     background-color: transparent;
     color: var(--color-foreground);
     text-align: center;
@@ -1301,7 +1305,7 @@ body,
 
 .section2-group--gamification .section2-flower--bottom-left {
     --flower-width: 110px;
-    --flower-height: 680px;
+    --flower-height: 570px;
     --flower-head-width: 100px;
     --flower-head-offset: 72px;
     --flower-tilt: 2deg;
@@ -1732,15 +1736,13 @@ body,
 
 .section1.is-returning-from-section2 .incoming-projects,
 .section1.is-returning-from-section2.is-settled .incoming-projects {
-    /* Margin-center so GSAP can animate translateY on the whole block
-       (cards + annotations) without fighting translateX(-50%). */
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
+    /* The whole section1 panel slides during the return, so this block just
+       holds the settled pose. It used to be margin-centred with `transform:
+       none` so GSAP could drive translateY on it directly, which meant it swapped
+       centring method — and could shift a pixel — at the end of every return. */
     opacity: 1;
     pointer-events: none;
-    transform: none !important;
+    transform: translate(-50%, 0) scale(1);
 }
 
 .section1.is-returning-from-section2 .project-annotation {
@@ -2401,10 +2403,13 @@ body,
     /* Height of the fixed header; the hero subtracts it to fill exactly one
        screen, so the two must stay in step. */
     --phone-header-offset: 110px;
+    /* Named so the footer, which is the last child, can cancel it and sit flush
+       with the bottom of the page the way it does on every other page. */
+    --phone-content-bottom: 80px;
     height: auto;
     min-height: 0;
     margin: 0;
-    padding: var(--phone-header-offset) var(--margin-x) 80px;
+    padding: var(--phone-header-offset) var(--margin-x) var(--phone-content-bottom);
     overflow: clip;
 }
 
@@ -2567,7 +2572,8 @@ body,
 @media (max-width: 720px) {
     .main-content {
         --phone-header-offset: 92px;
-        padding: var(--phone-header-offset) var(--margin-x) 56px;
+        --phone-content-bottom: 56px;
+        padding: var(--phone-header-offset) var(--margin-x) var(--phone-content-bottom);
     }
 
     /* The hero now centres its content in a full-screen box, so the decorative
@@ -2744,4 +2750,656 @@ body,
     }
 }
 
+}
+
+/* =========================================
+   Section 3 — profile (fixed) + playground (scrollable)
+   Slides up from below while section2 rides out the top.
+   ========================================= */
+
+/* This stylesheet has no global border-box, and section3 is a fixed-height
+   two-column scene where padding must not push a column past its track. */
+.section3,
+.section3 *,
+.section3 *::before,
+.section3 *::after {
+    box-sizing: border-box;
+}
+
+.section3 {
+    /* Both columns are fixed-width: the playground track is exactly two of these
+       plus one gap, so the cards never stretch with the viewport. */
+    --section3-play-column: 235px;
+    --section3-play-gap: 16px;
+    --section3-marquee-duration: 40s;
+    position: absolute;
+    inset: 0;
+    z-index: 13;
+    box-sizing: border-box;
+    margin: 0;
+    height: 100vh;
+    min-height: 100vh;
+    padding: 118px 0 0;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    text-align: left;
+    overflow: hidden;
+    pointer-events: auto;
+    opacity: 0;
+    visibility: hidden;
+    will-change: transform, opacity, visibility;
+}
+
+.section3.is-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* A band exactly as tall as the footer, parked below the fold and pushed up by
+   scroll. Only as tall as its content on purpose: a full-viewport panel left a
+   screenful of empty white above the footer, which read as a gap between it and
+   section3 for the whole travel. Nothing fades — the band is always opaque and
+   is hidden purely by sitting outside .main-content's overflow, which also
+   keeps it out of hit-testing while it is off screen. */
+.section3-footer-stage {
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 14;
+    height: auto;
+    background-color: var(--color-background);
+    /* Parked off screen in CSS too, so it cannot flash at the bottom of the
+       viewport in the moment before GSAP takes over on mount. */
+    transform: translateY(100%);
+    will-change: transform;
+}
+
+.section3-footer-stage footer {
+    /* The band adds no space of its own, so drop the standalone-page margin that
+       would otherwise push the footer below it. */
+    margin-top: 0;
+}
+
+/* Parked for now. The markup and its scroll wiring are left in place, so this
+   rule is the only thing to remove when the button comes back. */
+.index-back-to-beginning {
+    display: none;
+}
+
+.index-back-to-beginning {
+    position: fixed;
+    left: clamp(16px, 2vw, 28px);
+    bottom: clamp(16px, 2vw, 28px);
+    z-index: 100001;
+    padding: 12px 18px;
+    border: 2px solid var(--color-foreground);
+    border-radius: 999px;
+    background-color: var(--color-primary);
+    color: var(--color-foreground);
+    font-family: 'ArchivoBlack', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.35s;
+}
+
+.index-back-to-beginning.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Both columns are fixed, so the pair is centred as one block with padding all
+   the way around rather than stretched across the viewport. */
+.section3-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    gap: 64px;
+    width: 100%;
+    max-width: 1108px;
+    height: calc(100vh - 118px);
+    margin: 0 auto;
+    padding: 12px 32px 40px;
+}
+
+/* --- Left: profile card, stays put --- */
+.section3-profile {
+    flex: 0 0 360px;
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    margin-top: 56px;
+    padding-bottom: 36px;
+}
+
+/* The column never scrolls, so on a short screen the card gives up height
+   rather than pushing MORE and the back button off the bottom — only the photo
+   shrinks, the text below it keeps its size. */
+.section3-profile-card {
+    width: 100%;
+    padding: 20px;
+    background-color: var(--color-foreground);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 0 1 auto;
+    min-height: 0;
+    position: relative;
+}
+
+.section3-profile-card > *:not(.section3-profile-image) {
+    flex: 0 0 auto;
+}
+
+.section3-profile-image {
+    display: block;
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 140px;
+    height: clamp(210px, 43vh, 480px);
+    object-fit: cover;
+    object-position: center 22%;
+}
+
+.section3-profile-card h1 {
+    margin: 14px 0 0;
+    font-size: 32px;
+    color: var(--color-background);
+}
+
+.section3-profile-card h3 {
+    margin: 2px 0 0;
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--color-background);
+}
+
+.section3-profile-email {
+    margin-top: 18px;
+    color: var(--color-background);
+    text-decoration: none;
+}
+
+.section3-profile-email h1 {
+    margin: 0;
+    font-size: 20px;
+    color: var(--color-background);
+}
+
+.section3-profile-email:hover h1 {
+    color: var(--color-primary);
+}
+
+.section3-profile-socials {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.section3-profile-socials a {
+    display: inline-flex;
+    color: var(--color-background);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.section3-profile-socials a:hover {
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.section3-profile-socials svg,
+.section3-profile-socials img {
+    display: block;
+    width: 22px;
+    height: 22px;
+}
+
+/* The RedNote mark is a black tile, which vanishes into the dark card — invert
+   it so it carries the same white weight as the three line icons beside it. */
+.section3-profile-socials img {
+    filter: invert(1);
+}
+
+/* --- Right: playground columns, the only thing that scrolls --- */
+.section3-play {
+    position: relative;
+    flex: 0 0 auto;
+    width: calc((var(--section3-play-column) * 2) + var(--section3-play-gap));
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Two marquee columns drifting in opposite directions. Nothing here scrolls:
+   each track carries the same group twice and travels exactly one group's
+   height, so the loop is seamless. Hovering the playground stops both. */
+.section3-play-columns {
+    display: flex;
+    flex-direction: row;
+    gap: var(--section3-play-gap);
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.section3-play-column {
+    width: var(--section3-play-column);
+    flex: 0 0 auto;
+    overflow: hidden;
+}
+
+.section3-play-track {
+    display: flex;
+    flex-direction: column;
+    will-change: transform;
+}
+
+/* The trailing gap belongs to the group, not the track, so one group plus one
+   gap is exactly half the track — which is what the keyframes travel. */
+.section3-play-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--section3-play-gap);
+    padding-bottom: var(--section3-play-gap);
+}
+
+.section3-play-column--up .section3-play-track {
+    animation: section3-marquee-up var(--section3-marquee-duration) linear infinite;
+}
+
+.section3-play-column--down .section3-play-track {
+    animation: section3-marquee-down var(--section3-marquee-duration) linear infinite;
+}
+
+.section3-play:hover .section3-play-track {
+    animation-play-state: paused;
+}
+
+@keyframes section3-marquee-up {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(0, -50%, 0); }
+}
+
+@keyframes section3-marquee-down {
+    from { transform: translate3d(0, -50%, 0); }
+    to { transform: translate3d(0, 0, 0); }
+}
+
+.section3-play-item-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    background-color: var(--color-foreground);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.section3-play-item-wrapper:not([href]) {
+    cursor: default;
+}
+
+.section3-play-item {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.section3-play-item-wrapper:hover .section3-play-item {
+    transform: scale(1.04);
+}
+
+.section3-play-item-info {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.section3-play-item-info-wrapper .section3-play-item {
+    position: relative;
+    z-index: 1;
+}
+
+.section3-play-item-info-wrapper:hover .section3-play-item {
+    transform: translateY(-100%);
+}
+
+.section3-play-item-info h2 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--color-background);
+}
+
+.section3-play-item-info h3 {
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-background);
+}
+
+.section3-play-item-info h4 {
+    margin: 0;
+    font-size: 12px;
+    color: var(--color-background);
+}
+
+/* --- MORE circles: one straddling the about card's top-left corner, one low
+       on the playground's right edge. They sit still and twist on hover.
+       The play circle centres off `top: calc(...)` rather than a translate, so
+       `transform` is free to carry the hover rotation on its own. --- */
+.section3-more {
+    --section3-more-size: 88px;
+    position: absolute;
+    z-index: 6;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--section3-more-size);
+    height: var(--section3-more-size);
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: var(--color-foreground);
+    font-family: 'ArchivoBlack', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    opacity: 0;
+    transition: background-color 0.25s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.section3-more:hover {
+    transform: rotate(-14deg) scale(1.08);
+}
+
+.section3-more--about {
+    top: -28px;
+    left: -40px;
+    transform: scale(0.35) rotate(-24deg);
+}
+
+.section3-more--about:hover {
+    background-color: var(--color-primary-dark2);
+    transform: rotate(-14deg) scale(1.08);
+}
+
+.section3-more--play {
+    top: calc(72% - (var(--section3-more-size) / 2));
+    right: -72px;
+    background-color: var(--color-green-primary);
+    transform: scale(0.35) rotate(24deg);
+}
+
+.section3-more--play:hover {
+    background-color: var(--color-green-secondary);
+    transform: rotate(14deg) scale(1.08);
+}
+
+.section3.is-active .section3-more--about {
+    animation: section3-more-enter-about 620ms cubic-bezier(0.34, 1.56, 0.64, 1) 650ms forwards;
+}
+
+.section3.is-active .section3-more--play {
+    animation: section3-more-enter-play 620ms cubic-bezier(0.34, 1.56, 0.64, 1) 780ms forwards;
+}
+
+@keyframes section3-more-enter-about {
+    0% {
+        opacity: 0;
+        transform: scale(0.35) rotate(-24deg);
+    }
+
+    68% {
+        opacity: 1;
+        transform: scale(1.08) rotate(-10deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(-8deg);
+    }
+}
+
+@keyframes section3-more-enter-play {
+    0% {
+        opacity: 0;
+        transform: scale(0.35) rotate(24deg);
+    }
+
+    68% {
+        opacity: 1;
+        transform: scale(1.08) rotate(10deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(8deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .section3-play-column--up .section3-play-track,
+    .section3-play-column--down .section3-play-track {
+        animation: none;
+        transform: none;
+    }
+
+    .section3-more,
+    .section3-more:hover {
+        transition: none;
+        animation: none !important;
+    }
+
+    .section3-more--about,
+    .section3-more--about:hover {
+        opacity: 1;
+        transform: rotate(-8deg);
+    }
+
+    .section3-more--play,
+    .section3-more--play:hover {
+        opacity: 1;
+        transform: rotate(8deg);
+    }
+
+    .index-back-to-beginning,
+    .index-back-to-beginning.is-visible {
+        transition: none;
+        transform: none;
+    }
+}
+
+@media (max-width: 1180px) {
+    .section3 {
+        --section3-play-column: 200px;
+        --section3-play-gap: 14px;
+    }
+
+    .section3-profile {
+        flex-basis: 290px;
+        width: 290px;
+    }
+
+    .section3-inner {
+        gap: 40px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    /* Less room outside the columns here, so the circle tucks back in. */
+    .section3-more--play {
+        right: -52px;
+    }
+}
+
+@media (max-width: 920px) {
+    .section3 {
+        --section3-play-column: 175px;
+    }
+
+    .section3-profile {
+        flex-basis: 250px;
+        width: 250px;
+    }
+
+    .section3-inner {
+        gap: 28px;
+    }
+
+    .section3-more--play {
+        right: -28px;
+    }
+}
+
+@media (max-width: 720px) {
+    /* Phone: plain document flow, same as the other scenes. The profile column
+       dissolves into the page (display: contents) so its card and the playground
+       grid stack as two plain blocks. */
+    .section3 {
+        position: relative;
+        inset: auto;
+        z-index: auto;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        padding: 0;
+        margin: 0 auto 40px;
+        background: transparent;
+        overflow: visible;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+
+    .section3-inner {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 28px;
+        height: auto;
+        width: min(100%, 1100px);
+        max-width: none;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .section3-profile {
+        display: contents;
+    }
+
+    .section3-profile-card {
+        order: 1;
+        align-items: center;
+        text-align: center;
+    }
+
+    .section3-play {
+        order: 2;
+        width: 100%;
+        height: auto;
+    }
+
+    .section3-profile-image {
+        flex: 0 0 auto;
+        height: clamp(240px, 62vw, 400px);
+        object-fit: cover;
+    }
+
+    /* Phone: no marquee — one copy of each column, stacked as a plain grid. */
+    .section3-play-columns {
+        gap: 12px;
+    }
+
+    .section3-play-column {
+        width: auto;
+        flex: 1 1 0;
+        overflow: visible;
+    }
+
+    .section3-play-group {
+        gap: 12px;
+        padding-bottom: 0;
+    }
+
+    .section3-play-group[aria-hidden="true"] {
+        display: none;
+    }
+
+    .section3-play-column--up .section3-play-track,
+    .section3-play-column--down .section3-play-track {
+        animation: none;
+        transform: none;
+    }
+
+    .section3-profile {
+        margin-top: 0;
+    }
+
+    .section3-more {
+        --section3-more-size: 68px;
+        font-size: 11px;
+        opacity: 1;
+        animation: none !important;
+    }
+
+    .section3-more--about {
+        top: -16px;
+        left: -24px;
+        transform: rotate(-8deg);
+    }
+
+    .section3-more--play {
+        right: 2px;
+        transform: rotate(8deg);
+    }
+
+    .section3-play-item-info {
+        display: none;
+    }
+
+    .section3-play-item-wrapper:hover .section3-play-item,
+    .section3-play-item-info-wrapper:hover .section3-play-item {
+        transform: none;
+    }
+
+    /* On phones the stage sits in flow inside .main-content, which is inset by
+       the page margin — so it breaks back out to full width and cancels the
+       bottom padding, matching the edge-to-edge footer on the other pages. */
+    .section3-footer-stage {
+        position: relative;
+        inset: auto;
+        z-index: auto;
+        display: block;
+        overflow: visible;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: none !important;
+        width: calc(100% + 2 * var(--margin-x));
+        margin: 0 calc(-1 * var(--margin-x)) calc(-1 * var(--phone-content-bottom));
+    }
+
+    /* In flow the footer needs its usual gap from the content above it again. */
+    .section3-footer-stage footer {
+        margin-top: 100px;
+    }
+
+    .index-back-to-beginning {
+        left: var(--margin-x);
+        bottom: 20px;
+    }
 }

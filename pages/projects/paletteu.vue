@@ -44,7 +44,7 @@
                     <div class="overview-content-container">
                         <h2>OVERVIEW</h2>
 
-                        <h3>As the final project of Networked Media course and Intro to Three.js course at NYU. Later
+                        <h3 class="overview-intro">As the final project of Networked Media course and Intro to Three.js course at NYU. Later
                             extended it to a complete personal project. My first three.js and backend development
                             project.
                         </h3>

@@ -42,7 +42,7 @@
                     <div class="overview-content-container">
                         <h2>OVERVIEW</h2>
 
-                        <h3>Developed a Wechat Mini Program for users to find their ideal MBTI. The program focus on
+                        <h3 class="overview-intro">Developed a Wechat Mini Program for users to find their ideal MBTI. The program focus on
                             interactivity through code and art, and how to make user more engaged in the process to
                             increase the user base. Reaching 1500+ users and 500+ likes.
                         </h3>

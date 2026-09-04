@@ -14,12 +14,6 @@
                         creation with AI, moving from clip assembly toward true co-creation. This proposal led to a
                         successful offer from Tencent.</h3>
                 </div>
-                <div class="button-container">
-                    <button class="button"
-                        onclick="window.open('/assets/pdfs/wechat-channels-en.pdf', '_blank')">View PDF (EN)</button>
-                    <button class="button"
-                        onclick="window.open('/assets/pdfs/wechat-channels-zh.pdf', '_blank')">View PDF (中文)</button>
-                </div>
             </div>
 
             <div class="key-info">

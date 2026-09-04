@@ -1,6 +1,6 @@
 <template>
   <AppHeader hero="dark" />
-  <img class="hero-image" src="/assets/images/projects/ai-brand-kit/cover.png" alt="AI Brand Kit cover">
+  <img class="hero-image" src="/assets/images/projects/ai-brand-kit/cover.webp" alt="AI Brand Kit cover">
 
   <div class="content">
     <section class="project-header-container">
@@ -28,7 +28,7 @@
           <div class="overview-card" style="background-color:#fff2f0;"><div class="overview-card-title"><h4>03</h4><h3>H5 Page Generation</h3></div><p>Extend the head image into a complete H5 page and create elements and content that align with the brand.</p></div>
           <div class="overview-card" style="background-color:#fff2f0;"><div class="overview-card-title"><h4>04</h4><h3>Python Scripts</h3></div><p>Creating Python scripts in the skill to assist page generation, eg. Background removal, blending the picture to the background, inserting logo, etc.</p></div>
         </div>
-        <div class="overview-image-container"><img class="overview-image" src="/assets/images/projects/ai-brand-kit/kv-02.png" alt="Generated Life Services key visual"></div>
+        <div class="overview-image-container"><img class="overview-image" src="/assets/images/projects/ai-brand-kit/kv-02.webp" alt="Generated Life Services key visual"></div>
       </div>
     </section>
 
@@ -57,12 +57,12 @@
             </ol>
           </div>
           <div class="skill-visuals skill-visuals-kv">
-            <img src="/assets/images/projects/ai-brand-kit/kv-04.png" alt="Travel campaign key visual">
-            <img src="/assets/images/projects/ai-brand-kit/kv-05.png" alt="Matcha campaign key visual">
-            <img src="/assets/images/projects/ai-brand-kit/kv-06.png" alt="Tea campaign key visual">
-            <img src="/assets/images/projects/ai-brand-kit/kv-07.png" alt="Late-night food campaign key visual">
-            <img src="/assets/images/projects/ai-brand-kit/kv-08.png" alt="Summer picnic campaign key visual">
-            <img src="/assets/images/projects/ai-brand-kit/kv-09.png" alt="Beauty campaign key visual">
+            <img src="/assets/images/projects/ai-brand-kit/kv-04.webp" alt="Travel campaign key visual">
+            <img src="/assets/images/projects/ai-brand-kit/kv-05.webp" alt="Matcha campaign key visual">
+            <img src="/assets/images/projects/ai-brand-kit/kv-06.webp" alt="Tea campaign key visual">
+            <img src="/assets/images/projects/ai-brand-kit/kv-07.webp" alt="Late-night food campaign key visual">
+            <img src="/assets/images/projects/ai-brand-kit/kv-08.webp" alt="Summer picnic campaign key visual">
+            <img src="/assets/images/projects/ai-brand-kit/kv-09.webp" alt="Beauty campaign key visual">
           </div>
         </article>
         <article class="skill-block">
@@ -82,7 +82,7 @@
             </ol>
           </div>
           <div class="skill-visuals skill-visuals-h5">
-            <img src="/assets/images/projects/ai-brand-kit/h5-set.png" alt="Four generated H5 campaign pages: restaurant discovery, summer water play, winter pet travel, and spring blossom">
+            <img src="/assets/images/projects/ai-brand-kit/h5-set.webp" alt="Four generated H5 campaign pages: restaurant discovery, summer water play, winter pet travel, and spring blossom">
           </div>
         </article>
       </div>
@@ -123,7 +123,7 @@
               <p>I replaced it with a set of prompt templates organized by topic category. The skill now assigns the template that matches the campaign and composes a prompt from it, addressing both the quality ceiling and the repetition.</p>
             </div>
             <figure class="process-figure">
-              <img src="/assets/images/projects/ai-brand-kit/prompt-canvas.jpg" alt="Working canvas showing a logo reference and category reference images fanning out into prompt threads and their generated header images">
+              <img src="/assets/images/projects/ai-brand-kit/prompt-canvas.webp" alt="Working canvas showing a logo reference and category reference images fanning out into prompt threads and their generated header images">
             </figure>
           </div>
         </li>
@@ -140,22 +140,22 @@
           -->
           <div class="issue-grid">
             <div class="issue-item">
-              <img src="/assets/images/projects/ai-brand-kit/issue-logo.jpg" alt="Problem and solution for the logo: inconsistent renders beside the reference sheet of approved heart-logo treatments">
+              <img src="/assets/images/projects/ai-brand-kit/issue-logo.webp" alt="Problem and solution for the logo: inconsistent renders beside the reference sheet of approved heart-logo treatments">
               <h3>Logo distortion</h3>
               <p>The logo rendered with an incorrect shape, or appeared more than once in a single image.</p>
             </div>
             <div class="issue-item">
-              <img src="/assets/images/projects/ai-brand-kit/issue-title.jpg" alt="Problem and solution for title placement: an overlapping title beside the script-blended version that reserves space at the top">
+              <img src="/assets/images/projects/ai-brand-kit/issue-title.webp" alt="Problem and solution for title placement: an overlapping title beside the script-blended version that reserves space at the top">
               <h3>Title collision</h3>
               <p>The space reserved for the logo at the top of the image was not respected, so the title overlapped it.</p>
             </div>
             <div class="issue-item">
-              <img src="/assets/images/projects/ai-brand-kit/issue-typeface.jpg" alt="Campaign titles before and after, three samples each side">
+              <img src="/assets/images/projects/ai-brand-kit/issue-typeface.webp" alt="Campaign titles before and after, three samples each side">
               <h3>Wrong typeface</h3>
               <p>Generated text rendered in a typeface outside the brand set.</p>
             </div>
             <div class="issue-item">
-              <img src="/assets/images/projects/ai-brand-kit/issue-style.jpg" alt="Nine header images before and after, showing the shift away from a cartoonish render">
+              <img src="/assets/images/projects/ai-brand-kit/issue-style.webp" alt="Nine header images before and after, showing the shift away from a cartoonish render">
               <h3>Over-stylization</h3>
               <p>The overall render skewed more cartoonish than the brand allows.</p>
             </div>
@@ -174,6 +174,30 @@
       <h3>Visual quality becomes repeatable only when it is designed as a system.</h3>
       <div class="analysis-items-grid" style="margin-top:32px;"><div class="analysis-item" style="border-left:4px solid #FFB0A3;"><h3>From Taste to Rules</h3><p>“Make it look better” cannot guide an agent. References become useful when they are translated into concrete visual, content, and layout constraints.</p></div><div class="analysis-item" style="border-left:4px solid #FFB0A3;"><h3>What Comes Next</h3><p>The next step is expanding the sample library and validating the workflow with real production requests and measurable quality feedback.</p></div></div>
     </section> -->
+
+    <section class="next-project-section">
+        <h1 style="font-size: 24px;">More Projects</h1>
+        <div class="next-projects-container">
+            <a class="next-project-card" href="/projects/orangobranding">
+                <div class="next-project-image">
+                    <img src="/assets/images/covers/orango_branding.webp" alt="ORANGO">
+                </div>
+                <div class="next-project-content">
+                    <h2>ORANGO</h2>
+                    <p>Brand identity design for ORANGO.</p>
+                </div>
+            </a>
+            <a class="next-project-card" href="/projects/paletteu">
+                <div class="next-project-image">
+                    <img src="/assets/images/covers/paletteu.webp" alt="Palette U">
+                </div>
+                <div class="next-project-content">
+                    <h2>Palette U</h2>
+                    <p>A color palette generator that creates palettes based on user preferences.</p>
+                </div>
+            </a>
+        </div>
+    </section>
   </div>
   <AppFooter />
 </template>

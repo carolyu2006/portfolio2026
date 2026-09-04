@@ -48,22 +48,22 @@
             <section class="next-project-section">
                 <h1 style="font-size: 24px;">More Projects</h1>
                 <div class="next-projects-container">
-                    <a class="next-project-card" href="/projects/mbtiidealpartner">
+                    <a class="next-project-card" href="/projects/aigc-video-automation">
                         <div class="next-project-image">
-                            <img src="/assets/images/covers/mbti.webp" alt="MBTI Ideal Partner">
+                            <img src="/assets/images/covers/aigc-video-automation.webp" alt="AIGC Video Automation">
                         </div>
                         <div class="next-project-content">
-                            <h2>MBTI Ideal Partner</h2>
-                            <p>Discover your ideal partner based on MBTI personality types.</p>
+                            <h2>AIGC Video Automation</h2>
+                            <p>Turning product information and cultural trends into scalable e-commerce video ads.</p>
                         </div>
                     </a>
-                    <a class="next-project-card" href="/projects/everstream">
+                    <a class="next-project-card" href="/projects/wechatchannels">
                         <div class="next-project-image">
-                            <img src="/assets/images/covers/everstream.webp" alt="Everstream">
+                            <img src="/assets/images/covers/wechat.webp" alt="WeChat Channels">
                         </div>
                         <div class="next-project-content">
-                            <h2>Everstream</h2>
-                            <p>A multiplayer card game built around real-time strategy and stream mechanics.</p>
+                            <h2>WeChat Channels</h2>
+                            <p>Reimagining video creation with AI for the Tencent WeChat Channels team.</p>
                         </div>
                     </a>
                 </div>

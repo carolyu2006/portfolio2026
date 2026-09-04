@@ -185,22 +185,22 @@
             <section class="next-project-section">
                 <h1 style="font-size: 24px;">More Projects</h1>
                 <div class="next-projects-container">
-                    <a class="next-project-card" href="/projects/orangobranding">
+                    <a class="next-project-card" href="/projects/wechatchannels">
                         <div class="next-project-image">
-                            <img src="/assets/images/covers/orango_branding.webp" alt="ORANGO">
+                            <img src="/assets/images/covers/wechat.webp" alt="WeChat Channels">
                         </div>
                         <div class="next-project-content">
-                            <h2>ORANGO</h2>
-                            <p>Brand identity design for ORANGO.</p>
+                            <h2>WeChat Channels</h2>
+                            <p>Reimagining video creation with AI for the Tencent WeChat Channels team.</p>
                         </div>
                     </a>
-                    <a class="next-project-card" href="/projects/intertabs">
+                    <a class="next-project-card" href="/projects/ai-brand-kit">
                         <div class="next-project-image">
-                            <img src="/assets/images/covers/intertabs.webp" alt="interTabs">
+                            <img src="/assets/images/covers/ai-brand-kit.webp" alt="AI Brand Kit">
                         </div>
                         <div class="next-project-content">
-                            <h2>interTabs</h2>
-                            <p>An AI-powered Chrome extension that syncs your research across tabs and sessions.</p>
+                            <h2>AI Brand Kit</h2>
+                            <p>Training AI for brand content automation by creating a skill and a LoRA.</p>
                         </div>
                     </a>
                 </div>

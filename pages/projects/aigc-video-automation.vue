@@ -1,6 +1,6 @@
 <template>
   <AppHeader hero="dark" />
-  <img class="hero-image" src="/assets/images/projects/aigc-video-automation/cover.png" alt="AIGC e-commerce advertisement video examples">
+  <img class="hero-image" src="/assets/images/projects/aigc-video-automation/cover.webp" alt="AIGC e-commerce advertisement video examples">
 
   <div class="content">
     <div class="project-header-container">
@@ -40,19 +40,19 @@
 
         <div ref="overviewVideoContainer" class="overview-image-container">
           <template v-if="showOverviewVideo">
-            <video ref="overviewPreviewVideo" class="overview-video-preview" muted loop playsinline preload="metadata" poster="/assets/images/projects/aigc-video-automation/overview-demo-poster.jpg" aria-label="AIGC video automation overview demo">
+            <video ref="overviewPreviewVideo" class="overview-video-preview" muted loop playsinline preload="metadata" poster="/assets/images/projects/aigc-video-automation/overview-demo-poster.webp" aria-label="AIGC video automation overview demo">
               <source src="/assets/images/projects/aigc-video-automation/overview-demo.mp4" type="video/mp4">
             </video>
           </template>
           <img
             v-else
             class="overview-video-preview"
-            src="/assets/images/projects/aigc-video-automation/overview-demo-poster.jpg"
+            src="/assets/images/projects/aigc-video-automation/overview-demo-poster.webp"
             alt="AIGC video automation overview demo"
             loading="lazy"
             decoding="async"
             data-expand-video="/assets/images/projects/aigc-video-automation/overview-demo.mp4"
-            data-expand-poster="/assets/images/projects/aigc-video-automation/overview-demo-poster.jpg"
+            data-expand-poster="/assets/images/projects/aigc-video-automation/overview-demo-poster.webp"
           >
         </div>
       </div>
@@ -72,7 +72,7 @@
           <img
             ref="mindmapImage"
             class="solution-mindmap-image"
-            src="/assets/images/projects/aigc-video-automation/workflow-diagram.png"
+            src="/assets/images/projects/aigc-video-automation/workflow-diagram.webp"
             alt="Creative generation workflow: product extraction, plot and script generation, character and scene assets, video clips, and final output."
             loading="lazy"
             decoding="async"
@@ -208,6 +208,30 @@
         </div>
       </div>
     </section>
+
+    <section class="next-project-section">
+        <h1 style="font-size: 24px;">More Projects</h1>
+        <div class="next-projects-container">
+            <a class="next-project-card" href="/projects/everstream">
+                <div class="next-project-image">
+                    <img src="/assets/images/covers/everstream.webp" alt="Everstream">
+                </div>
+                <div class="next-project-content">
+                    <h2>Everstream</h2>
+                    <p>A multiplayer card game built around real-time strategy and stream mechanics.</p>
+                </div>
+            </a>
+            <a class="next-project-card" href="/projects/mbtiidealpartner">
+                <div class="next-project-image">
+                    <img src="/assets/images/covers/mbti.webp" alt="MBTI Ideal Partner">
+                </div>
+                <div class="next-project-content">
+                    <h2>MBTI Ideal Partner</h2>
+                    <p>Discover your ideal partner based on MBTI personality types.</p>
+                </div>
+            </a>
+        </div>
+    </section>
   </div>
   <AppFooter />
 </template>
@@ -218,10 +242,10 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 const mediaBase = '/assets/images/projects/aigc-video-automation'
 
 const solutionVideos = [
-  { label: 'AI short drama 01', src: `${mediaBase}/ai-drama-01.mp4`, poster: `${mediaBase}/ai-drama-01-poster.jpg` },
-  { label: '3D animation 01', src: `${mediaBase}/animation-01.mp4`, poster: `${mediaBase}/animation-01-poster.jpg` },
-  { label: '3D animation 02', src: `${mediaBase}/animation-02.mp4`, poster: `${mediaBase}/animation-02-poster.jpg` },
-  { label: 'AI short drama 02', src: `${mediaBase}/ai-drama-02.mp4`, poster: `${mediaBase}/ai-drama-02-poster.jpg` }
+  { label: 'AI short drama 01', src: `${mediaBase}/ai-drama-01.mp4`, poster: `${mediaBase}/ai-drama-01-poster.webp` },
+  { label: '3D animation 01', src: `${mediaBase}/animation-01.mp4`, poster: `${mediaBase}/animation-01-poster.webp` },
+  { label: '3D animation 02', src: `${mediaBase}/animation-02.mp4`, poster: `${mediaBase}/animation-02-poster.webp` },
+  { label: 'AI short drama 02', src: `${mediaBase}/ai-drama-02.mp4`, poster: `${mediaBase}/ai-drama-02-poster.webp` }
 ]
 
 const activeSolutionIndex = ref(0)

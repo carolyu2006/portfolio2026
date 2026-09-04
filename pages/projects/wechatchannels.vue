@@ -105,7 +105,7 @@
                         </div>
                         <div class="next-project-content">
                             <h2>Albert Plus</h2>
-                            <p>A redesigned companion for NYU's Albert course system.</p>
+                            <p>A redesigned companion for NYU's Albert — improving search, comparison, and planning.</p>
                         </div>
                     </a>
                     <a class="next-project-card" href="/projects/intertabs">

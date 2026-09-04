@@ -92,7 +92,7 @@
                             </div>
                             <div class="overview-image-container"
                                 onclick="window.open('https://youtube.com/shorts/xU0D0vRQFwU', '_blank')">
-                                <video class="overview-image" src="/assets/images/projects/mbti/video.mov"
+                                <video class="overview-image" src="/assets/images/projects/mbti/video.mp4"
                                     alt="overview" autoplay muted loop></video>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                     </div>
                     <!-- <div class="overview-image-container"
                         onclick="window.open('https://youtube.com/shorts/xU0D0vRQFwU', '_blank')">
-                        <video class="overview-image" src="/assets/images/projects/mbti/video.mov" alt="overview"
+                        <video class="overview-image" src="/assets/images/projects/mbti/video.mp4" alt="overview"
                             autoplay muted loop></video>
                     </div> -->
                 </div>
@@ -151,22 +151,22 @@
             <section class="next-project-section">
                 <h1 style="font-size: 24px;">More Projects</h1>
                 <div class="next-projects-container">
-                    <a class="next-project-card" href="/projects/paletteu">
+                    <a class="next-project-card" href="/projects/ai-brand-kit">
                         <div class="next-project-image">
-                            <img src="/assets/images/covers/paletteu.webp" alt="Palette U">
+                            <img src="/assets/images/covers/ai-brand-kit.webp" alt="AI Brand Kit">
                         </div>
                         <div class="next-project-content">
-                            <h2>Palette U</h2>
-                            <p>A color palette generator that creates palettes based on user preferences.</p>
+                            <h2>AI Brand Kit</h2>
+                            <p>Training AI for brand content automation by creating a skill and a LoRA.</p>
                         </div>
                     </a>
-                    <a class="next-project-card" href="/projects/orangobranding">
+                    <a class="next-project-card" href="/projects/aigc-video-automation">
                         <div class="next-project-image">
-                            <img src="/assets/images/covers/orango_branding.webp" alt="ORANGO">
+                            <img src="/assets/images/covers/aigc-video-automation.webp" alt="AIGC Video Automation">
                         </div>
                         <div class="next-project-content">
-                            <h2>ORANGO</h2>
-                            <p>Brand identity design for ORANGO.</p>
+                            <h2>AIGC Video Automation</h2>
+                            <p>Turning product information and cultural trends into scalable e-commerce video ads.</p>
                         </div>
                     </a>
                 </div>

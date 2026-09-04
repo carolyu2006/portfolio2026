@@ -17,12 +17,12 @@
                 <div class="play-featured-left">
                     <div class="play-featured-main">
                         <button class="play-featured-arrow play-featured-arrow--left" id="featured-prev"></button>
-                        <video id="featured-main-video" src="/assets/images/covers/everstream.mov" poster="/assets/images/covers/everstream.webp" autoplay muted loop playsinline preload="metadata"></video>
+                        <video id="featured-main-video" src="/assets/images/covers/everstream.mp4" poster="/assets/images/covers/everstream.webp" autoplay muted loop playsinline preload="metadata"></video>
                         <img id="featured-main-img" src="" alt="Everstream" style="display:none;">
                         <button class="play-featured-arrow play-featured-arrow--right" id="featured-next"></button>
                     </div>
                     <div class="play-featured-thumbs" id="featured-thumbs">
-                        <div class="play-featured-thumb active" data-type="video" data-src="/assets/images/covers/everstream.mov" data-poster="/assets/images/covers/everstream.webp">
+                        <div class="play-featured-thumb active" data-type="video" data-src="/assets/images/covers/everstream.mp4" data-poster="/assets/images/covers/everstream.webp">
                             <img src="/assets/images/covers/everstream.webp" alt="video">
                         </div>
                         <div class="play-featured-thumb" data-type="image" data-src="/assets/images/projects/everstream/ui1.webp">
@@ -135,7 +135,7 @@
                         <h3>Game Designer & Developer</h3>
                         <p>A 2D game depicting the journey of the four seasons along a stream.</p>
                     </div>
-                    <video class="play-item" src="/assets/images/covers/everstream.mov" poster="/assets/images/covers/everstream.webp" autoplay muted loop playsinline preload="metadata"></video>
+                    <video class="play-item" src="/assets/images/covers/everstream.mp4" poster="/assets/images/covers/everstream.webp" autoplay muted loop playsinline preload="metadata"></video>
                 </a>
                 <a class="play-item-wrapper swipe play-item-info-wrapper" data-tag="xr" data-featured="dreammail" href="https://devpost.com/software/dreamail" target="_blank" rel="noopener noreferrer">
                     <div class="play-item-info">
@@ -148,13 +148,13 @@
                 </a>
                 
                 <div class="play-item-wrapper" data-tag="xr">
-                    <video class="play-item" src="/assets/images/play/mr-coffeechat.mov" alt="music" autoplay muted loop
+                    <video class="play-item" src="/assets/images/play/mr-coffeechat.mp4" alt="music" autoplay muted loop
                         playsinline preload="metadata"></video>
                 </div>
                 <a class="play-item-wrapper" data-tag="code" href="https://pixel-me-taupe.vercel.app/" target="_blank"
                     rel="noopener noreferrer">
 
-                    <video class="play-item" src="/assets/images/play/pixelme.mov" alt="pixelMe" autoplay muted loop
+                    <video class="play-item" src="/assets/images/play/pixelme.mp4" alt="pixelMe" autoplay muted loop
                         playsinline preload="metadata"></video>
                 </a>
                 <div class="play-item-wrapper" data-tag="design">
@@ -164,7 +164,7 @@
                     href="https://chromewebstore.google.com/detail/pet-ur-friend/onddalpajmjpenfeoppfpcincflmbghb"
                     target="_blank" rel="noopener noreferrer">
 
-                    <video class="play-item" src="/assets/images/play/PetUrFriends.mov" alt="TheFalseTurn" loop autoplay
+                    <video class="play-item" src="/assets/images/play/PetUrFriends.mp4" alt="TheFalseTurn" loop autoplay
                         muted playsinline></video>
                 </a>
 
@@ -186,11 +186,11 @@
                     <img class="play-item" src="/assets/images/play/super-maricat.webp" alt="Super Maricat">
                 </div>
                 <div class="play-item-wrapper" data-tag="code">
-                    <video class="play-item" src="/assets/images/play/band-comp.mov" alt="music" autoplay muted loop
+                    <video class="play-item" src="/assets/images/play/band-comp.mp4" alt="music" autoplay muted loop
                         playsinline preload="metadata"></video>
                 </div>
                 <div class="play-item-wrapper" data-tag="art">
-                    <video class="play-item" src="/assets/images/play/cook-animation.mov" alt="music" autoplay muted
+                    <video class="play-item" src="/assets/images/play/cook-animation.mp4" alt="music" autoplay muted
                         loop playsinline preload="metadata"></video>
                 </div>
                 <a class="play-item-wrapper" data-tag="code" href="https://youtu.be/auyys1KmkXU" target="_blank"
@@ -199,17 +199,17 @@
                 </a>
                 <a class="play-item-wrapper" data-tag="code" href="https://youtu.be/e9QJO8i3q8s" target="_blank"
                     rel="noopener noreferrer">
-                    <video class="play-item" src="/assets/images/play/InHistory.mov" alt="InHistory" autoplay muted loop
+                    <video class="play-item" src="/assets/images/play/InHistory.mp4" alt="InHistory" autoplay muted loop
                         playsinline preload="metadata"></video>
                 </a>
                 <a class="play-item-wrapper" data-tag="game" href="https://youtu.be/Mgj6xAEFDHo" target="_blank"
                     rel="noopener noreferrer">
-                    <video class="play-item" src="/assets/images/play/game_maze.mov" alt="Game Maze" autoplay muted loop
+                    <video class="play-item" src="/assets/images/play/game_maze.mp4" alt="Game Maze" autoplay muted loop
                         playsinline preload="metadata"></video>
                 </a>
                 <a class="play-item-wrapper" data-tag="code" href="https://animal-clock-git-main-carol-projects.vercel.app/"
                     target="_blank" rel="noopener noreferrer">
-                    <video class="play-item" src="/assets/images/play/clock.mov" alt="Clock" autoplay muted loop
+                    <video class="play-item" src="/assets/images/play/clock.mp4" alt="Clock" autoplay muted loop
                         playsinline preload="metadata"></video>
                 </a>
 
@@ -220,7 +220,7 @@
                 </a>
 
                 <div class="play-item-wrapper" data-tag="code">
-                    <video class="play-item" src="/assets/images/play/xa.mov" alt="xa" autoplay muted loop playsinline
+                    <video class="play-item" src="/assets/images/play/xa.mp4" alt="xa" autoplay muted loop playsinline
                         preload="metadata"></video>
                 </div>
                 <div class="play-item-wrapper" data-tag="design">
@@ -252,11 +252,11 @@
                     <img class="play-item" src="/assets/images/experience/sweetdreams-behind.webp" alt="Sweet Dream 4 All">
                 </a>
                 <div class="play-item-wrapper" data-tag="art">
-                    <video class="play-item" src="/assets/images/play/TheFalseTurn.mov" alt="TheFalseTurn" autoplay
+                    <video class="play-item" src="/assets/images/play/TheFalseTurn.mp4" alt="TheFalseTurn" autoplay
                         muted loop playsinline preload="metadata"></video>
                 </div>
                 <div class="play-item-wrapper" data-tag="art">
-                    <video class="play-item" src="/assets/images/play/EchoesOfOurStep.mov" alt="EchoesOfOurStep"
+                    <video class="play-item" src="/assets/images/play/EchoesOfOurStep.mp4" alt="EchoesOfOurStep"
                         autoplay muted loop playsinline preload="metadata"></video>
                 </div>
                 <div class="play-item-wrapper" data-tag="design">

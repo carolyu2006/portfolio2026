@@ -407,22 +407,22 @@
             <section class="next-project-section">
                 <h1 style="font-size: 24px;">More Projects</h1>
                 <div class="next-projects-container">
-                    <a class="next-project-card" href="/projects/everstream">
+                    <a class="next-project-card" href="/projects/ai-brand-kit">
                         <div class="next-project-image">
-                            <img src="/assets/images/covers/everstream.webp" alt="Everstream">
+                            <img src="/assets/images/covers/ai-brand-kit.webp" alt="AI Brand Kit">
                         </div>
                         <div class="next-project-content">
-                            <h2>Everstream</h2>
-                            <p>A multiplayer card game built around real-time strategy and stream mechanics.</p>
+                            <h2>AI Brand Kit</h2>
+                            <p>Training AI for brand content automation by creating a skill and a LoRA.</p>
                         </div>
                     </a>
-                    <a class="next-project-card" href="/projects/albertplus">
+                    <a class="next-project-card" href="/projects/aigc-video-automation">
                         <div class="next-project-image">
-                            <img src="/assets/images/covers/albertplus.webp" alt="Albert Plus">
+                            <img src="/assets/images/covers/aigc-video-automation.webp" alt="AIGC Video Automation">
                         </div>
                         <div class="next-project-content">
-                            <h2>Albert Plus</h2>
-                            <p>A redesigned companion for NYU's Albert — improving search, comparison, and planning.</p>
+                            <h2>AIGC Video Automation</h2>
+                            <p>Turning product information and cultural trends into scalable e-commerce video ads.</p>
                         </div>
                     </a>
                 </div>

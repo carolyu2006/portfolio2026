@@ -1,6 +1,6 @@
 <template>
 <AppHeader />
-        <video class="hero-image" src="/assets/images/projects/paletteu/cover.mov" alt="Palette U" autoplay muted loop
+        <video class="hero-image" src="/assets/images/projects/paletteu/cover.mp4" alt="Palette U" autoplay muted loop
             playsinline preload="metadata"></video>
 
         <div class="content">
@@ -195,12 +195,12 @@
                 <div class="features-container-wrapper">
                     <div class="features-container-two">
                         <div class="feature-item">
-                            <video class="feature-item-video" src="/assets/images/projects/paletteu/feature-memory.mov"
+                            <video class="feature-item-video" src="/assets/images/projects/paletteu/feature-memory.mp4"
                                 alt="feature" autoplay muted loop></video>
                             <p>Add Memory</p>
                         </div>
                         <div class="feature-item">
-                            <video class="feature-item-video" src="/assets/images/projects/paletteu/feature-view.mov"
+                            <video class="feature-item-video" src="/assets/images/projects/paletteu/feature-view.mp4"
                                 alt="feature" autoplay muted loop></video>
                             <p>View All Memories</p>
                         </div>
@@ -208,12 +208,12 @@
                     <div class="features-container-two">
                         <div class="feature-item">
                             <video class="feature-item-video"
-                                src="/assets/images/projects/paletteu/feature-addIsland.mov" alt="feature" autoplay
+                                src="/assets/images/projects/paletteu/feature-addIsland.mp4" alt="feature" autoplay
                                 muted loop></video>
                             <p>Add Island - create your own memory island</p>
                         </div>
                         <div class="feature-item">
-                            <video class="feature-item-video" src="/assets/images/projects/paletteu/feature-island.mov"
+                            <video class="feature-item-video" src="/assets/images/projects/paletteu/feature-island.mp4"
                                 alt="feature" autoplay muted loop></video>
                             <p>View Islands - see the important parts of your life</p>
                         </div>
@@ -221,12 +221,12 @@
                     <div class="features-container-two">
                         <div class="feature-item">
                             <video class="feature-item-video"
-                                src="/assets/images/projects/paletteu/feature-customize.mov" alt="feature" autoplay
+                                src="/assets/images/projects/paletteu/feature-customize.mp4" alt="feature" autoplay
                                 muted loop></video>
                             <p>Customize Dashboard - make the memory represents what it means to you</p>
                         </div>
                         <div class="feature-item">
-                            <video class="feature-item-video" src="/assets/images/projects/paletteu/feature-train.mov"
+                            <video class="feature-item-video" src="/assets/images/projects/paletteu/feature-train.mp4"
                                 alt="feature" autoplay muted loop></video>
                             <p>Memory Train - bring you random memories</p>
                         </div>
@@ -246,22 +246,22 @@
             <section class="next-project-section">
                 <h1 style="font-size: 24px;">More Projects</h1>
                 <div class="next-projects-container">
-                    <a class="next-project-card" href="/projects/albertplus">
+                    <a class="next-project-card" href="/projects/wechatchannels">
                         <div class="next-project-image">
-                            <img src="/assets/images/covers/albertplus.webp" alt="Albert Plus">
+                            <img src="/assets/images/covers/wechat.webp" alt="WeChat Channels">
                         </div>
                         <div class="next-project-content">
-                            <h2>Albert Plus</h2>
-                            <p>A redesigned companion for NYU's Albert — improving search, comparison, and planning.</p>
+                            <h2>WeChat Channels</h2>
+                            <p>Reimagining video creation with AI for the Tencent WeChat Channels team.</p>
                         </div>
                     </a>
-                    <a class="next-project-card" href="/projects/mbtiidealpartner">
+                    <a class="next-project-card" href="/projects/ai-brand-kit">
                         <div class="next-project-image">
-                            <img src="/assets/images/covers/mbti.webp" alt="MBTI Ideal Partner">
+                            <img src="/assets/images/covers/ai-brand-kit.webp" alt="AI Brand Kit">
                         </div>
                         <div class="next-project-content">
-                            <h2>MBTI Ideal Partner</h2>
-                            <p>Discover your ideal partner based on MBTI personality types.</p>
+                            <h2>AI Brand Kit</h2>
+                            <p>Training AI for brand content automation by creating a skill and a LoRA.</p>
                         </div>
                     </a>
                 </div>

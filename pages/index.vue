@@ -95,7 +95,7 @@
                 <p>Training AI for Brand Content Automation by creating skill and lora.</p>
               </div>
             </div>
-            <img class="projects-item-image" src="/assets/images/covers/ai-brand-kit.png" alt="AI Brand Kit project cover">
+            <img class="projects-item-image" src="/assets/images/covers/ai-brand-kit.webp" alt="AI Brand Kit project cover">
           </a>
 
           <a class="projects-item" data-category="web-apps" href="/projects/aigc-video-automation">
@@ -113,7 +113,7 @@
                 <p>Turning product information and cultural trends into scalable, platform-native e-commerce video ads.</p>
               </div>
             </div>
-            <img src="/assets/images/covers/aigc-video-automation.png" alt="WeChat Channels project cover">
+            <img src="/assets/images/covers/aigc-video-automation.webp" alt="WeChat Channels project cover">
           </a>
 
           <a class="projects-item" data-category="web-apps" href="https://cosmasense.tech/" target="_blank" rel="noopener noreferrer">
@@ -153,7 +153,7 @@
                 <p>A Tencent Design Challenge that led to a Successful Offer.</p>
               </div>
             </div>
-            <video class="projects-item-image" src="/assets/images/covers/wechat.mov"
+            <video class="projects-item-image" src="/assets/images/covers/wechat.mp4"
               poster="/assets/images/covers/wechat.webp" autoplay muted loop playsinline preload="metadata"></video>
           </a>
         </div>
@@ -194,7 +194,7 @@
         aria-hidden="true"
       >
         <span>Scroll</span>
-        <img class="incoming-scroll-cue-arrow" src="/assets/icons/scroll-arrow.png" alt="">
+        <img class="incoming-scroll-cue-arrow" src="/assets/icons/scroll-arrow.webp" alt="">
       </div>
     </section>
     
@@ -210,7 +210,7 @@
             </div>
             <div class="section2-flower-field section2-flower-field--back" aria-hidden="true">
               <div class="section2-flower section2-flower--bottom-right">
-                <img class="section2-flower__head" src="/assets/images/section2/flower-leaf.png" alt="">
+                <img class="section2-flower__head" src="/assets/images/section2/flower-leaf.webp" alt="">
                 <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
                   <path d="M40 1000 C41 740 42 480 38 260 C37 150 36 70 35 8" />
                 </svg>
@@ -218,19 +218,19 @@
             </div>
             <div class="section2-flower-field" aria-hidden="true">
               <div class="section2-flower section2-flower--top-left">
-                <img class="section2-flower__head" src="/assets/images/section2/flower-corner-b.png" alt="">
+                <img class="section2-flower__head" src="/assets/images/section2/flower-corner-b.webp" alt="">
                 <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
                   <path d="M40 1000 C42 720 66 300 40 0" />
                 </svg>
               </div>
               <div class="section2-flower section2-flower--top-right">
-                <img class="section2-flower__head" src="/assets/images/section2/flower-corner-a.png" alt="">
+                <img class="section2-flower__head" src="/assets/images/section2/flower-corner-a.webp" alt="">
                 <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
                   <path d="M40 1000 C38 720 14 300 40 0" />
                 </svg>
               </div>
               <div class="section2-flower section2-flower--bottom-left">
-                <img class="section2-flower__head" src="/assets/images/section2/flower-crown.png" alt="">
+                <img class="section2-flower__head" src="/assets/images/section2/flower-crown.webp" alt="">
                 <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
                   <path d="M40 1000 C39 740 38 480 42 260 C43 150 44 70 45 8" />
                 </svg>
@@ -271,7 +271,7 @@
                     <p>The next-generation companion for NYU's Albert course registration system with better user experience and features.</p>
                   </div>
                 </div>
-                <video class="projects-item-image" src="/assets/images/covers/albertplus.mov"
+                <video class="projects-item-image" src="/assets/images/covers/albertplus.mp4"
                   poster="/assets/images/covers/albertplus.webp" autoplay muted loop playsinline preload="metadata">
                 </video>
               </a>
@@ -287,25 +287,25 @@
             </div>
             <div class="section2-flower-field section2-flower-field--gamification" aria-hidden="true">
               <div class="section2-flower section2-flower--top-left">
-                <img class="section2-flower__head" src="/assets/images/section2/flower-corner-b.png" alt="">
+                <img class="section2-flower__head" src="/assets/images/section2/flower-corner-b.webp" alt="">
                 <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
                   <path d="M40 1000 C38 700 20 260 40 0" />
                 </svg>
               </div>
               <div class="section2-flower section2-flower--top-right">
-                <img class="section2-flower__head" src="/assets/images/section2/flower-leaf.png" alt="">
+                <img class="section2-flower__head" src="/assets/images/section2/flower-leaf.webp" alt="">
                 <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
                   <path d="M40 1000 C39 740 39 480 40 260 C40 150 40 70 40 8" />
                 </svg>
               </div>
               <div class="section2-flower section2-flower--bottom-left">
-                <img class="section2-flower__head" src="/assets/images/section2/flower-crown.png" alt="">
+                <img class="section2-flower__head" src="/assets/images/section2/flower-crown.webp" alt="">
                 <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
                   <path d="M40 1000 C50 740 58 480 30 260 C24 150 34 70 40 8" />
                 </svg>
               </div>
               <div class="section2-flower section2-flower--bottom-right">
-                <img class="section2-flower__head" src="/assets/images/section2/flower-corner-a.png" alt="">
+                <img class="section2-flower__head" src="/assets/images/section2/flower-corner-a.webp" alt="">
                 <svg class="section2-flower__stem" viewBox="0 0 80 1000" preserveAspectRatio="none">
                   <path d="M40 1000 C42 700 60 260 40 0" />
                 </svg>
@@ -490,23 +490,23 @@ const playColumns = [
     items: [
       {
         type: 'video',
-        src: '/assets/images/covers/everstream.mov',
+        src: '/assets/images/covers/everstream.mp4',
         poster: '/assets/images/covers/everstream.webp',
         href: '/projects/everstream',
         info: { year: '2025', title: 'Everstream', role: 'Game Designer & Developer' }
       },
       {
         type: 'video',
-        src: '/assets/images/play/pixelme.mov',
+        src: '/assets/images/play/pixelme.mp4',
         href: 'https://pixel-me-taupe.vercel.app/',
         external: true
       },
       { type: 'image', src: '/assets/images/play/springshowposter.webp', alt: 'ITP Spring Show 2026' },
-      { type: 'video', src: '/assets/images/play/mr-coffeechat.mov' },
+      { type: 'video', src: '/assets/images/play/mr-coffeechat.mp4' },
       { type: 'image', src: '/assets/images/play/super-maricat.webp', alt: 'Super Maricat' },
       {
         type: 'video',
-        src: '/assets/images/play/clock.mov',
+        src: '/assets/images/play/clock.mp4',
         href: 'https://animal-clock-git-main-carol-projects.vercel.app/',
         external: true
       },
@@ -526,11 +526,11 @@ const playColumns = [
       },
       {
         type: 'video',
-        src: '/assets/images/play/PetUrFriends.mov',
+        src: '/assets/images/play/PetUrFriends.mp4',
         href: 'https://chromewebstore.google.com/detail/pet-ur-friend/onddalpajmjpenfeoppfpcincflmbghb',
         external: true
       },
-      { type: 'video', src: '/assets/images/play/cook-animation.mov' },
+      { type: 'video', src: '/assets/images/play/cook-animation.mp4' },
       { type: 'image', src: '/assets/images/play/orango.webp', alt: 'Orango' },
       {
         type: 'video',

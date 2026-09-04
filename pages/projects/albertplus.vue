@@ -98,7 +98,7 @@
                     <div class="features-container">
                         <div class="feature-item">
                             <video autoplay muted loop playsinline>
-                                <source src="/assets/images/projects/albertplus/feature3.mov" type="video/mp4">
+                                <source src="/assets/images/projects/albertplus/feature3.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="feature-description">
@@ -111,7 +111,7 @@
                     <div class="features-container">
                         <div class="feature-item">
                             <video autoplay muted loop playsinline>
-                                <source src="/assets/images/projects/albertplus/feature2.mov" type="video/mp4">
+                                <source src="/assets/images/projects/albertplus/feature2.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="feature-description">
@@ -124,7 +124,7 @@
                     <div class="features-container">
                         <div class="feature-item">
                             <video autoplay muted loop playsinline>
-                                <source src="/assets/images/projects/albertplus/feature4.mov" type="video/mp4">
+                                <source src="/assets/images/projects/albertplus/feature4.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="feature-description">
@@ -137,7 +137,7 @@
                     <div class="features-container">
                         <div class="feature-item">
                             <video autoplay muted loop playsinline>
-                                <source src="/assets/images/projects/albertplus/feature1.mov" type="video/mp4">
+                                <source src="/assets/images/projects/albertplus/feature1.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="feature-description">
@@ -405,22 +405,22 @@
             <section class="next-project-section">
                 <h1 style="font-size: 24px;">More Projects</h1>
                 <div class="next-projects-container">
-                    <a class="next-project-card" href="/projects/intertabs">
+                    <a class="next-project-card" href="/projects/aigc-video-automation">
                         <div class="next-project-image">
-                            <img src="/assets/images/covers/intertabs.webp" alt="interTabs">
+                            <img src="/assets/images/covers/aigc-video-automation.webp" alt="AIGC Video Automation">
                         </div>
                         <div class="next-project-content">
-                            <h2>interTabs</h2>
-                            <p>An AI-powered Chrome extension that syncs your research across tabs and sessions.</p>
+                            <h2>AIGC Video Automation</h2>
+                            <p>Turning product information and cultural trends into scalable e-commerce video ads.</p>
                         </div>
                     </a>
-                    <a class="next-project-card" href="/projects/paletteu">
+                    <a class="next-project-card" href="/projects/wechatchannels">
                         <div class="next-project-image">
-                            <img src="/assets/images/covers/paletteu.webp" alt="Palette U">
+                            <img src="/assets/images/covers/wechat.webp" alt="WeChat Channels">
                         </div>
                         <div class="next-project-content">
-                            <h2>Palette U</h2>
-                            <p>A color palette generator that creates palettes based on user preferences.</p>
+                            <h2>WeChat Channels</h2>
+                            <p>Reimagining video creation with AI for the Tencent WeChat Channels team.</p>
                         </div>
                     </a>
                 </div>

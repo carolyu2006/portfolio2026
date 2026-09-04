@@ -44,9 +44,12 @@ section {
     height: 81px;
 }
 
+/* top is a fixed px offset (not a % of .hero's 100vh) anchored to the fixed-size
+   hero-image below it, so the callout's position stays correct at every viewport
+   height instead of drifting relative to the CAROL title under short/tall vh. */
 .hero-side {
     position: absolute;
-    top: 20%;
+    top: 154px;
     left: calc(50% - 175px - 150px);
     align-items: left;
     justify-content: left;
@@ -60,7 +63,7 @@ section {
 
 .hero-side-right {
     position: absolute;
-    top: 51%;
+    top: 350px;
     left: calc(50% + 140px);
     display: flex;
     flex-direction: column;
@@ -671,7 +674,11 @@ a.play-item-wrapper {
     }
 }
 
-@media (max-width: 768px) {
+/* 720px (not 768px) to match the mobile/desktop split in index.vue's
+   onMounted (window.matchMedia('(max-width: 720px)')) — otherwise 721-767px
+   widths get this doc-flow CSS while JS still runs the desktop GSAP pinned
+   scroll, which is broken (huge scroll distance, near-zero visible motion). */
+@media (max-width: 720px) {
 
     button {
         font-size: 12px;

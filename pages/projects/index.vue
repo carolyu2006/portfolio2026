@@ -21,7 +21,7 @@
                                 <h2 class="project-item-title">WeChat Channels × AI</h2>
                                 <h3>Product Designer</h3>
                                 <p>An interview-stage design task for the Tencent WeChat Channels team that led to a successful offer — reimagining video creation with AI.</p>
-                                <video class="project-item-image" src="/assets/images/covers/wechat.mov"
+                                <video class="project-item-image" src="/assets/images/covers/wechat.mp4"
                                     poster="/assets/images/covers/wechat.webp" autoplay muted loop playsinline preload="metadata"></video>
                             </a>
                             <div class="project-item-side" style="border-left: 4px solid #FF8519;">
@@ -53,7 +53,7 @@
                                 <h2 class="project-item-title">Albert Plus</h2>
                                 <h3>UIUX Designer & Developer</h3>
                                 <p>The next-generation companion for NYU's Albert course registration system with better user experience and features.</p>
-                                <video class="project-item-image" src="/assets/images/covers/albertplus.mov"
+                                <video class="project-item-image" src="/assets/images/covers/albertplus.mp4"
                                     poster="/assets/images/covers/albertplus.webp" autoplay muted loop playsinline preload="metadata"></video>
                             </a>
                             <div class="project-item-side" style="border-left: 4px solid #A38CF4;">
@@ -122,7 +122,7 @@
                                 <h2 class="project-item-title">Everstream</h2>
                                 <h3>Game Designer & Developer</h3>
                                 <p>A 2D game depicting the journey of the four seasons along a stream.</p>
-                                <video class="project-item-image" src="/assets/images/covers/everstream.mov"
+                                <video class="project-item-image" src="/assets/images/covers/everstream.mp4"
                                     poster="/assets/images/covers/everstream.webp" autoplay muted loop playsinline preload="metadata"></video>
                             </a>
                             <div class="project-item-side" style="border-left: 4px solid #7BC47F;">

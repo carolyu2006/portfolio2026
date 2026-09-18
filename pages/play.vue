@@ -237,9 +237,9 @@
                     <video class="play-item" src="/assets/images/play/zelda.mp4" alt="Zelda" autoplay muted loop
                         playsinline preload="metadata"></video>
                 </a>
-                <div class="play-item-wrapper" data-tag="design">
-                    <img class="play-item" src="/assets/images/play/orango.webp" alt="orango">
-                </div>
+                <a class="play-item-wrapper" data-tag="design" href="/projects/orangobranding">
+                    <img class="play-item" src="/assets/images/covers/orango_branding.webp" alt="Orango Branding">
+                </a>
                 <div class="play-item-wrapper" data-tag="code">
                     <img class="play-item" src="/assets/images/play/NeoAssistant.webp" alt="NeoAssistant">
                 </div>

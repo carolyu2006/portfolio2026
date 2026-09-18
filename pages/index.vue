@@ -1,5 +1,6 @@
 <template>
-  <AppHeader />
+  <IntroLoader :exit="loaderExit" @prepare="prepareIntro" @leave="playIntro" @done="releaseRestoredScroll" />
+  <AppHeader :play-hint="isAboutIn" />
   <div class="main-content" :class="{ 'is-reveal-armed': isPhoneRevealArmed }">
     <div id="hero" class="hero hero-section">
       <div class="hero-title-container">
@@ -27,31 +28,19 @@
           I'm Carol, a <strong>Product Designer</strong> crafting engaging experiences that resonate with users.
         </p>
       </div>
-      <div class="hero-side-right">
-        <div>
-          <img class="hero-side-image" src="/assets/icons/icon-tag.webp" alt="hero">
-          <p>AI Product</p>
-        </div>
-        <div>
-          <img class="hero-side-image" src="/assets/icons/icon-tag.webp" alt="hero">
-          <p>Design Thinking</p>
-        </div>
-        <div>
-          <img class="hero-side-image" src="/assets/icons/icon-tag.webp" alt="hero">
-          <p>Tech & Dev</p>
-        </div>
-        <div>
-          <img class="hero-side-image" src="/assets/icons/icon-tag.webp" alt="hero">
-          <p>Gamification</p>
-        </div>
-      </div>
+      <nav class="hero-side-right" aria-label="Jump to section">
+        <a v-for="tag in heroTags" :key="tag.target" :href="`#${tag.target}`" @click.prevent="jumpToSection(tag.target)">
+          <img class="hero-side-image" src="/assets/icons/icon-tag.webp" alt="">
+          <p>{{ tag.label }}</p>
+        </a>
+      </nav>
     </div>
 
     <section id="section1" class="section1" :class="{
       'is-active': isSection1Active,
       'is-settled': isSection1Settled,
       'is-returning-from-section2': isReturningFromSection2,
-      'is-statement-armed': isPhoneRevealArmed,
+      'is-statement-armed': isStatementArmed,
       'is-statement-in': isStatementIn
     }">
       <div class="section1-inner">
@@ -203,7 +192,7 @@
       <div class="section2-projects">
         <div class="projects-container">
           <div class="section2-group-gap section2-group-gap--lead" aria-hidden="true"></div>
-          <div class="section2-group">
+          <div id="uiux" class="section2-group">
             <div class="section2-heading">
               <h2>Smart UI/UX for Real-World Problems</h2>
               <p>Interfaces that turn practical product problems into clear, delightful user experiences.</p>
@@ -280,7 +269,7 @@
 
           <div class="section2-group-gap" aria-hidden="true"></div>
 
-          <div class="section2-group section2-group--gamification">
+          <div id="interaction" class="section2-group section2-group--gamification">
             <div class="section2-heading">
               <h2>Beyond Static Interfaces</h2>
               <p>Playful, immersive experiences that push interfaces beyond traditional screens.</p>
@@ -354,101 +343,35 @@
               
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <section id="section3" class="section3" :class="{ 'is-active': isSection3Active }"
-      aria-label="About Carol and playground">
-      <div class="section3-inner">
-        <aside class="section3-profile">
-          <div class="section3-profile-card">
-            <img class="section3-profile-image" src="/assets/images/about/profile.webp" alt="Carol Yu">
-            <h1>Carol Yu</h1>
-            <h3>Product Designer + Creative Technologist</h3>
-            <a href="mailto:CAROL.YU@NYU.EDU" class="section3-profile-email">
-              <h1>CAROL.YU@NYU.EDU</h1>
-            </a>
-            <div class="section3-profile-socials">
-              <a href="https://www.linkedin.com/in/carolyuhf/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="currentColor" />
-                </svg>
-              </a>
-              <a href="https://www.instagram.com/carolyuhf/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="currentColor" />
-                </svg>
-              </a>
-              <a href="https://github.com/carolyu2006" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" fill="currentColor" />
-                </svg>
-              </a>
-              <a href="https://www.xiaohongshu.com/user/profile/5d1cd7fa00000000120188e0?xsec_token=YBCBoIDQv8J87E1oyjqCuMg_Nt6OsVnhy_21ROXc6LLaA=&amp;xsec_source=app_share&amp;xhsshare=CopyLink&amp;shareRedId=N0ozQ0c8Sko2NzUyOTgwNjc1OTg8PUs5&amp;apptime=1768556034&amp;share_id=e22ed04444514283841f8ea95a601532" target="_blank" rel="noopener noreferrer" aria-label="RedNote">
-                <img src="/assets/icons/rednote.webp" alt="">
-              </a>
-            </div>
-            <a class="section3-more section3-more--about" href="/about">MORE</a>
-          </div>
-        </aside>
+          <div class="section2-group-gap section2-group-gap--section3" aria-hidden="true"></div>
 
-        <div class="section3-play">
-          <a class="section3-more section3-more--play" href="/play">MORE</a>
-          <div class="section3-play-columns">
-            <div
-              v-for="column in playColumns"
-              :key="column.direction"
-              class="section3-play-column"
-              :class="`section3-play-column--${column.direction}`"
-            >
-              <div class="section3-play-track">
-                <!-- The track holds the same group twice and travels exactly one
-                     group's height, so the loop has no seam. -->
-                <div
-                  v-for="copy in 2"
-                  :key="copy"
-                  class="section3-play-group"
-                  :aria-hidden="copy === 2 ? 'true' : null"
-                >
-                  <a
-                    v-for="item in column.items"
-                    :key="`${copy}-${item.src}`"
-                    class="section3-play-item-wrapper"
-                    :class="{ 'section3-play-item-info-wrapper': item.info }"
-                    :href="item.href || null"
-                    :target="item.external ? '_blank' : null"
-                    :rel="item.external ? 'noopener noreferrer' : null"
-                    :tabindex="copy === 2 ? -1 : null"
-                  >
-                    <div v-if="item.info" class="section3-play-item-info">
-                      <h4>{{ item.info.year }}</h4>
-                      <h2>{{ item.info.title }}</h2>
-                      <h3>{{ item.info.role }}</h3>
-                    </div>
-                    <video
-                      v-if="item.type === 'video'"
-                      class="section3-play-item"
-                      :src="item.src"
-                      :poster="item.poster || null"
-                      autoplay
-                      muted
-                      loop
-                      playsinline
-                      preload="metadata"
-                    ></video>
-                    <img v-else class="section3-play-item" :src="item.src" :alt="item.alt || ''">
-                  </a>
-                </div>
+          <!-- The about car: the old portfolio's About, photo left and copy right,
+               bottom-aligned. The row ends here. -->
+          <section id="section3" class="section3 section3-about" aria-label="About Carol">
+            <div class="section3-about-inner">
+              <img class="section3-about-image" src="/assets/images/main/profile.webp" alt="Carol Yu">
+              <div class="section3-about-content">
+                <h1><span data-about-word="about">About</span> <span data-about-word="me">Me</span></h1>
+                <h3>I'm Carol, a <strong>Product Designer</strong> crafting engaging experiences that resonate with users.</h3>
+                <p>
+                  For me, <strong>Product Design</strong> is an interdisciplinary artwork.
+                  <strong>Technology</strong> forms the canvas that defines the possibilities;
+                  <strong>Art</strong> is the unique strokes; <strong>Business</strong>,
+                  <strong>Philosophy</strong>, and <strong>Game Mechanics</strong> mix into the palette
+                  that create experience and interactions that resonates.
+                </p>
+                <p>I pour love into every design, weaving together this colorful world.</p>
+                <a class="section3-button" href="/about">More About Me</a>
               </div>
             </div>
-          </div>
+          </section>
+
+          <!-- The road sign stands past the about car, part of the row itself. -->
+          <RoadSign @jump="jumpToSection" />
         </div>
       </div>
     </section>
-    <div ref="section3Footer" class="section3-footer-stage">
-      <AppFooter />
-    </div>
   </div>
   <button
     type="button"
@@ -466,6 +389,160 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 let removeMobileHeroTransitionListener = null;
 
+// Hero entrance: held on its first frame behind the loader ('loading'), played
+// as the loader lifts ('playing'), then the classes come off entirely so the
+// intro animations can't pin opacity/translate over the scroll-driven styles.
+const INTRO_DURATION = 4500;
+const introState = ref('loading');
+let introDoneTimer = null;
+
+// Everything but the image starts stacked on the image's centre and slides out
+// from under it. The offsets are measured rather than hand-written so the travel
+// stays right at any viewport size; the measuring class suppresses the intro for
+// the read, which happens inside one frame so nothing flashes.
+const INTRO_EMERGE_SELECTOR = [
+  '.hero-title-container',
+  '.hero-fish-icon',
+  '.hero-title-carol',
+  '.hero-side'
+].join(', ');
+
+// The tags slide straight out to the right from behind the image, together,
+// each at its own height.
+const INTRO_SLIDE_SELECTOR = '.hero-side-right > a';
+
+// The leaves are the exception: they drift in from off the right
+// edge of the page like something carried downstream, so each one starts past
+// the right edge with its own vertical offset and tilt rather than on the image.
+const INTRO_DRIFT_SELECTOR = '.hero .leaf';
+const DRIFT_RISE = [-46, 28, -30, 44, -18, 36, -24];
+const DRIFT_TILT = [-32, 24, -18, 30, -26, 16, -12];
+
+const measureIntroOffsets = () => {
+  const image = document.querySelector('.hero-image');
+  const emergeTargets = Array.from(document.querySelectorAll(INTRO_EMERGE_SELECTOR));
+  const driftTargets = Array.from(document.querySelectorAll(INTRO_DRIFT_SELECTOR));
+  const slideTargets = Array.from(document.querySelectorAll(INTRO_SLIDE_SELECTOR));
+  if (!image || !emergeTargets.length) return;
+
+  const root = document.documentElement;
+  root.classList.add('intro-measuring');
+  const imageBox = image.getBoundingClientRect();
+  const centerX = imageBox.left + imageBox.width / 2;
+  const centerY = imageBox.top + imageBox.height / 2;
+  const emergeOffsets = emergeTargets.map((el) => {
+    const box = el.getBoundingClientRect();
+    return [el, centerX - (box.left + box.width / 2), centerY - (box.top + box.height / 2)];
+  });
+  // Far enough past the right edge that nothing is half-on screen at rest; the
+  // page already clips horizontal overflow, so this adds no scrollbar.
+  const driftOffsets = driftTargets.map((el, index) => {
+    const box = el.getBoundingClientRect();
+    return [el, window.innerWidth - box.left + 140, index];
+  });
+  // One shared offset so the block moves as a unit: the widest tag starts
+  // centred on the image, and the rest (left-aligned with it) sit inside it too.
+  const slideBoxes = slideTargets.map((el) => el.getBoundingClientRect());
+  const slideLeft = Math.min(...slideBoxes.map((box) => box.left));
+  const slideWidth = Math.max(...slideBoxes.map((box) => box.right)) - slideLeft;
+  const slideDx = centerX - (slideLeft + slideWidth / 2);
+  const slideOffsets = slideTargets.map((el) => [el, slideDx]);
+  root.classList.remove('intro-measuring');
+
+  slideOffsets.forEach(([el, dx]) => {
+    el.style.setProperty('--intro-from-x', `${Math.round(dx)}px`);
+  });
+
+  emergeOffsets.forEach(([el, dx, dy]) => {
+    el.style.setProperty('--intro-from-x', `${Math.round(dx)}px`);
+    el.style.setProperty('--intro-from-y', `${Math.round(dy)}px`);
+  });
+
+  driftOffsets.forEach(([el, dx, index]) => {
+    el.style.setProperty('--intro-from-x', `${Math.round(dx)}px`);
+    el.style.setProperty('--intro-from-y', `${DRIFT_RISE[index % DRIFT_RISE.length]}px`);
+    el.style.setProperty('--intro-from-tilt', `${DRIFT_TILT[index % DRIFT_TILT.length]}deg`);
+  });
+};
+
+// The loader turns see-through while its mark flips, before the intro plays.
+// Measuring here parks every piece at its starting point first — otherwise the
+// leaves (which have no fade) show in their final spots for that moment and
+// then jump off screen.
+let hasMeasuredIntro = false;
+const prepareIntro = () => {
+  if (loaderExit.value !== 'flip') return;
+  measureIntroOffsets();
+  hasMeasuredIntro = true;
+};
+
+const playIntro = () => {
+  if (loaderExit.value !== 'flip') return;
+  if (!hasMeasuredIntro) measureIntroOffsets();
+  introState.value = 'playing';
+  clearTimeout(introDoneTimer);
+  introDoneTimer = setTimeout(() => {
+    introState.value = 'done';
+  }, INTRO_DURATION);
+};
+
+// A reload (or back/forward) lands the reader back where they were instead of
+// replaying the intro. Where they were is saved as the page is left; on the way
+// back the page is parked there before the loader lifts. From the hero the
+// loader still flips its mark into the image; anywhere further along it skips
+// the mark and only fades the overlay onto the parked content.
+const RESTORE_KEY = 'home-scroll-position';
+const nuxtApp = useNuxtApp();
+const isFirstPageLoad = nuxtApp.isHydrating;
+const loaderExit = ref('flip');
+let getScrollSnapshot = null;
+let reapplyRestoredScroll = null;
+let isHoldingRestoredScroll = false;
+let restoreListenersCleanup = null;
+
+const readSavedScroll = () => {
+  if (!isFirstPageLoad) return null;
+  try {
+    const navigation = performance.getEntriesByType?.('navigation')?.[0];
+    if (navigation && navigation.type !== 'reload' && navigation.type !== 'back_forward') return null;
+    return JSON.parse(sessionStorage.getItem(RESTORE_KEY) || 'null');
+  } catch {
+    return null;
+  }
+};
+
+const isSavedPastHero = (saved) => {
+  if (!saved) return false;
+  if (typeof saved.stage === 'string') return saved.stage !== 'hero';
+  return Number(saved.y) > 40;
+};
+
+// Set before the loader mounts so it never starts the mark on a mid-page restore.
+if (import.meta.client && isSavedPastHero(readSavedScroll())) {
+  loaderExit.value = 'fade';
+}
+
+const saveScroll = () => {
+  try {
+    const snapshot = getScrollSnapshot?.();
+    if (snapshot) sessionStorage.setItem(RESTORE_KEY, JSON.stringify(snapshot));
+  } catch {
+    // Storage blocked — a reload simply starts from the top.
+  }
+};
+
+// Restoring below the hero: no intro. The head manager doesn't pick up a class
+// change made this early in hydration, so the classes also come off directly.
+const skipIntro = () => {
+  introState.value = 'done';
+  document.documentElement.classList.remove('intro', 'intro-paused');
+};
+
+// The loader has lifted: from here the reader drives the scroll.
+const releaseRestoredScroll = () => {
+  isHoldingRestoredScroll = false;
+};
+
 // section1 content entrance (leaves + statement) fires via this class
 const isSection1Active = ref(false);
 const isSection1Settled = ref(false);
@@ -474,80 +551,13 @@ const showScrollCue = ref(false);
 const showBottomAnnotations = ref(false);
 // phone only: content below the hero holds until it is scrolled to, then plays
 const isPhoneRevealArmed = ref(false);
+const isStatementArmed = ref(false);
 const isStatementIn = ref(false);
 // section2 plays its own entrance once it reaches the viewport threshold
 const isSection2Active = ref(false);
-// section3 (profile + playground) slides up from below once section2 is done
-const isSection3Active = ref(false);
 const showBackToBeginning = ref(false);
-
-// The playground is two marquee columns drifting in opposite directions, each
-// rendered twice so the loop is seamless. Order is the reading order of the
-// first copy.
-const playColumns = [
-  {
-    direction: 'up',
-    items: [
-      {
-        type: 'video',
-        src: '/assets/images/covers/everstream.mp4',
-        poster: '/assets/images/covers/everstream.webp',
-        href: '/projects/everstream',
-        info: { year: '2025', title: 'Everstream', role: 'Game Designer & Developer' }
-      },
-      {
-        type: 'video',
-        src: '/assets/images/play/pixelme.mp4',
-        href: 'https://pixel-me-taupe.vercel.app/',
-        external: true
-      },
-      { type: 'image', src: '/assets/images/play/springshowposter.webp', alt: 'ITP Spring Show 2026' },
-      { type: 'video', src: '/assets/images/play/mr-coffeechat.mp4' },
-      { type: 'image', src: '/assets/images/play/super-maricat.webp', alt: 'Super Maricat' },
-      {
-        type: 'video',
-        src: '/assets/images/play/clock.mp4',
-        href: 'https://animal-clock-git-main-carol-projects.vercel.app/',
-        external: true
-      },
-      { type: 'image', src: '/assets/images/play/modelMe.webp', alt: 'Model Me' }
-    ]
-  },
-  {
-    direction: 'down',
-    items: [
-      {
-        type: 'image',
-        src: '/assets/images/covers/dreamail.webp',
-        alt: 'Dreammail',
-        href: 'https://devpost.com/software/dreamail',
-        external: true,
-        info: { year: '2026', title: 'DREAMMAIL', role: 'Designer & Developer' }
-      },
-      {
-        type: 'video',
-        src: '/assets/images/play/PetUrFriends.mp4',
-        href: 'https://chromewebstore.google.com/detail/pet-ur-friend/onddalpajmjpenfeoppfpcincflmbghb',
-        external: true
-      },
-      { type: 'video', src: '/assets/images/play/cook-animation.mp4' },
-      { type: 'image', src: '/assets/images/play/orango.webp', alt: 'Orango' },
-      {
-        type: 'video',
-        src: '/assets/images/play/TheInvisibleLoop.mp4',
-        href: 'https://youtu.be/AuA6fwoRjjc',
-        external: true
-      },
-      {
-        type: 'video',
-        src: '/assets/images/play/maricat.mp4',
-        href: 'https://youtu.be/O5TcwrCu_Dw',
-        external: true
-      },
-      { type: 'image', src: '/assets/images/play/space-shooter.webp', alt: 'Space Shooter' }
-    ]
-  }
-];
+// Set while the about car is on screen, which shows the nav note pointing at PLAY.
+const isAboutIn = ref(false);
 // distinct reverse transition when scrolling back from section2 to section1 bottom
 const isReturningFromSection2 = ref(false);
 
@@ -555,9 +565,9 @@ let scrollTimeline = null;
 let pageScrollTrigger = null;
 let heroExitUnlockTimer = null;
 let progressTween = null;
+let scrubTween = null;
 let section2HorizontalWheelHandler = null;
 let section2TransitionUnlockTimer = null;
-let section3TransitionUnlockTimer = null;
 let footerTransitionUnlockTimer = null;
 // Set by the desktop timeline. Nothing calls it while the "back to beginning"
 // button is out of the markup; kept so bringing the button back is one line.
@@ -568,11 +578,54 @@ const handleBackToBeginning = () => {
   backToBeginningHandler?.();
 };
 
+// The hero tags jump to their section. Desktop sets the pinned scroll up
+// directly (see jumpToSectionHandler); the tags are hidden on phones, where a
+// plain scroll would do.
+// (The road sign at the end of the row reuses this for its own four targets.)
+const heroTags = [
+  { label: 'AI Designer', target: 'section1' },
+  { label: 'UIUX', target: 'uiux' },
+  { label: 'Interaction & Animation', target: 'interaction' }
+];
+let jumpToSectionHandler = null;
+
+const jumpToSection = (target) => {
+  if (jumpToSectionHandler) {
+    jumpToSectionHandler(target);
+    return;
+  }
+  document.getElementById(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
 onMounted(() => {
+  // The page restores its own position; the browser's attempt would land
+  // somewhere in the middle of the pinned scroll and trip its transitions.
+  if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+  const savedScroll = readSavedScroll();
+  window.addEventListener('pagehide', saveScroll);
+
   if (window.matchMedia('(max-width: 720px)').matches) {
     const hero = document.querySelector('#hero');
     const firstSection = document.querySelector('#section1');
     if (!hero || !firstSection) return;
+
+    // Phone: a plain scroll offset. Re-applied until the loader lifts, since
+    // images above it can still shift the layout while it loads.
+    getScrollSnapshot = () => ({ y: Math.round(window.scrollY) });
+    const restoreY = Number(savedScroll?.y) || 0;
+    const applyRestoreY = () => {
+      if (isHoldingRestoredScroll) window.scrollTo(0, restoreY);
+    };
+    isHoldingRestoredScroll = true;
+    window.scrollTo(0, restoreY);
+    const holdOnLoad = () => applyRestoreY();
+    window.addEventListener('load', holdOnLoad, { once: true });
+    restoreListenersCleanup = () => window.removeEventListener('load', holdOnLoad);
+    const isRestoredBelowHero = restoreY > 40;
+    if (isRestoredBelowHero) {
+      skipIntro();
+      loaderExit.value = 'fade';
+    }
 
     // The hero fades out as it scrolls away rather than snapping to 0 at a fixed
     // threshold — a hard toggle left a blank hole where the hero still sat in flow.
@@ -616,8 +669,11 @@ onMounted(() => {
     const STATEMENT_REVEAL_RATIO = 0.4;
     const statement = document.querySelector('.incoming-statement');
     let statementObserver = null;
-    if (statement && 'IntersectionObserver' in window) {
-      isPhoneRevealArmed.value = true;
+    // Already on (or above) the screen after a reload: it simply shows.
+    const isStatementAlreadySeen = isRestoredBelowHero
+      && statement && statement.getBoundingClientRect().top < window.innerHeight;
+    if (statement && !isStatementAlreadySeen && 'IntersectionObserver' in window) {
+      isStatementArmed.value = true;
       statementObserver = new IntersectionObserver((entries) => {
         const reached = entries.some(
           (entry) => entry.isIntersecting && entry.intersectionRatio >= STATEMENT_REVEAL_RATIO
@@ -690,6 +746,8 @@ onMounted(() => {
   }
 
   gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.clearScrollMemory('manual');
+  window.scrollTo(0, 0);
 
   const hero = document.querySelector('#hero');
   const section1 = document.querySelector('#section1');
@@ -701,23 +759,18 @@ onMounted(() => {
   const section2ProjectsTrack = document.querySelector('.section2-projects .projects-container');
   const section3 = document.querySelector('#section3');
   const section3Footer = document.querySelector('.section3-footer-stage');
-  // Pieces the section2 -> section3 handoff stages in behind the panel move.
-  const section3Profile = document.querySelector('.section3-profile');
-  const section3PlayColumns = Array.from(document.querySelectorAll('.section3-play-column'));
-  const section3StagedPieces = [section3Profile, ...section3PlayColumns].filter(Boolean);
-  // The marquee renders every clip twice, so section3 alone holds 16 looping
-  // videos. They stay parked until the scene is actually on screen — it is
-  // hidden behind section1/section2 for most of the page.
-  const section3Videos = section3 ? Array.from(section3.querySelectorAll('video')) : [];
-  section3Videos.forEach((video) => video.pause());
-  watch(isSection3Active, (active) => {
-    section3Videos.forEach((video) => {
-      if (active) video.play?.().catch(() => {});
-      else video.pause();
-    });
-  });
+  // The PLAY note follows the "About Me" heading as the row slides. It comes on
+  // once "About" has travelled well into the screen (not the instant it peeks
+  // in) and goes off once "About" reaches the left edge. The same line works in
+  // both directions, so scrolling back hides it at the same place.
+  const aboutWord = section3?.querySelector('[data-about-word="about"]');
+  const HINT_SHOW_AT = 0.55; // share of the viewport width, from the left
+  const updateAboutHint = () => {
+    if (!aboutWord) return;
+    const { left } = aboutWord.getBoundingClientRect();
+    isAboutIn.value = left <= window.innerWidth * HINT_SHOW_AT && left > 0;
+  };
   const section1BottomSpace = 300;
-  const SECTION1_INTRO_LOCK_DURATION = 1400;
   const EXIT_ANIMATION_DURATION = 0.75;
   const SECTION_EXIT_DURATION = 0.8;
   const SECTION_ENTER_DURATION = 0.8;
@@ -726,8 +779,20 @@ onMounted(() => {
   // scroll triggers it instead of idling through an ease-in the reader reads as lag.
   const SECTION_TRANSITION_EASE = 'power2.out';
   const SECTION2_TRANSITION_ANIM_DURATION = Math.max(SECTION_EXIT_DURATION, SECTION_ENTER_DURATION);
-  const SECTION2_POST_TRANSITION_SCROLL_LOCK = 100;
   const SCROLL_TRIGGER_THRESHOLD = 0.01;
+  // Scrubbed motion eases toward the scroll position instead of jumping with
+  // each wheel tick, so a notched mouse wheel glides like a trackpad.
+  const SCRUB_SMOOTHING = 0.4;
+  // A transition unlocks once the gesture that fired it has gone quiet, so
+  // trackpad momentum cannot carry straight on into the next section. The cap
+  // keeps a long inertial tail from holding the page hostage.
+  const GESTURE_QUIET_MS = 140;
+  const GESTURE_UNLOCK_MAX_MS = 900;
+  // Section 1 -> 2 holds scroll for less time than the other handoffs: a faster
+  // slide, and a shorter wait for the gesture to go quiet afterwards.
+  const SECTION2_ENTER_SLIDE_DURATION = 0.5;
+  const SECTION2_ENTER_QUIET_MS = 60;
+  const SECTION2_ENTER_UNLOCK_MAX_MS = 250;
   const INCOMING_LEAF_SCROLL_FACTOR = 0.7;
   const SECTION2_SCROLL_SLOWDOWN = 2.5;
 
@@ -748,12 +813,20 @@ onMounted(() => {
     return Math.max(0, section2ProjectsTrack.scrollWidth - section2Projects.clientWidth);
   };
 
-  // The footer band and section3 travel the same distance, so section3's bottom
-  // edge and the band's top edge stay welded together for the whole tail.
+  // The footer band and the pinned panel travel the same distance, so the
+  // panel's bottom edge and the band's top edge stay welded for the whole tail.
+  // Empty space between the hero's bottom edge and section1 while scrolling
+  // back up to the hero.
+  const getHeroReturnGap = () => window.innerHeight * 0.2;
+
   const getFooterBandHeight = () => section3Footer?.offsetHeight || 0;
 
   const getPinnedScrollDistance = () => {
-    return Math.round((window.innerHeight * 5) + (getSection2HorizontalScroll() * SECTION2_SCROLL_SLOWDOWN));
+    const base = (window.innerHeight * 5) + (getSection2HorizontalScroll() * SECTION2_SCROLL_SLOWDOWN);
+    // The longer hero and cue stages add their own scroll room, so every other
+    // stage keeps the same pixels-per-step it had.
+    const extras = CUE_HOLD_EXTRA + HERO_OUT_EXTRA;
+    return Math.round(base * (total / (total - extras)));
   };
 
   // Starting positions for the pinned hero/section1 moment.
@@ -763,7 +836,6 @@ onMounted(() => {
   gsap.set(incomingLeaves, { y: 0 });
   gsap.set(section2ProjectsTrack, { x: 0 });
   gsap.set(section2, { xPercent: 100, yPercent: 0, autoAlpha: 0 });
-  gsap.set(section3, { xPercent: 0, yPercent: 100, autoAlpha: 0 });
   if (section3Footer) {
     gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
   }
@@ -773,56 +845,51 @@ onMounted(() => {
   //  REVEAL         -> hero has left, section1 is in
   //  CUE            -> section1 projects are revealed, cue appears
   //  SECTION2       -> section1 exits left, section2 enters
-  //  SCROLL_DONE    -> section2 project row finishes horizontal scroll
-  //  SECTION3       -> section2 exits upward, section3 slides up from below
-  //  END    (1)     -> tail room so the pin never releases behind section3
+  //  SCROLL_DONE    -> the row finishes scrolling on the about car
+  //  END    (1)     -> the footer band, plus tail room so the pin holds
   // Durations below drive these fractions; keep the snap array in sync.
-  const HERO_OUT = EXIT_ANIMATION_DURATION;
+  // The hero segment is also the scroll-up path back to the hero, so it gets
+  // enough extra room to feel about one-to-one with the distance it covers.
+  const HERO_OUT_EXTRA = 0.8;
+  const HERO_OUT = EXIT_ANIMATION_DURATION + HERO_OUT_EXTRA;
   const REVEAL = 1.6;    // section1 project reveal
-  const CUE_HOLD = 0.6;  // cue threshold before release
+  // Cue threshold before release. The extra keeps the scroll cue on screen for
+  // longer before the section2 handoff takes it away.
+  const CUE_HOLD_EXTRA = 0.3;
+  const CUE_HOLD = 0.6 + CUE_HOLD_EXTRA;
   const SECTION2_HORIZONTAL_SCROLL = 6;
   const PARALLEL_EXIT_ENTER = SECTION2_TRANSITION_ANIM_DURATION;
-  // Breathing room after the horizontal row ends, so scrolling back out of
-  // section3 does not land straight back on the section3 trigger.
-  const SECTION3_LEAD = 0.6;
-  const SECTION3_TRANSITION = SECTION2_TRANSITION_ANIM_DURATION;
   // The footer is a snap like every other boundary, not a scrubbed drag: a
   // little travel to arm it, a placeholder for the animation the trigger plays,
   // and clamped room past it so the pin never releases behind the footer.
   const FOOTER_LEAD = 0.6;
   const FOOTER_TRANSITION = SECTION2_TRANSITION_ANIM_DURATION;
   const FOOTER_TAIL = 0.8;
-  const SECTION3_TAIL = FOOTER_LEAD + FOOTER_TRANSITION + FOOTER_TAIL;
   const SECTION2_STAGES = HERO_OUT + REVEAL + CUE_HOLD + PARALLEL_EXIT_ENTER + SECTION2_HORIZONTAL_SCROLL;
-  const total = SECTION2_STAGES + SECTION3_LEAD + SECTION3_TRANSITION + SECTION3_TAIL;
+  const total = SECTION2_STAGES + FOOTER_LEAD + FOOTER_TRANSITION + FOOTER_TAIL;
   const pHeroOut = HERO_OUT / total;
   const pRevealDone = (HERO_OUT + REVEAL) / total;
   const pSection2Start = (HERO_OUT + REVEAL + CUE_HOLD) / total;
   const pSection2EnterStart = pSection2Start;
   const pSection2Ready = (HERO_OUT + REVEAL + CUE_HOLD + PARALLEL_EXIT_ENTER) / total;
   const pSection2ScrollDone = SECTION2_STAGES / total;
-  const pSection3Start = (SECTION2_STAGES + SECTION3_LEAD) / total;
-  const pSection3Ready = (SECTION2_STAGES + SECTION3_LEAD + SECTION3_TRANSITION) / total;
-  const pFooterStart = pSection3Ready + (FOOTER_LEAD / total);
+  const pFooterStart = pSection2ScrollDone + (FOOTER_LEAD / total);
   const pFooterReady = pFooterStart + (FOOTER_TRANSITION / total);
-  // Coming back out of the footer lands inside the arming gap rather than exactly
-  // on the section3 rest point, so the same gesture cannot carry straight on into
-  // the handoff back to section2.
-  const pFooterReturnLand = pSection3Ready + ((FOOTER_LEAD / total) * 0.35);
+  // Coming back out of the footer lands inside the arming gap rather than
+  // exactly at its edge, so the same gesture cannot carry straight on into the
+  // footer again.
+  const pFooterReturnLand = pSection2ScrollDone + ((FOOTER_LEAD / total) * 0.35);
   const pBottomAnnotations = pHeroOut + ((pRevealDone - pHeroOut) * 0.55);
   const pScrollCueShow = pRevealDone;
   const pScrollCueHide = pHeroOut + ((pRevealDone - pHeroOut) * 0.88);
   let hasEnteredSection1Start = false;
   let hasEnteredSection2 = false;
-  let hasEnteredSection3 = false;
   let hasEnteredFooter = false;
   let hasBottomAnnotationsAppeared = false;
   let isLockingHeroExit = false;
-  let isAnimatingHeroReturn = false;
+  let isHeroScrollReturn = false;
   let isAnimatingSection2Transition = false;
   let section2TransitionLockProgress = 0;
-  let isAnimatingSection3Transition = false;
-  let section3TransitionLockProgress = 0;
   let isAnimatingFooterTransition = false;
   let footerTransitionLockProgress = 0;
   const preserveSection1Reveal = () => {
@@ -886,7 +953,43 @@ onMounted(() => {
   };
 
   const setTimelineProgress = (progress) => {
+    scrubTween?.kill();
+    scrubTween = null;
     scrollTimeline?.progress(progress);
+  };
+
+  const scrubTimelineTo = (progress) => {
+    if (!scrollTimeline) return;
+    scrubTween?.kill();
+    const state = { progress: scrollTimeline.progress() };
+    scrubTween = gsap.to(state, {
+      progress,
+      duration: SCRUB_SMOOTHING,
+      ease: 'power3.out',
+      onUpdate: () => {
+        scrollTimeline.progress(state.progress);
+        if (state.progress >= pRevealDone) preserveSection1Reveal();
+      },
+      onComplete: () => {
+        scrubTween = null;
+      }
+    });
+  };
+
+  let lastScrollInputAt = 0;
+
+  const afterGestureSettles = (onSettled, assignTimer, quietMs = GESTURE_QUIET_MS, maxMs = GESTURE_UNLOCK_MAX_MS) => {
+    const startedAt = performance.now();
+    const check = () => {
+      const now = performance.now();
+      if (now - lastScrollInputAt >= quietMs || now - startedAt >= maxMs) {
+        assignTimer(null);
+        onSettled();
+        return;
+      }
+      assignTimer(window.setTimeout(check, 40));
+    };
+    check();
   };
 
   const animateTimelineToProgress = (targetProgress, duration, onComplete, onProgress) => {
@@ -914,21 +1017,9 @@ onMounted(() => {
     section2TransitionUnlockTimer = null;
   };
 
-  const clearSection3TransitionUnlockTimer = () => {
-    clearTimeout(section3TransitionUnlockTimer);
-    section3TransitionUnlockTimer = null;
-  };
-
   const clearFooterTransitionUnlockTimer = () => {
     clearTimeout(footerTransitionUnlockTimer);
     footerTransitionUnlockTimer = null;
-  };
-
-  const setSection3VideosPlaying = (playing) => {
-    section3Videos.forEach((video) => {
-      if (playing) video.play?.().catch(() => {});
-      else video.pause();
-    });
   };
 
   // Hard-reset section shells so return (vertical) and enter (horizontal) never share leftover transforms.
@@ -980,11 +1071,11 @@ onMounted(() => {
         isSection1Settled.value = false;
         hideScrollCue();
 
-        section2TransitionUnlockTimer = window.setTimeout(() => {
+        afterGestureSettles(() => {
           hasEnteredSection2 = true;
           isAnimatingSection2Transition = false;
-          section2TransitionUnlockTimer = null;
-        }, SECTION2_POST_TRANSITION_SCROLL_LOCK);
+        }, (timer) => { section2TransitionUnlockTimer = timer; },
+        SECTION2_ENTER_QUIET_MS, SECTION2_ENTER_UNLOCK_MAX_MS);
         progressTween = null;
       }
     })
@@ -992,14 +1083,14 @@ onMounted(() => {
         xPercent: -100,
         yPercent: 0,
         autoAlpha: 0.2,
-        duration: SECTION_EXIT_DURATION,
+        duration: SECTION2_ENTER_SLIDE_DURATION,
         ease: SECTION_TRANSITION_EASE
       }, 0)
       .to(section2, {
         xPercent: 0,
         yPercent: 0,
         autoAlpha: 1,
-        duration: SECTION_ENTER_DURATION,
+        duration: SECTION2_ENTER_SLIDE_DURATION,
         ease: SECTION_TRANSITION_EASE
       }, 0);
   };
@@ -1082,166 +1173,10 @@ onMounted(() => {
       }, 0);
   };
 
-  // section2 rides up and out while section3 slides in from below it.
-  const startSection3EnterTransition = (self) => {
-    isAnimatingSection3Transition = true;
-    section3TransitionLockProgress = pSection3Start;
-    clearSection3TransitionUnlockTimer();
-    progressTween?.kill();
-    progressTween = null;
-    hasScrollCueBeenDismissed = true;
-    hideScrollCue();
-
-    setScrollToProgress(self, pSection3Start);
-    setTimelineProgress(pSection3Start);
-    gsap.set(section2ProjectsTrack, { x: -getSection2HorizontalScroll() });
-
-    isSection2Active.value = true;
-    isSection3Active.value = true;
-    hasEnteredFooter = false;
-    showBackToBeginning.value = false;
-    if (section3Footer) gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
-    setSectionShell(section2, { xPercent: 0, yPercent: 0, autoAlpha: 1, zIndex: 8 });
-    setSectionShell(section3, { xPercent: 0, yPercent: 100, autoAlpha: 1, zIndex: 13 });
-
-    // Both panels are a viewport tall, so yPercent keeps their edges welded for
-    // the whole slide — that carries the move. The character comes from what
-    // happens inside: section2's project row runs on ahead of its own panel,
-    // and section3's three columns arrive a beat apart with a little overshoot,
-    // so the scene assembles instead of just arriving. Section2's row leaves
-    // sideways-scrolled and section3's columns drop in vertically, which trades
-    // one reading axis for the other.
-    progressTween = gsap.timeline({
-      onComplete: () => {
-        setSectionShell(section2, { xPercent: 0, yPercent: -100, autoAlpha: 0, zIndex: 8 });
-        setSectionShell(section3, { xPercent: 0, yPercent: 0, autoAlpha: 1, zIndex: 13 });
-        gsap.set(section2Projects, { clearProps: 'transform' });
-        gsap.set(section3StagedPieces, { clearProps: 'transform,opacity,visibility' });
-        section3TransitionLockProgress = pSection3Ready;
-        setScrollToProgress(self, pSection3Ready);
-        setTimelineProgress(pSection3Ready);
-        isSection2Active.value = false;
-
-        section3TransitionUnlockTimer = window.setTimeout(() => {
-          hasEnteredSection3 = true;
-          isAnimatingSection3Transition = false;
-          section3TransitionUnlockTimer = null;
-        }, SECTION2_POST_TRANSITION_SCROLL_LOCK);
-        progressTween = null;
-      }
-    })
-      .to(section2, {
-        yPercent: -100,
-        autoAlpha: 0,
-        duration: SECTION_EXIT_DURATION,
-        ease: SECTION_TRANSITION_EASE
-      }, 0)
-      .to(section3, {
-        yPercent: 0,
-        autoAlpha: 1,
-        duration: SECTION_ENTER_DURATION,
-        ease: SECTION_TRANSITION_EASE
-      }, 0)
-      // The row lifts a little faster than the panel carrying it — cheap
-      // parallax that reads as section2 receding rather than sliding flat.
-      .fromTo(section2Projects, { y: 0 }, {
-        y: -80,
-        duration: SECTION_EXIT_DURATION,
-        ease: 'power2.in'
-      }, 0)
-      .fromTo(section3Profile, { y: 110, autoAlpha: 0 }, {
-        y: 0,
-        autoAlpha: 1,
-        duration: 0.58,
-        ease: 'back.out(1.5)'
-      }, 0.22)
-      .fromTo(section3PlayColumns, { y: 170 }, {
-        y: 0,
-        duration: 0.62,
-        ease: 'back.out(1.3)',
-        stagger: 0.08
-      }, 0.28);
-  };
-
-  const returnToSection2FromSection3 = (self) => {
-    isAnimatingSection3Transition = true;
-    section3TransitionLockProgress = pSection3Ready;
-    clearSection3TransitionUnlockTimer();
-    progressTween?.kill();
-    progressTween = null;
-
-    setScrollToProgress(self, pSection3Ready);
-    setTimelineProgress(pSection3Ready);
-
-    hasEnteredFooter = false;
-    showBackToBeginning.value = false;
-    if (section3Footer) gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
-
-    isSection2Active.value = true;
-    setSectionShell(section1, { xPercent: -100, yPercent: 0, autoAlpha: 0.2 });
-    setSectionShell(section2, { xPercent: 0, yPercent: -100, autoAlpha: 1, zIndex: 8 });
-    setSectionShell(section3, { xPercent: 0, yPercent: 0, autoAlpha: 1, zIndex: 13 });
-    gsap.set(section2ProjectsTrack, { x: -getSection2HorizontalScroll() });
-
-    progressTween = gsap.timeline({
-      onComplete: () => {
-        hasEnteredSection3 = false;
-        isSection3Active.value = false;
-        isAnimatingSection3Transition = false;
-        clearSection3TransitionUnlockTimer();
-
-        setSectionShell(section2, { xPercent: 0, yPercent: 0, autoAlpha: 1, zIndex: 8 });
-        setSectionShell(section3, { xPercent: 0, yPercent: 100, autoAlpha: 0, zIndex: 13 });
-        if (section3Footer) gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
-        hasEnteredFooter = false;
-        showBackToBeginning.value = false;
-        // Land at the end of the horizontal row, one SECTION3_LEAD short of the
-        // section3 trigger, so section3 is not re-entered on the same gesture.
-        section3TransitionLockProgress = pSection2ScrollDone;
-        setScrollToProgress(self, pSection2ScrollDone);
-        setTimelineProgress(pSection2ScrollDone);
-        gsap.set(section2ProjectsTrack, { x: -getSection2HorizontalScroll() });
-        gsap.set(section2Projects, { clearProps: 'transform' });
-        gsap.set(section3StagedPieces, { clearProps: 'transform,opacity,visibility' });
-        progressTween = null;
-      }
-    })
-      .to(section3, {
-        yPercent: 100,
-        autoAlpha: 0,
-        duration: SECTION_EXIT_DURATION,
-        ease: SECTION_TRANSITION_EASE
-      }, 0)
-      .to(section2, {
-        yPercent: 0,
-        autoAlpha: 1,
-        duration: SECTION_ENTER_DURATION,
-        ease: SECTION_TRANSITION_EASE
-      }, 0)
-      // Going back, the same pieces lag instead of overshooting: the columns
-      // sink a little as their panel drops and the row settles back into place,
-      // so the reverse reads as the same mechanism unwinding.
-      .fromTo(section3PlayColumns, { y: 0 }, {
-        y: 90,
-        duration: SECTION_EXIT_DURATION * 0.7,
-        ease: 'power2.in',
-        stagger: 0.05
-      }, 0)
-      .fromTo(section3Profile, { y: 0 }, {
-        y: 60,
-        duration: SECTION_EXIT_DURATION * 0.7,
-        ease: 'power2.in'
-      }, 0.05)
-      .fromTo(section2Projects, { y: -80 }, {
-        y: 0,
-        duration: SECTION_ENTER_DURATION,
-        ease: 'power2.out'
-      }, 0);
-  };
-
-  // The footer band rises from the bottom and pushes section3 up by exactly its
-  // own height, so the two edges stay welded. Triggered and locked like every
-  // other boundary rather than scrubbed, so a small scroll plays the whole move.
+  // The footer band rises from the bottom and pushes the pinned panel up by
+  // exactly its own height, so the two edges stay welded. Triggered and locked
+  // like every other boundary rather than scrubbed, so a small scroll plays the
+  // whole move.
   const startFooterEnterTransition = (self) => {
     isAnimatingFooterTransition = true;
     footerTransitionLockProgress = pFooterStart;
@@ -1253,29 +1188,26 @@ onMounted(() => {
     setTimelineProgress(pFooterStart);
 
     const pushDistance = getFooterBandHeight();
-    gsap.set(section3, { y: 0 });
+    gsap.set(section2, { y: 0 });
     gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
 
     progressTween = gsap.timeline({
       onComplete: () => {
-        gsap.set(section3, { y: -pushDistance });
+        gsap.set(section2, { y: -pushDistance });
         gsap.set(section3Footer, { xPercent: 0, yPercent: 0, y: 0 });
         footerTransitionLockProgress = pFooterReady;
         setScrollToProgress(self, pFooterReady);
         setTimelineProgress(pFooterReady);
-        // The playground is off screen behind the footer now.
-        setSection3VideosPlaying(false);
         showBackToBeginning.value = true;
 
-        footerTransitionUnlockTimer = window.setTimeout(() => {
+        afterGestureSettles(() => {
           hasEnteredFooter = true;
           isAnimatingFooterTransition = false;
-          footerTransitionUnlockTimer = null;
-        }, SECTION2_POST_TRANSITION_SCROLL_LOCK);
+        }, (timer) => { footerTransitionUnlockTimer = timer; });
         progressTween = null;
       }
     })
-      .to(section3, {
+      .to(section2, {
         y: -pushDistance,
         duration: SECTION_EXIT_DURATION,
         ease: SECTION_TRANSITION_EASE
@@ -1287,7 +1219,7 @@ onMounted(() => {
       }, 0);
   };
 
-  const returnToSection3FromFooter = (self) => {
+  const returnFromFooter = (self) => {
     isAnimatingFooterTransition = true;
     footerTransitionLockProgress = pFooterReady;
     clearFooterTransitionUnlockTimer();
@@ -1298,9 +1230,8 @@ onMounted(() => {
     setTimelineProgress(pFooterReady);
 
     const pushDistance = getFooterBandHeight();
-    gsap.set(section3, { y: -pushDistance });
+    gsap.set(section2, { y: -pushDistance });
     gsap.set(section3Footer, { xPercent: 0, yPercent: 0, y: 0 });
-    setSection3VideosPlaying(true);
     showBackToBeginning.value = false;
 
     progressTween = gsap.timeline({
@@ -1309,7 +1240,7 @@ onMounted(() => {
         isAnimatingFooterTransition = false;
         clearFooterTransitionUnlockTimer();
 
-        gsap.set(section3, { y: 0 });
+        gsap.set(section2, { y: 0 });
         gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
         footerTransitionLockProgress = pFooterReturnLand;
         setScrollToProgress(self, pFooterReturnLand);
@@ -1317,7 +1248,7 @@ onMounted(() => {
         progressTween = null;
       }
     })
-      .to(section3, {
+      .to(section2, {
         y: 0,
         duration: SECTION_ENTER_DURATION,
         ease: SECTION_TRANSITION_EASE
@@ -1329,21 +1260,39 @@ onMounted(() => {
       }, 0);
   };
 
-  // "Back to beginning": section3 drops away, then every scene is hard-reset to
-  // the hero rather than replaying each transition in reverse on the way up.
+  const startHeroExit = (self) => {
+    isLockingHeroExit = true;
+    setScrollToProgress(self, pHeroOut);
+    isSection1Active.value = true;
+    isSection1Settled.value = false;
+    isSection2Active.value = false;
+    hideScrollCue();
+    showBottomAnnotations.value = false;
+    hasBottomAnnotationsAppeared = false;
+    clearTimeout(heroExitUnlockTimer);
+    animateTimelineToProgress(pHeroOut, EXIT_ANIMATION_DURATION, () => {
+      afterGestureSettles(() => {
+        hasEnteredSection1Start = true;
+        isLockingHeroExit = false;
+        setScrollToProgress(self, pHeroOut);
+        setTimelineProgress(pHeroOut);
+      }, (timer) => { heroExitUnlockTimer = timer; });
+    });
+  };
+
+  // "Back to beginning": the current panel drops away, then every scene is
+  // hard-reset to the hero rather than replaying each transition in reverse.
   const resetToHero = () => {
-    isAnimatingSection3Transition = false;
     isAnimatingSection2Transition = false;
-    isAnimatingHeroReturn = false;
+    isAnimatingFooterTransition = false;
+    isHeroScrollReturn = false;
     isLockingHeroExit = false;
     hasEnteredSection1Start = false;
     hasEnteredSection2 = false;
-    hasEnteredSection3 = false;
     hasEnteredFooter = false;
     hasScrollCueBeenDismissed = false;
     hasBottomAnnotationsAppeared = false;
     clearSection2TransitionUnlockTimer();
-    clearSection3TransitionUnlockTimer();
     clearFooterTransitionUnlockTimer();
     clearTimeout(heroExitUnlockTimer);
     heroExitUnlockTimer = null;
@@ -1352,15 +1301,14 @@ onMounted(() => {
     isSection1Active.value = false;
     isSection1Settled.value = false;
     isSection2Active.value = false;
-    isSection3Active.value = false;
     showBackToBeginning.value = false;
     isReturningFromSection2.value = false;
     hideScrollCue();
 
-    gsap.set(hero, { xPercent: 0, yPercent: 0, autoAlpha: 1, clearProps: 'zIndex' });
+    gsap.set(hero, { xPercent: 0, yPercent: 0, y: 0, autoAlpha: 1, clearProps: 'zIndex' });
     setSectionShell(section1, { xPercent: 0, yPercent: 0, autoAlpha: 1 });
     setSectionShell(section2, { xPercent: 100, yPercent: 0, autoAlpha: 0 });
-    setSectionShell(section3, { xPercent: 0, yPercent: 100, autoAlpha: 0 });
+    gsap.set(section2, { y: 0 });
     if (section3Footer) gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
     gsap.set(section1Inner, { y: 0 });
     gsap.set(incomingLeaves, { y: 0 });
@@ -1374,10 +1322,10 @@ onMounted(() => {
   backToBeginningHandler = () => {
     if (!pageScrollTrigger || !scrollTimeline) return;
     progressTween?.kill();
-    isAnimatingSection3Transition = true;
-    section3TransitionLockProgress = pageScrollTrigger.progress;
+    isAnimatingFooterTransition = true;
+    footerTransitionLockProgress = pageScrollTrigger.progress;
 
-    progressTween = gsap.to(section3, {
+    progressTween = gsap.to(section2, {
       yPercent: 100,
       autoAlpha: 0,
       duration: 0.5,
@@ -1398,11 +1346,10 @@ onMounted(() => {
     // in sync. The visible handoff is played by startSection2EnterTransition.
     .to({}, { duration: SECTION_EXIT_DURATION })
     .to({}, { duration: 0 }, '<')
-    .to(section2ProjectsTrack, { x: () => -getSection2HorizontalScroll(), ease: 'none', duration: SECTION2_HORIZONTAL_SCROLL })
-    // Lead-in gap, the section3 handoff (played by startSection3EnterTransition)
-    // and the clamped tail — placeholders that only keep the progress math right.
-    .to({}, { duration: SECTION3_LEAD })
-    .to({}, { duration: SECTION3_TRANSITION })
+    // fromTo, not to: every refresh invalidates the timeline, and a plain `to`
+    // would re-read its start from wherever the row sits at that moment — a
+    // refresh at the end of the row froze it there for the whole way back.
+    .fromTo(section2ProjectsTrack, { x: 0 }, { x: () => -getSection2HorizontalScroll(), ease: 'none', duration: SECTION2_HORIZONTAL_SCROLL })
     // Arming room, the footer handoff (played by startFooterEnterTransition) and
     // the clamped tail — placeholders that only keep the progress math right.
     .to({}, { duration: FOOTER_LEAD })
@@ -1421,18 +1368,21 @@ onMounted(() => {
     pin: true,
     pinSpacing: true,
     invalidateOnRefresh: true,
-    snap: {
-      snapTo: (value) => {
-        if (value > pHeroOut && value < pSection2Start) return value;
-        if (value >= pSection2Start) return value;
-        return gsap.utils.snap([0, pHeroOut, pRevealDone, pSection2Start, pSection2Ready], value);
-      },
-      duration: { min: 0.18, max: 0.5 },
-      // delay: 0.03,
+    // No snap: every boundary is already a triggered, locked transition, and a
+    // snap tween landing after the gesture fought those locks.
+    onRefresh: () => {
+      scrollTimeline?.invalidate();
+      updateAboutHint();
     },
-    onRefresh: () => scrollTimeline?.invalidate(),
     onUpdate: (self) => {
       const p = self.progress;
+
+      // The loader is still up over a restored position: keep it parked.
+      if (isHoldingRestoredScroll) {
+        reapplyRestoredScroll?.();
+        updateAboutHint();
+        return;
+      }
 
       if (isLockingHeroExit) {
         setScrollToProgress(self, pHeroOut);
@@ -1450,66 +1400,55 @@ onMounted(() => {
         return;
       }
 
-      if (isAnimatingSection3Transition) {
-        setScrollToProgress(self, section3TransitionLockProgress);
-        return;
-      }
-
       if (isAnimatingFooterTransition) {
         setScrollToProgress(self, footerTransitionLockProgress);
         return;
       }
 
-      if (isAnimatingHeroReturn) {
-        setScrollToProgress(self, pHeroOut);
-        isSection1Active.value = true;
-        isSection2Active.value = false;
-        hideScrollCue();
-        showBottomAnnotations.value = false;
-        hasBottomAnnotationsAppeared = false;
+      // Scrolling up out of section1 is a plain scroll rather than a triggered
+      // animation: the hero sits one screen (plus a gap) above section1 and
+      // both follow the scroll position directly, in either direction.
+      if (hasEnteredSection1Start && p < pHeroOut && (isHeroScrollReturn || self.direction < 0)) {
+        if (!isHeroScrollReturn) {
+          isHeroScrollReturn = true;
+          progressTween?.kill();
+          progressTween = null;
+          clearTimeout(heroExitUnlockTimer);
+          heroExitUnlockTimer = null;
+          setTimelineProgress(pHeroOut);
+          gsap.set(section1Inner, { y: 0 });
+          gsap.set(incomingLeaves, { y: 0 });
+          setSectionShell(section2, { xPercent: 100, yPercent: 0, autoAlpha: 0 });
+          isSection2Active.value = false;
+          hideScrollCue();
+          showBottomAnnotations.value = false;
+          hasBottomAnnotationsAppeared = false;
+        }
+
+        const travel = window.innerHeight + getHeroReturnGap();
+        const offset = travel * (p / pHeroOut);
+        gsap.set(hero, { xPercent: 0, y: -offset });
+        gsap.set(section1, { xPercent: 0, autoAlpha: 1, y: travel - offset });
+
+        if (p <= 0.001) {
+          isHeroScrollReturn = false;
+          hasEnteredSection1Start = false;
+          hasEnteredSection2 = false;
+          hasScrollCueBeenDismissed = false;
+          isSection1Active.value = false;
+          isSection1Settled.value = false;
+          gsap.set(hero, { y: 0 });
+          gsap.set(section1, { y: 0 });
+          setTimelineProgress(0);
+        }
         return;
       }
 
-      if (self.direction < 0 && hasEnteredSection1Start && p < pHeroOut) {
-        isAnimatingHeroReturn = true;
-        setScrollToProgress(self, pHeroOut);
-        setTimelineProgress(pHeroOut);
-        isSection1Active.value = true;
-        isSection2Active.value = false;
-        hideScrollCue();
-        showBottomAnnotations.value = false;
-        progressTween?.kill();
-        clearTimeout(heroExitUnlockTimer);
-        heroExitUnlockTimer = null;
-
-        gsap.set(hero, { xPercent: -120, zIndex: 12 });
-        gsap.set(section1, { xPercent: 0, autoAlpha: 1, zIndex: 11 });
-        gsap.set(section1Inner, { y: 0 });
-        gsap.set(incomingLeaves, { y: 0 });
-        gsap.set(section2, { xPercent: 100, autoAlpha: 0 });
-
-        progressTween = gsap.timeline({
-          onComplete: () => {
-            hasEnteredSection1Start = false;
-            hasEnteredSection2 = false;
-            hasScrollCueBeenDismissed = false;
-            isAnimatingHeroReturn = false;
-            isSection1Active.value = false;
-            isSection1Settled.value = false;
-            isSection2Active.value = false;
-            hideScrollCue();
-            showBottomAnnotations.value = false;
-            hasBottomAnnotationsAppeared = false;
-            gsap.set(hero, { xPercent: 0, clearProps: 'zIndex' });
-            gsap.set(section1, { xPercent: 0, autoAlpha: 1, clearProps: 'zIndex' });
-            setTimelineProgress(0);
-            setScrollToProgress(self, 0);
-            progressTween = null;
-          }
-        })
-          .to(section1, { xPercent: 100, autoAlpha: 0, ease: 'power3.in', duration: SECTION_EXIT_DURATION }, 0)
-          .to(hero, { xPercent: 0, ease: 'power2.out', duration: SECTION_ENTER_DURATION }, SECTION_EXIT_DURATION);
-        return;
+      if (isHeroScrollReturn) {
+        // Scrolled back down into section1 before reaching the hero.
+        isHeroScrollReturn = false;
+        gsap.set(hero, { xPercent: -120, y: 0 });
+        gsap.set(section1, { xPercent: 0, autoAlpha: 1, y: 0 });
       }
 
       if (p < 0.02) {
@@ -1517,20 +1456,15 @@ onMounted(() => {
         hasEnteredSection2 = false;
         hasScrollCueBeenDismissed = false;
         isLockingHeroExit = false;
-        isAnimatingHeroReturn = false;
         isAnimatingSection2Transition = false;
-        isAnimatingSection3Transition = false;
         isAnimatingFooterTransition = false;
-        hasEnteredSection3 = false;
         hasEnteredFooter = false;
         clearFooterTransitionUnlockTimer();
         isSection1Settled.value = false;
         clearSection2TransitionUnlockTimer();
-        clearSection3TransitionUnlockTimer();
         isSection2Active.value = false;
-        isSection3Active.value = false;
         showBackToBeginning.value = false;
-        setSectionShell(section3, { xPercent: 0, yPercent: 100, autoAlpha: 0 });
+        gsap.set(section2, { y: 0 });
         if (section3Footer) gsap.set(section3Footer, { xPercent: 0, yPercent: 100, y: 0 });
         hideScrollCue();
         showBottomAnnotations.value = false;
@@ -1542,24 +1476,7 @@ onMounted(() => {
       }
 
       if (self.direction > 0 && !hasEnteredSection1Start && p > SCROLL_TRIGGER_THRESHOLD) {
-        isLockingHeroExit = true;
-        setScrollToProgress(self, pHeroOut);
-        isSection1Active.value = true;
-        isSection1Settled.value = false;
-        isSection2Active.value = false;
-        hideScrollCue();
-        showBottomAnnotations.value = false;
-        hasBottomAnnotationsAppeared = false;
-        animateTimelineToProgress(pHeroOut, EXIT_ANIMATION_DURATION);
-
-        clearTimeout(heroExitUnlockTimer);
-        heroExitUnlockTimer = window.setTimeout(() => {
-          hasEnteredSection1Start = true;
-          isLockingHeroExit = false;
-          setScrollToProgress(self, pHeroOut);
-          setTimelineProgress(pHeroOut);
-          heroExitUnlockTimer = null;
-        }, SECTION1_INTRO_LOCK_DURATION);
+        startHeroExit(self);
         return;
       }
 
@@ -1568,28 +1485,18 @@ onMounted(() => {
         return;
       }
 
-      if (self.direction < 0 && hasEnteredSection2 && !hasEnteredSection3 && !isAnimatingSection2Transition && p <= pSection2Ready + 0.002) {
+      if (self.direction < 0 && hasEnteredSection2 && !hasEnteredFooter && !isAnimatingSection2Transition && p <= pSection2Ready + 0.002) {
         returnToSection1Bottom(self);
         return;
       }
 
-      if (self.direction > 0 && hasEnteredSection2 && !hasEnteredSection3 && !isAnimatingSection3Transition && p >= pSection3Start - 0.002) {
-        startSection3EnterTransition(self);
-        return;
-      }
-
-      if (self.direction < 0 && hasEnteredSection3 && !hasEnteredFooter && !isAnimatingFooterTransition && !isAnimatingSection3Transition && p <= pSection3Ready - 0.002) {
-        returnToSection2FromSection3(self);
-        return;
-      }
-
-      if (self.direction > 0 && hasEnteredSection3 && !hasEnteredFooter && !isAnimatingFooterTransition && p >= pFooterStart - 0.002) {
+      if (section3Footer && self.direction > 0 && hasEnteredSection2 && !hasEnteredFooter && !isAnimatingFooterTransition && p >= pFooterStart - 0.002) {
         startFooterEnterTransition(self);
         return;
       }
 
       if (self.direction < 0 && hasEnteredFooter && !isAnimatingFooterTransition && p <= pFooterReady - 0.002) {
-        returnToSection3FromFooter(self);
+        returnFromFooter(self);
         return;
       }
 
@@ -1600,12 +1507,7 @@ onMounted(() => {
         effectiveProgress = pSection2Start;
       }
 
-      if (!hasEnteredSection3 && p > pSection3Start) {
-        setScrollToProgress(self, pSection3Start);
-        effectiveProgress = pSection3Start;
-      }
-
-      if (hasEnteredSection3 && !hasEnteredFooter && p > pFooterStart) {
+      if (!hasEnteredFooter && p > pFooterStart) {
         setScrollToProgress(self, pFooterStart);
         effectiveProgress = pFooterStart;
       }
@@ -1619,11 +1521,7 @@ onMounted(() => {
         hasEnteredSection2 = false;
       }
 
-      setTimelineProgress(effectiveProgress);
-
-      if (effectiveProgress >= pRevealDone) {
-        preserveSection1Reveal();
-      }
+      scrubTimelineTo(effectiveProgress);
 
       isSection1Active.value = effectiveProgress >= pHeroOut * 0.4 && effectiveProgress < pSection2Ready;
       updateScrollCueVisibility(effectiveProgress);
@@ -1631,14 +1529,176 @@ onMounted(() => {
         hasBottomAnnotationsAppeared = true;
       }
       showBottomAnnotations.value = hasBottomAnnotationsAppeared && effectiveProgress >= pHeroOut;
-      isSection2Active.value = effectiveProgress >= pSection2EnterStart && hasEnteredSection2 && !hasEnteredSection3;
+      isSection2Active.value = effectiveProgress >= pSection2EnterStart && hasEnteredSection2;
+      updateAboutHint();
     }
   });
 
+  // Where the reader is, as a stage of the pinned scroll. The stages with a
+  // scrubbed range (section1, the row) keep their exact progress; the triggered
+  // ones are a single rest point.
+  getScrollSnapshot = () => {
+    const progress = pageScrollTrigger?.progress ?? 0;
+    if (hasEnteredFooter) return { stage: 'footer' };
+    if (hasEnteredSection2 || isSection2Active.value) return { stage: 'section2', progress };
+    if (hasEnteredSection1Start || isLockingHeroExit) return { stage: 'section1', progress };
+    return { stage: 'hero' };
+  };
+
+  // Rebuilds a stage's rest state directly — every flag, shell and panel a
+  // forward scroll would have left behind — with no transitions played. Kept
+  // clear of each boundary's trigger point so parking there fires nothing.
+  const clampProgress = (value, min, max) => Math.min(max, Math.max(min, Number(value) || 0));
+  const getRestoreProgress = ({ stage, progress }) => ({
+    section1: () => clampProgress(progress, pHeroOut + 0.004, pSection2Start - 0.01),
+    section2: () => clampProgress(progress, pSection2Ready + 0.01, pFooterStart - 0.01),
+    // No longer saved, but an older save may still say so: land at the end of the row.
+    playground: () => pSection2ScrollDone,
+    columns: () => pSection2ScrollDone,
+    footer: () => pFooterReady
+  }[stage]?.() ?? 0);
+
+  const applyRestoredStage = (saved) => {
+    const stage = saved.stage;
+    const target = getRestoreProgress(saved);
+    const isPast = (name) => {
+      const order = ['hero', 'section1', 'section2', 'playground', 'columns', 'footer'];
+      return order.indexOf(stage) >= order.indexOf(name);
+    };
+
+    hasEnteredSection1Start = isPast('section1');
+    hasEnteredSection2 = isPast('section2');
+    hasEnteredFooter = isPast('footer');
+    hasScrollCueBeenDismissed = isPast('section2');
+    hasBottomAnnotationsAppeared = isPast('section1');
+
+    setTimelineProgress(target);
+    setScrollToProgress(pageScrollTrigger, target);
+
+    if (isPast('section2')) {
+      setSectionShell(section1, { xPercent: -100, yPercent: 0, autoAlpha: 0.2 });
+      setSectionShell(section2, { xPercent: 0, yPercent: 0, autoAlpha: 1 });
+    }
+    if (section3Footer) {
+      const footerHeight = getFooterBandHeight();
+      gsap.set(section2, { y: isPast('footer') ? -footerHeight : 0 });
+      gsap.set(section3Footer, { xPercent: 0, yPercent: isPast('footer') ? 0 : 100, y: 0 });
+    }
+
+    // Settled shows section1 in its end state, skipping the statement's entrance.
+    isSection1Active.value = stage === 'section1';
+    isSection1Settled.value = stage === 'section1';
+    showBottomAnnotations.value = stage === 'section1';
+    isSection2Active.value = isPast('section2');
+    showBackToBeginning.value = isPast('footer');
+    updateScrollCueVisibility(target);
+  };
+
+  // Where a group in the section2 row sits on the pinned scroll: the row shifted
+  // so the group lands where the first one starts.
+  const getSection2GroupProgress = (id) => {
+    const group = document.getElementById(id);
+    const first = document.getElementById('uiux');
+    const distance = getSection2HorizontalScroll();
+    if (!group || !first || !distance) return pSection2Ready;
+    const shift = group.getBoundingClientRect().left - first.getBoundingClientRect().left;
+    return pSection2Ready + (pSection2ScrollDone - pSection2Ready) * clampProgress(shift / distance, 0, 1);
+  };
+
+  const savedStage = typeof savedScroll?.stage === 'string' ? savedScroll : null;
+  if (savedStage && savedStage.stage !== 'hero' && getRestoreProgress(savedStage) > 0) {
+    skipIntro();
+    loaderExit.value = 'fade';
+    applyRestoredStage(savedStage);
+    reapplyRestoredScroll = () => {
+      setScrollToProgress(pageScrollTrigger, getRestoreProgress(savedStage));
+    };
+    // Images still loading behind the loader change the pinned distance, which
+    // moves every stage; land on the same stage again after each re-measure,
+    // until the reader takes over.
+    const onRefresh = () => {
+      if (hasReaderScrolled) return;
+      applyRestoredStage(savedStage);
+    };
+    ScrollTrigger.addEventListener('refresh', onRefresh);
+    restoreListenersCleanup = () => ScrollTrigger.removeEventListener('refresh', onRefresh);
+  } else {
+    reapplyRestoredScroll = () => setScrollToProgress(pageScrollTrigger, 0);
+  }
+  isHoldingRestoredScroll = true;
+  let hasReaderScrolled = false;
+
+  // Hero tags. From the hero, AI Designer plays the same exit a scroll would;
+  // every other jump fades the page out, rebuilds the target stage's rest
+  // state (as a reload restore does) and fades back in.
+  const pinnedContent = document.querySelector('.main-content');
+  jumpToSectionHandler = (target) => {
+    if (!pageScrollTrigger || !scrollTimeline || isHoldingRestoredScroll) return;
+    if (isAnimatingSection2Transition || isAnimatingFooterTransition || isLockingHeroExit) return;
+    hasReaderScrolled = true;
+
+    if (target === 'section1' && !hasEnteredSection1Start && !isHeroScrollReturn) {
+      startHeroExit(pageScrollTrigger);
+      return;
+    }
+
+    const saved = target === 'section1'
+      ? { stage: 'section1', progress: pHeroOut }
+      : target === 'hero'
+        ? null
+        : { stage: 'section2', progress: getSection2GroupProgress(target) };
+
+    progressTween?.kill();
+    // Borrow the footer lock so scroll input is held for the whole fade.
+    isAnimatingFooterTransition = true;
+    footerTransitionLockProgress = pageScrollTrigger.progress;
+
+    progressTween = gsap.timeline({
+      onComplete: () => {
+        gsap.set(pinnedContent, { clearProps: 'opacity,visibility' });
+        isAnimatingFooterTransition = false;
+        progressTween = null;
+        updateAboutHint();
+      }
+    })
+      .to(pinnedContent, {
+        autoAlpha: 0,
+        duration: 0.3,
+        ease: 'power2.in',
+        onComplete: () => {
+          // Back to the very start: the same reset the parked button uses.
+          if (!saved) {
+            resetToHero();
+            return;
+          }
+          isHeroScrollReturn = false;
+          isReturningFromSection2.value = false;
+          clearTimeout(heroExitUnlockTimer);
+          heroExitUnlockTimer = null;
+          clearSection2TransitionUnlockTimer();
+          clearFooterTransitionUnlockTimer();
+          gsap.set(hero, { xPercent: -120, y: 0 });
+          setSectionShell(section1, { xPercent: 0, yPercent: 0, autoAlpha: 1 });
+          setSectionShell(section2, { xPercent: 100, yPercent: 0, autoAlpha: 0 });
+          footerTransitionLockProgress = getRestoreProgress(saved);
+          applyRestoredStage(saved);
+        }
+      })
+      .to(pinnedContent, { autoAlpha: 1, duration: 0.45, ease: 'power2.out' });
+  };
+
   section2HorizontalWheelHandler = (event) => {
     if (!pageScrollTrigger || !scrollTimeline) return;
+    if (isHoldingRestoredScroll) {
+      event.preventDefault();
+      return;
+    }
+    hasReaderScrolled = true;
+    lastScrollInputAt = performance.now();
 
-    if (isAnimatingSection2Transition || isAnimatingSection3Transition) {
+    // Swallow input while a transition holds the page, rather than letting the
+    // browser scroll and then yanking it back — that tug read as jitter.
+    if (isAnimatingSection2Transition || isAnimatingFooterTransition || isLockingHeroExit) {
       event.preventDefault();
       return;
     }
@@ -1646,11 +1706,13 @@ onMounted(() => {
     const { x, y } = getWheelDelta(event);
     if (Math.abs(x) <= Math.abs(y) || Math.abs(x) < 1) return;
 
+    // A sideways swipe drives the page anywhere on the index, not just along
+    // the project row: right moves forward, left moves back, exactly as a
+    // vertical scroll would. Along the row it is geared down so the cards track
+    // the fingers; elsewhere it maps one to one.
     const progress = pageScrollTrigger.progress;
     const isInHorizontalRange = progress >= pSection2Ready && progress <= pSection2ScrollDone;
-    if (!isInHorizontalRange) return;
-
-    const horizontalScrollScale = 0.55;
+    const horizontalScrollScale = isInHorizontalRange ? 0.55 : 1;
     const currentScroll = pageScrollTrigger.scroll();
     const nextScroll = currentScroll + (x * horizontalScrollScale);
 
@@ -1670,6 +1732,8 @@ onMounted(() => {
 
   window.addEventListener('wheel', section2HorizontalWheelHandler, { passive: false });
 
+  updateAboutHint();
+
   if (window.matchMedia('(max-width: 720px)').matches && section3Footer) {
     const footerTarget = section3Footer.querySelector('footer') || section3Footer;
     section3FooterObserver = new IntersectionObserver(([entry]) => {
@@ -1680,12 +1744,19 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+  window.removeEventListener('pagehide', saveScroll);
+  restoreListenersCleanup?.();
+  restoreListenersCleanup = null;
+  getScrollSnapshot = null;
+  reapplyRestoredScroll = null;
+  clearTimeout(introDoneTimer);
   removeMobileHeroTransitionListener?.();
   clearTimeout(heroExitUnlockTimer);
   clearTimeout(section2TransitionUnlockTimer);
-  clearTimeout(section3TransitionUnlockTimer);
   clearTimeout(footerTransitionUnlockTimer);
   progressTween?.kill();
+  scrubTween?.kill();
+  scrubTween = null;
   if (section2HorizontalWheelHandler) {
     window.removeEventListener('wheel', section2HorizontalWheelHandler);
   }
@@ -1694,6 +1765,7 @@ onBeforeUnmount(() => {
   progressTween = null;
   section2HorizontalWheelHandler = null;
   backToBeginningHandler = null;
+  jumpToSectionHandler = null;
   section3FooterObserver?.disconnect();
   section3FooterObserver = null;
   pageScrollTrigger = null;
@@ -1702,12 +1774,25 @@ onBeforeUnmount(() => {
 
 useHead({
   title: 'Carol Yu',
+  htmlAttrs: {
+    class: computed(() => ({
+      loading: 'intro intro-paused',
+      playing: 'intro',
+      done: ''
+    }[introState.value]))
+  },
   link: [
     { rel: 'icon', type: 'image/png', href: '/assets/images/main/logo.svg' },
     { rel: 'stylesheet', href: '/css/styles.css' },
     { rel: 'stylesheet', href: '/css/index.css' }
   ],
   script: [
+    // Runs before first paint so a mid-page reload never flashes the loader mark.
+    {
+      key: 'home-restore-mark',
+      tagPosition: 'head',
+      innerHTML: `(function(){try{var n=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];if(!n||(n.type!=='reload'&&n.type!=='back_forward'))return;var s=JSON.parse(sessionStorage.getItem('home-scroll-position')||'null');if(!s)return;if((s.stage&&s.stage!=='hero')||(typeof s.y==='number'&&s.y>40)){var e=document.createElement('style');e.id='intro-content-exit-style';e.textContent='.intro-loader__mark,.intro-loader__flip{visibility:hidden!important;opacity:0!important}';document.head.appendChild(e);}}catch(t){}})();`
+    },
     { src: '/js/script.js', body: true },
     { src: '/js/index.js', body: true }
   ]

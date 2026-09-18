@@ -10,10 +10,33 @@
         </div>
 
         <div class="header-middle">
-            <a href="/#project" class="nav-link nav-link--work">WORK</a>
+            <a href="/" class="nav-link nav-link--work">WORK</a>
             <!-- <a href="#games">GAMES</a> -->
 
-            <a href="/play" class="nav-link">PLAY</a>
+            <a href="/play" class="nav-link nav-link--play">
+                PLAY
+                <span class="nav-play-hint" :class="{ 'is-visible': playHint }" aria-hidden="true">
+                    <svg class="nav-play-hint__mark" viewBox="0 0 28 40" fill="none" aria-hidden="true">
+                        <path class="nav-play-hint__line" pathLength="1" d="M25.5005 37.5 C25.5005 37.5 19.185 34.5 13.328 24.0992 C9.72017 17.6923 8.13965 6 8.13965 6" />
+                        <path class="nav-play-hint__arrow" pathLength="1" d="M2.00049 12.5 L6.50049 2 L17.0005 7.5" />
+                    </svg>
+                    <span class="nav-play-hint__copy">
+                        <span class="nav-play-hint__label">Check My Playground!</span>
+                        <span
+                            class="nav-play-hint__reel"
+                            @mouseenter="isPlayReelPaused = true"
+                            @mouseleave="isPlayReelPaused = false"
+                        >
+                            <img
+                                class="nav-play-hint__reel-image"
+                                :src="playReelImages[playReelIndex]"
+                                alt=""
+                                draggable="false"
+                            >
+                        </span>
+                    </span>
+                </span>
+            </a>
             <a href="/about" class="nav-link">ABOUT</a>
         </div>
 
@@ -42,7 +65,7 @@
     </div>
     <!-- Mobile nav dropdown -->
     <div class="header-mobile-nav" id="header-mobile-nav">
-        <a href="/#project" class="nav-link nav-link--work">WORK</a>
+        <a href="/" class="nav-link nav-link--work">WORK</a>
         <a href="/play" class="nav-link">PLAY</a>
         <a href="/about" class="nav-link">ABOUT</a>
         <img class="menu-bottom" src="/assets/images/main/menu-bottom.svg" alt="">
@@ -100,25 +123,91 @@
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted } from 'vue';
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
 // hero="dark" for pages whose top section is dark: the nav starts white and
 // fades to the normal dark text as the white background scrolls in.
-defineProps({
+const props = defineProps({
   hero: {
     type: String,
     default: 'light',
   },
+  playHint: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+const playReelImages = [
+  '/assets/images/covers/everstream.webp',
+  '/assets/images/covers/dreamail.webp',
+  '/assets/images/play/springshowposter.webp',
+  '/assets/images/play/space-shooter.webp',
+  '/assets/images/play/app4.webp',
+  '/assets/images/play/design1.webp',
+  '/assets/images/play/super-maricat.webp',
+  '/assets/images/play/DreamOrDime.webp',
+  '/assets/images/play/PetUrFriends.webp',
+  '/assets/images/play/NeoAssistant.webp',
+  '/assets/images/covers/orango_branding.webp',
+  '/assets/images/experience/sweetdreams-behind.webp',
+  '/assets/images/play/heartbreak-dodge.webp',
+  '/assets/images/play/modelMe.webp',
+  '/assets/images/play/fly-swatter-arena.webp',
+  '/assets/images/experience/gds-behind.webp',
+  '/assets/images/play/maze.webp',
+  '/assets/images/play/art2.webp',
+];
+
+const playReelIndex = ref(0);
+const isPlayReelPaused = ref(false);
+const PLAY_REEL_INTERVAL_MS = 180;
+let playReelTimer = null;
+
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const stopPlayReel = () => {
+  if (playReelTimer) {
+    window.clearInterval(playReelTimer);
+    playReelTimer = null;
+  }
+};
+
+const startPlayReel = () => {
+  stopPlayReel();
+  if (prefersReducedMotion()) return;
+  playReelTimer = window.setInterval(() => {
+    if (isPlayReelPaused.value) return;
+    playReelIndex.value = (playReelIndex.value + 1) % playReelImages.length;
+  }, PLAY_REEL_INTERVAL_MS);
+};
+
+watch(
+  () => props.playHint,
+  (visible) => {
+    if (visible) startPlayReel();
+    else {
+      stopPlayReel();
+      isPlayReelPaused.value = false;
+    }
+  },
+);
 
 let cleanup = () => {};
 
 onMounted(() => {
+  playReelImages.forEach((src) => {
+    const image = new Image();
+    image.src = src;
+  });
+  if (props.playHint) startPlayReel();
+
   const path = window.location.pathname.replace(/\/$/, '') || '/';
 
   document.querySelectorAll('.header-middle .nav-link, .header-mobile-nav .nav-link').forEach((link) => {
     const href = link.getAttribute('href')?.replace(/\/$/, '') || '/';
-    if (href === path || (href === '/#project' && path === '/')) {
+    if (href === path) {
       link.classList.add('active');
     }
   });
@@ -171,6 +260,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+  stopPlayReel();
   cleanup();
 });
 </script>

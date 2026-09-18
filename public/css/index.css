@@ -1181,6 +1181,15 @@ body,
     min-width: 200px;
 }
 
+/* Extra room on the left of the first group (Smart UI/UX) in the row. A margin,
+   not padding: the heading and flower fields are absolutely positioned and
+   would ignore padding, leaving only the cards shifted. */
+@media (min-width: 721px) {
+    #uiux.section2-group {
+        margin-left: 80px;
+    }
+}
+
 /* Breathing room between the last project group and the about car, so the
    about reads as a new beat rather than one more project. */
 .section2-group-gap--section3 {
@@ -2933,17 +2942,19 @@ body,
 
 /* Road sign — a signpost standing at the far end of the horizontal row, past
    the About car. It is part of the row (so the row scrolls on to it) and simply
-   there: no entrance. The post is drawn at its Figma size (14 x 288) and scaled
+   there: no entrance. The post is drawn at its Figma size (12 x 317) and scaled
    up by --road-sign-scale, with the wrapper sized to match so the row's width
    includes it. Signs are placed from the pole's top-center, per the Figma frame. */
 .road-sign {
     --road-sign-scale: 1;
     position: relative;
     flex: 0 0 auto;
-    width: calc(220px * var(--road-sign-scale));
+    width: calc(184px * var(--road-sign-scale));
     height: 90vh;
-    /* Room past the sign so the row does not end flush against it. */
-    margin-right: 40px;
+    /* Pushed further along the row, away from the About car, with scrollable
+       room after it so the row does not end flush against the sign. */
+    margin-left: 160px;
+    margin-right: 15vw;
     pointer-events: none;
 }
 
@@ -2951,8 +2962,8 @@ body,
     position: absolute;
     left: 50%;
     bottom: 0;
-    width: 14px;
-    height: 288px;
+    width: 12px;
+    height: 317px;
     pointer-events: auto;
     transform: translateX(-50%) scale(var(--road-sign-scale));
     transform-origin: 50% 100%;
@@ -2962,28 +2973,28 @@ body,
     position: absolute;
     inset: 0;
     background: var(--color-black);
-    border-radius: 10px 10px 0 0;
+    border-radius: 11px 11px 0 0;
 }
 
 .road-sign-item {
     --sign-x: 0px;
     --sign-y: 0px;
-    --sign-w: 124.65px;
+    --sign-w: 137.2px;
     --sign-tilt: 0deg;
     position: absolute;
     top: var(--sign-y);
     left: calc(50% + var(--sign-x));
     width: var(--sign-w);
-    height: 37px;
+    height: 40.73px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 0 0 14px;
+    padding: 0 0 0 15px;
     border: 0;
     background: none;
     color: var(--color-black);
-    font: 16px/1 'ArchivoBlack', sans-serif;
-    letter-spacing: 0.64px;
+    font: 16.5px/1 'ArchivoBlack', sans-serif;
+    letter-spacing: 0.66px;
     text-transform: none;
     white-space: nowrap;
     text-decoration: none;
@@ -3012,10 +3023,10 @@ body,
     position: relative;
 }
 
-.road-sign-item--back-to-top { --sign-x: -2.7px; --sign-y: 29px; --sign-w: 131.65px; --sign-tilt: 6.55deg; }
-.road-sign-item--ai-design { --sign-x: -6.6px; --sign-y: 76.6px; --sign-tilt: -3deg; }
-.road-sign-item--uiux { --sign-x: -9.3px; --sign-y: 116px; --sign-tilt: 5deg; }
-.road-sign-item--animation { --sign-x: -4.15px; --sign-y: 164.9px; --sign-w: 117.65px; --sign-tilt: -4deg; }
+.road-sign-item--back-to-top { --sign-x: -3.1px; --sign-y: 31.9px; --sign-w: 144.9px; --sign-tilt: 6.55deg; }
+.road-sign-item--ai-design { --sign-x: -7.4px; --sign-y: 84.3px; --sign-tilt: -3deg; }
+.road-sign-item--uiux { --sign-x: -8.4px; --sign-y: 125.7px; --sign-tilt: 5deg; }
+.road-sign-item--animation { --sign-x: -5.7px; --sign-y: 179.5px; --sign-w: 129.5px; --sign-tilt: -4deg; }
 
 .road-sign-item:focus-visible {
     outline: 2px solid var(--color-black);

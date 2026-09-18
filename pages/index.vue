@@ -765,7 +765,13 @@ onMounted(() => {
   // both directions, so scrolling back hides it at the same place.
   const aboutWord = section3?.querySelector('[data-about-word="about"]');
   const HINT_SHOW_AT = 0.55; // share of the viewport width, from the left
+  // Held off while a jump is fading the page, so the note does not flash back.
+  let isAboutHintSuppressed = false;
   const updateAboutHint = () => {
+    if (isAboutHintSuppressed) {
+      isAboutIn.value = false;
+      return;
+    }
     if (!aboutWord) return;
     const { left } = aboutWord.getBoundingClientRect();
     isAboutIn.value = left <= window.innerWidth * HINT_SHOW_AT && left > 0;
@@ -1636,6 +1642,8 @@ onMounted(() => {
     if (!pageScrollTrigger || !scrollTimeline || isHoldingRestoredScroll) return;
     if (isAnimatingSection2Transition || isAnimatingFooterTransition || isLockingHeroExit) return;
     hasReaderScrolled = true;
+    // The PLAY note goes the moment a jump starts, not when the page fades.
+    isAboutIn.value = false;
 
     if (target === 'section1' && !hasEnteredSection1Start && !isHeroScrollReturn) {
       startHeroExit(pageScrollTrigger);
@@ -1649,6 +1657,11 @@ onMounted(() => {
         : { stage: 'section2', progress: getSection2GroupProgress(target) };
 
     progressTween?.kill();
+    isAboutHintSuppressed = true;
+    // Fallback in case the fade is killed before its onComplete (0.3s + 0.45s).
+    setTimeout(() => {
+      isAboutHintSuppressed = false;
+    }, 900);
     // Borrow the footer lock so scroll input is held for the whole fade.
     isAnimatingFooterTransition = true;
     footerTransitionLockProgress = pageScrollTrigger.progress;
@@ -1658,6 +1671,7 @@ onMounted(() => {
         gsap.set(pinnedContent, { clearProps: 'opacity,visibility' });
         isAnimatingFooterTransition = false;
         progressTween = null;
+        isAboutHintSuppressed = false;
         updateAboutHint();
       }
     })
@@ -1669,6 +1683,20 @@ onMounted(() => {
           // Back to the very start: the same reset the parked button uses.
           if (!saved) {
             resetToHero();
+            return;
+          }
+          // AI Design starts over: every scene is reset, then the page parks
+          // where the hero has just left, with section1 not yet active, so its
+          // entrance (leaves + statement) plays again from the top as it fades in.
+          if (target === 'section1') {
+            resetToHero();
+            setTimelineProgress(pHeroOut);
+            setScrollToProgress(pageScrollTrigger, pHeroOut);
+            footerTransitionLockProgress = pHeroOut;
+            hasEnteredSection1Start = true;
+            requestAnimationFrame(() => {
+              isSection1Active.value = true;
+            });
             return;
           }
           isHeroScrollReturn = false;

@@ -22,18 +22,6 @@
                     </svg>
                     <span class="nav-play-hint__copy">
                         <span class="nav-play-hint__label">Check My Playground!</span>
-                        <span
-                            class="nav-play-hint__reel"
-                            @mouseenter="isPlayReelPaused = true"
-                            @mouseleave="isPlayReelPaused = false"
-                        >
-                            <img
-                                class="nav-play-hint__reel-image"
-                                :src="playReelImages[playReelIndex]"
-                                alt=""
-                                draggable="false"
-                            >
-                        </span>
                     </span>
                 </span>
             </a>
@@ -123,7 +111,7 @@
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { onBeforeUnmount, onMounted } from 'vue';
 
 // hero="dark" for pages whose top section is dark: the nav starts white and
 // fades to the normal dark text as the white background scrolls in.
@@ -138,71 +126,9 @@ const props = defineProps({
   },
 });
 
-const playReelImages = [
-  '/assets/images/covers/everstream.webp',
-  '/assets/images/covers/dreamail.webp',
-  '/assets/images/play/springshowposter.webp',
-  '/assets/images/play/space-shooter.webp',
-  '/assets/images/play/app4.webp',
-  '/assets/images/play/design1.webp',
-  '/assets/images/play/super-maricat.webp',
-  '/assets/images/play/DreamOrDime.webp',
-  '/assets/images/play/PetUrFriends.webp',
-  '/assets/images/play/NeoAssistant.webp',
-  '/assets/images/covers/orango_branding.webp',
-  '/assets/images/experience/sweetdreams-behind.webp',
-  '/assets/images/play/heartbreak-dodge.webp',
-  '/assets/images/play/modelMe.webp',
-  '/assets/images/play/fly-swatter-arena.webp',
-  '/assets/images/experience/gds-behind.webp',
-  '/assets/images/play/maze.webp',
-  '/assets/images/play/art2.webp',
-];
-
-const playReelIndex = ref(0);
-const isPlayReelPaused = ref(false);
-const PLAY_REEL_INTERVAL_MS = 180;
-let playReelTimer = null;
-
-const prefersReducedMotion = () =>
-  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-const stopPlayReel = () => {
-  if (playReelTimer) {
-    window.clearInterval(playReelTimer);
-    playReelTimer = null;
-  }
-};
-
-const startPlayReel = () => {
-  stopPlayReel();
-  if (prefersReducedMotion()) return;
-  playReelTimer = window.setInterval(() => {
-    if (isPlayReelPaused.value) return;
-    playReelIndex.value = (playReelIndex.value + 1) % playReelImages.length;
-  }, PLAY_REEL_INTERVAL_MS);
-};
-
-watch(
-  () => props.playHint,
-  (visible) => {
-    if (visible) startPlayReel();
-    else {
-      stopPlayReel();
-      isPlayReelPaused.value = false;
-    }
-  },
-);
-
 let cleanup = () => {};
 
 onMounted(() => {
-  playReelImages.forEach((src) => {
-    const image = new Image();
-    image.src = src;
-  });
-  if (props.playHint) startPlayReel();
-
   const path = window.location.pathname.replace(/\/$/, '') || '/';
 
   document.querySelectorAll('.header-middle .nav-link, .header-mobile-nav .nav-link').forEach((link) => {
@@ -260,7 +186,6 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  stopPlayReel();
   cleanup();
 });
 </script>

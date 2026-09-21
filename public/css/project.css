@@ -481,6 +481,15 @@ html.media-lightbox-open body {
     opacity: 1;
 }
 
+/* Artwork with a transparent background gets the backdrop it has in the page
+   (set inline from JS) plus a little padding, so the fill reads as a deliberate
+   frame instead of the scrim showing through the image. */
+.media-lightbox-media.has-backdrop {
+    box-sizing: border-box;
+    padding: clamp(14px, 2.5vw, 36px);
+    background-color: #fff;
+}
+
 /* Pinch/wheel zoom is driven from JS, so the browser must not claim the touch
    gestures on the image itself. Videos keep default touch handling for controls. */
 .media-lightbox-image {
@@ -537,6 +546,10 @@ html.media-lightbox-open body {
     .media-lightbox-media {
         max-height: calc(100vh - 24px);
         border-radius: 6px;
+    }
+
+    .media-lightbox-media.has-backdrop {
+        padding: 12px;
     }
 }
 

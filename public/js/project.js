@@ -355,6 +355,98 @@
         });
     }
 
+    // ----- Backdrop for artwork exported without a background -----
+    // A transparent PNG/WebP reads fine in the page because the block behind it
+    // supplies the colour, but on the lightbox scrim the dark scrim shows straight
+    // through and the image looks broken. Those images borrow whatever they sit on
+    // in the page, so expanding one keeps the look of the thumbnail. Opaque images
+    // are left edge to edge, with no frame around them.
+    var alphaCache = Object.create(null);
+
+    // Sampled small: a downscale keeps any transparent pixel below full alpha, so a
+    // cheap 40px read still catches artwork that is only partly cut out.
+    function hasTransparency(img) {
+        var src = img.currentSrc || img.src || '';
+        if (!src) return false;
+        if (src in alphaCache) return alphaCache[src];
+        if (!img.naturalWidth || !img.complete) return false;
+
+        var result = false;
+        try {
+            var w = Math.min(40, img.naturalWidth);
+            var h = Math.max(1, Math.round(w * img.naturalHeight / img.naturalWidth));
+            var canvas = document.createElement('canvas');
+            canvas.width = w;
+            canvas.height = h;
+            var ctx = canvas.getContext('2d', { willReadFrequently: true });
+            ctx.drawImage(img, 0, 0, w, h);
+            var data = ctx.getImageData(0, 0, w, h).data;
+            for (var i = 3; i < data.length; i += 4) {
+                if (data[i] < 250) {
+                    result = true;
+                    break;
+                }
+            }
+        } catch (e) {
+            // Cross-origin image: the canvas is tainted and cannot be read.
+            result = false;
+        }
+
+        alphaCache[src] = result;
+        return result;
+    }
+
+    function isOpaqueColor(value) {
+        if (!value || value === 'transparent') return false;
+        var match = value.replace(/\s/g, '').match(/^rgba?\(([^)]+)\)$/);
+        if (!match) return true;
+        var parts = match[1].split(',');
+        return parts.length < 4 || parseFloat(parts[3]) > 0.05;
+    }
+
+    // The nearest ancestor that actually paints something - the gradient block a
+    // feature shot sits in, a card, or finally the page itself.
+    function readPageBackdrop(media) {
+        var el = media.parentElement;
+
+        while (el && el !== document.documentElement) {
+            var style = window.getComputedStyle(el);
+
+            if (style.backgroundImage && style.backgroundImage !== 'none') {
+                return {
+                    image: style.backgroundImage,
+                    size: style.backgroundSize,
+                    position: style.backgroundPosition,
+                    repeat: style.backgroundRepeat,
+                    color: isOpaqueColor(style.backgroundColor) ? style.backgroundColor : '#ffffff'
+                };
+            }
+
+            if (isOpaqueColor(style.backgroundColor)) {
+                return { color: style.backgroundColor };
+            }
+
+            el = el.parentElement;
+        }
+
+        return { color: '#ffffff' };
+    }
+
+    function applyBackdrop(target, source) {
+        if (!hasTransparency(source)) return;
+
+        var backdrop = readPageBackdrop(source);
+        target.classList.add('has-backdrop');
+        target.style.backgroundColor = backdrop.color || '#ffffff';
+
+        if (backdrop.image) {
+            target.style.backgroundImage = backdrop.image;
+            target.style.backgroundSize = backdrop.size || 'cover';
+            target.style.backgroundPosition = backdrop.position || 'center';
+            target.style.backgroundRepeat = backdrop.repeat || 'no-repeat';
+        }
+    }
+
     function openLightbox(media) {
         ensureLightbox();
         var stage = overlay.querySelector('.media-lightbox-stage');
@@ -402,6 +494,7 @@
             resetPanZoom();
             mediaEl.src = media.currentSrc || media.src;
             mediaEl.alt = media.alt || 'Expanded project image';
+            applyBackdrop(mediaEl, media);
             stage.appendChild(mediaEl);
 
             mediaEl.addEventListener('load', function () {

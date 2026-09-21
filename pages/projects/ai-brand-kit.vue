@@ -32,14 +32,14 @@
       </div>
     </section>
 
-    <div id="problem" class="problem-statement-container">
+    <div id="hmw" class="problem-statement-container">
       <div class="problem-statement" style="background-color:#FFB0A3;">
         <h3>How might we help an AI agent create Life Services H5 pages and header images that meet a high visual standard—without making every campaign a manual design task?</h3>
       </div>
     </div>
 
-    <section id="context">
-      <h2>CONTEXT</h2>
+    <section id="problem">
+      <h2>PROBLEM</h2>
       <h3>Life Services teams frequently need to create campaign visuals and H5 pages that are polished, on-brand, and ready to use. Creating these pages one by one with designers and operations teams can be time-consuming. The agent platform enables operations teams to generate pages directly, improving speed and efficiency. However, the visual quality can be inconsistent and often fails to fully match the brand style.</h3>
       <h3>The skills aim to address this problem by specifically:</h3>
       <div class="impact-cards">

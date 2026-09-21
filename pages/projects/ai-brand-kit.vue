@@ -20,7 +20,7 @@
 
     <section id="overview">
       <h2>OVERVIEW</h2>
-      <h3 class="overview-intro">Life Services teams constantly need to create campaign visuals and H5 pages that feel polished, branded, and ready to use. I designed a two-skill workflow that moves an AI agent from a campaign brief to a key visual and a complete H5 page.</h3>
+      <h3 class="overview-intro">I designed a two-skill workflow that moves an AI agent from a campaign brief to a key visual and a complete H5 page.</h3>
       <div class="overview-container">
         <div class="overview-card-container">
           <div class="overview-card" style="background-color:#fff2f0;"><div class="overview-card-title"><h4>01</h4><h3>Brand Knowledge</h3></div><p>Analyzing and understanding the brand visual language and brand assets.</p></div>
@@ -37,6 +37,26 @@
         <h3>How might we help an AI agent create Life Services H5 pages and header images that meet a high visual standard—without making every campaign a manual design task?</h3>
       </div>
     </div>
+
+    <section id="context">
+      <h2>CONTEXT</h2>
+      <h3>Life Services teams frequently need to create campaign visuals and H5 pages that are polished, on-brand, and ready to use. Creating these pages one by one with designers and operations teams can be time-consuming. The agent platform enables operations teams to generate pages directly, improving speed and efficiency. However, the visual quality can be inconsistent and often fails to fully match the brand style.</h3>
+      <h3>The skills aim to address this problem by specifically:</h3>
+      <div class="impact-cards">
+        <div>
+          <h3>Wider Adoption</h3>
+          <p>Allowing operations teams to create their own campaign visuals and H5 pages on the agent platform instead of queuing for design support.</p>
+        </div>
+        <div>
+          <h3>Higher Baseline</h3>
+          <p>Life Services visual standards live inside the workflow, so output starts on-brand rather than generic.</p>
+        </div>
+        <div>
+          <h3>Faster Turnaround</h3>
+          <p>A campaign brief becomes a finished header image and H5 page in a single pass.</p>
+        </div>
+      </div>
+    </section>
 
     <section id="solution">
       <h2>SOLUTION</h2>
@@ -88,39 +108,20 @@
       </div>
     </section>
 
-    <section id="impact">
-      <h2>INTENDED IMPACT</h2>
-      <h3>The skills aim to change three things: who can make campaign visuals, how good they are, and how long they take.</h3>
-      <div class="impact-cards">
-        <div>
-          <h3>Wider Adoption</h3>
-          <p>Operations teams can create their own campaign visuals on the agent platform instead of queuing for design support.</p>
-        </div>
-        <div>
-          <h3>Higher Baseline</h3>
-          <p>Life Services visual standards live inside the workflow, so output starts on-brand rather than generic.</p>
-        </div>
-        <div>
-          <h3>Faster Turnaround</h3>
-          <p>A campaign brief becomes a finished header image and H5 page in a single pass.</p>
-        </div>
-      </div>
-    </section>
-
     <section id="process" class="process-section">
       <h2>PROCESS</h2>
       <ol class="process-steps">
         <li class="process-step">
           <h3><span class="process-step-num">01</span>LoRA vs. Skill</h3>
-          <p>I evaluated two approaches, a LoRA and a skill, on which produced higher-quality images that fit the Life Services visual style. The comparison favored the skill, which became the foundation for the rest of the workflow.</p>
+          <p>I evaluated two approaches, a LoRA and a skill, on which produced higher-quality images that fit the Life Services visual style. The comparison <strong>favored the skill</strong>, which became the foundation for the rest of the workflow.</p>
         </li>
 
         <li class="process-step">
           <h3><span class="process-step-num">02</span>Header Image Skill</h3>
           <div class="process-split">
             <div class="process-split-text">
-              <p>The initial workflow was a linear chain: campaign topic, then generated prompt, then generated image. In practice it rarely met the quality bar, and the resulting style repeated itself across campaigns.</p>
-              <p>I replaced it with a set of prompt templates organized by topic category. The skill now assigns the template that matches the campaign and composes a prompt from it, addressing both the quality ceiling and the repetition.</p>
+              <p>The initial workflow was a linear chain: campaign topic, then generated prompt, then generated image. In practice it <strong>rarely met the quality bar</strong>, and the resulting style repeated itself across campaigns.</p>
+              <p>I replaced it with a set of <strong>prompt templates organized by topic category</strong>. The skill now assigns the template that matches the campaign and composes a prompt from it, addressing both the quality ceiling and the repetition.</p>
             </div>
             <figure class="process-figure">
               <img src="/assets/images/projects/ai-brand-kit/prompt-canvas.webp" alt="Working canvas showing a logo reference and category reference images fanning out into prompt threads and their generated header images">
@@ -131,7 +132,7 @@
 
         <li class="process-step">
           <h3><span class="process-step-num">03</span>Problem Solving</h3>
-          <p>Problems occurred in the process that affect the quality of the output. I iterated on reference inputs, scripts writing, prompt engineering, and adding steps to the skill to resolve each of these and brought the output to a consistent quality level.</p>
+          <p>Problems occurred in the process that affect the quality of the output. I iterated on reference inputs, scripts writing, prompt engineering, and adding steps to the skill to resolve each of these and brought the output to a <strong>consistent quality level</strong>.</p>
           <!-- Element repetition: hidden for now, no supporting image yet.
           <div class="issue-item">
             <h3>Element repetition</h3>
@@ -164,7 +165,7 @@
 
         <li class="process-step">
           <h3><span class="process-step-num">04</span>H5 Page Skill</h3>
-          <p>I analyzed the sample H5 pages to determine which parts of the layout could be encoded as a skill, then defined a template for each page section. The skill is written with HTML and CSS knowledge so pages can be reproduced consistently, including a typographic treatment for section subtitles that keeps them on brand.</p>
+          <p>I analyzed the sample H5 pages to determine which parts of the layout could be <strong>encoded as a skill</strong>, then defined a template for each page section. The skill is written with HTML and CSS knowledge so pages can be reproduced consistently, including a typographic treatment for section subtitles that keeps them on brand. I then <strong>tested the agent and revised the skill round by round</strong> to improve the output, working with developers to resolve specific issues such as removing the background behind a generated title.</p>
         </li>
       </ol>
     </section>

@@ -1212,6 +1212,16 @@ html.media-lightbox-open body {
 .process-step h3 { margin: 0 0 14px; }
 .process-step-num { color: #FFB0A3; font-variation-settings: 'wght' 700; margin-right: 10px; }
 .process-step p { margin: 0 0 14px; font-size: 17px; color: var(--color-foreground); line-height: 1.7; }
+/* Emphasis in the step-number salmon (#FFB0A3), darkened: the tint itself sits
+   at 1.75:1 on white and is unreadable as inline text, so this keeps its exact
+   hue at 3.6:1. Gabarito is a variable font whose @font-face declares a single
+   weight, so font-weight: 700 would be synthesized - drive the wght axis
+   instead. */
+.process-step p strong {
+    font-weight: 400;
+    font-variation-settings: 'wght' 700;
+    color: #E45A44;
+}
 /* Standalone prose gets a readable measure; figures and the split still span the
    full step width, so the block stays aligned with the other sections. */
 /* .process-step > p { max-width: 680px; } */
